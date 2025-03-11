@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Parallax Container */
+.parallax-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Parallax Layer */
+.parallax-layer {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  object-fit: cover;
+  background-size: cover;
+  background-position: center center; /* Keep the image centered */
+  z-index: 1; /* Ensure layers stack correctly */
+}
+
+/* Static Layer */
+.static-layer {
+  position: absolute; /* Fixes it to a certain position */
+  top: 0; /* Adjust to where you want the static layer */
+  left: 0;
+  width: 100vw; /* Full width */
+  height: 100vh; /* Full height */
+  background-size: cover;
+  background-position: center center;
+  z-index: 1; /* To ensure it's above the background layers but below parallax layers */
+}
+
+.mountain {
+    animation: moveLayer 30s linear infinite;
+}
+
+.cloud1 {
+    animation: moveLayer 30s linear infinite;
+}
+
+.cloud2 {
+    animation: moveLayer 30s linear infinite;
+}
+
+.cloud3 {
+    animation: moveLayer 30s linear infinite;
+}
