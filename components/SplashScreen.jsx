@@ -2,18 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import Link from 'next/link';
-import { TypeAnimation } from 'react-type-animation';
-import { Jersey_15 } from 'next/font/google';
+import TitleAnimation from '@/components/TitleAnimation';
 import Parallax from '@/components/Parallax';
 
-const jersey = Jersey_15({
-    weight: "400",
-    subsets: ['latin'],
-})
 
 const SplashScreen = ({ finishLoading }) => {
     const [isButtonVisible, setIsButtonVisible] = useState(false);
-
 
             useEffect(() => {
                 setTimeout(() => {
@@ -35,32 +29,7 @@ const SplashScreen = ({ finishLoading }) => {
                      zIndex: 10
              }}
         >
-            <h1
-                className="text-2xl"
-                style={{ fontFamily: jersey.style.fontFamily }}
-            ></h1>
-                    <span style={{ 
-                        fontSize: '4em',
-                        fontFamily: jersey.style.fontFamily,
-                        position: 'relative',
-                        zIndex: 20,
-                    }}>&gt; </span>
-                    <TypeAnimation
-                        sequence={[
-                            // Same substring at the start will only be typed out once, initially
-                            500,
-                            'David A. Lee\'s Personal Webpage',
-                            500,
-                        ]}
-                        speed={50}
-                        style={{ fontSize: '4em',
-                            textAlign: 'center',
-                            fontFamily: jersey.style.fontFamily,
-                            position: 'relative',
-                            zIndex: 20,
-                        }}
-                        repeat={1}
-                    />
+            <TitleAnimation />
         </div>
         {/*isButtonVisible && <button style={{fontSize: '2em'}} onClick={() => finishLoading()}>test button, fade appear after animation</button> */}
         </>
