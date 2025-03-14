@@ -7,7 +7,7 @@
   position: relative;
   width: 100%;
   height: 100vh;
-  background-size: cover;
+  background-size: cover; /*cover*/
   background-position: center center; /* Keep the image centered */
 }
 
@@ -25,6 +25,7 @@
   background-size: 100% 100%;
   background-position: center center; /* Keep the image centered */
   background-repeat: "repeat-x";
+  transform: translate(-100%, -100%);
   z-index: 1; /* Ensure layers stack correctly */
 }
 
