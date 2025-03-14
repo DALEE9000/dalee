@@ -45,7 +45,6 @@ export default function Parallax(
             className={`${styles["parallax-layer"]} ${styles[element]}`}
             style={{ 
               backgroundImage: `url(/pixelart/${element}.png)`,
-              backgroundRepeat: "repeat-x",
             }}
             initial={{ x: layer.initialX }}
             animate={{ x: layer.animateX }}
