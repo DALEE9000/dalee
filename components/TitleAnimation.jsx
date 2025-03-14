@@ -1,5 +1,6 @@
 import { TypeAnimation } from 'react-type-animation';
 import { Jersey_15 } from 'next/font/google';
+import styles from './Splash.module.css';
 
 const jersey = Jersey_15({
     weight: "400",
@@ -11,33 +12,38 @@ export default function TitleAnimation(
 ) {
     return(
     <>
-    <span style={{ 
-        fontSize: '7em',
-        fontFamily: jersey.style.fontFamily,
-        position: 'absolute',
-        left: 0,
-        marginTop: '0.5%',
-        zIndex: 20,
-    }}>&gt; </span>
-        <TypeAnimation
-        sequence={[
-            // Same substring at the start will only be typed out once, initially
-            500,
-            'David A. Lee\'s Personal Webpage',
-            500,
-        ]}
-        speed={50}
-        style={{ fontSize: '7em',
-            textAlign: 'left',
-            alignItems: 'center',
-            fontFamily: jersey.style.fontFamily,
-            position: 'absolute',
-            left: '49.7833px',
-            marginTop: '0.5%',
-            zIndex: 20,
-        }}
-        repeat={1}
-        />
+        <div
+            className=""
+        >
+            <span 
+                className={`${styles['arrow-cursor']}`}
+                style={{
+                    fontFamily: jersey.style.fontFamily,
+                }}
+            >
+                &gt; 
+            </span>
+        </div>
+
+        <div
+            className=""
+        >
+            <TypeAnimation
+                className={`${styles['type-animation']}`}
+                sequence={[
+                    // Same substring at the start will only be typed out once, initially
+                    500,
+                    'David A. Lee\'s Personal Webpage',
+                    500,
+                ]}
+                speed={50}
+                style={{ 
+                    left: 0,
+                    fontFamily: jersey.style.fontFamily,
+                }}
+                repeat={1}
+            />
+        </div>
     </>
     );
 }

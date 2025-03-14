@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from 'framer-motion';
-import styles from "./Parallax.module.css";
+import styles from "./Splash.module.css";
 
 {/* This ensures a seamless horizontal wrap */}
 const animateparam = [

@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* PARALLAX COMPONENT STYLES */
+/* Found in Parallax.jsx */
+
 /* Parallax Container */
 .parallax-container {
   position: relative;
@@ -62,4 +65,51 @@
 
 .cloud3 {
     animation: moveLayer 30s linear infinite;
+}
+
+/* TYPE ANIMATION COMPONENT STYLES */
+/* Found in SplashScreen.jsx and TitleAnimation.jsx */
+
+.title-animation-div {
+  width: 100vw;
+  display: flex;
+  transform: translateY(-20vh);
+  z-index: 10;
+}
+
+.arrow-cursor {
+  font-size: 7vw;
+  position: relative;
+  width: auto;
+  left: 0;
+  z-index: 20;
+}
+
+.type-animation {
+  flex: 1;
+  font-size: 7vw;
+  text-align: left;
+  display: 'inline';
+  position: 'relative';
+  z-index: 20;
+}
+
+
+/* SPLASH BUTTON COMPONENT STYLES */
+/* Found in SplashScreen.jsx and Buttons.jsx */
+
+.splash-button {
+  all: unset; /* Remove all default button styles (including margin, padding, etc.) */
+  width: 200px; /* Ensure the button takes the image size */
+  height: 100px;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.splash-button-div {
+  width: 100%;
+  position: absolute;
+  transform: translateY(+18vh);
+  z-index: 10;
 }

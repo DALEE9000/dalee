@@ -1,15 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
+import styles from './Splash.module.css';
 
 export default function SplashButton ( { finishLoading }) {
-    const [isButtonVisible, setIsButtonVisible] = useState(true);
     const [imageSrc, setImageSrc] = useState("/pixelart/button1.png");
-
-        useEffect(() => {
-            setTimeout(() => {
-                setIsButtonVisible(true);
-            }, 3000); // Match text animation duration
-        }, []);
 
         function handleMouseEnter() {
             setImageSrc("/pixelart/button2.png");
@@ -21,18 +15,9 @@ export default function SplashButton ( { finishLoading }) {
 
         return (
             <>
-            {isButtonVisible && 
             <button 
                 onClick={() => finishLoading()}
-                className="fixed p-0 bg-transparent border-none outline-none cursor-pointer"
-                style={{
-                    all: 'unset', // Remove all default button styles (including margin, padding, etc.)
-                    width: '200px', // Ensure the button takes the image size
-                    height: '100px',
-                    justifyContent: 'center',
-                    position: 'relative',
-                    cursor: 'pointer',
-                }}
+                className={`${styles['splash-button']}`}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseExit}
             >
@@ -43,7 +28,7 @@ export default function SplashButton ( { finishLoading }) {
                     alt="Splash Page Button"
                     className="cursor-pointer"
                 />
-            </button>}
+            </button>
             </>
         );
 }
