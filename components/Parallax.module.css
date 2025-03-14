@@ -27,7 +27,7 @@
   background-position: center center; /* Keep the image centered */
   background-repeat: "repeat-x";
   min-width: 1920px;
-  min-height: 50vh;
+  max-height: 100vh;
   z-index: 1; /* Ensure layers stack correctly */
 }
 
