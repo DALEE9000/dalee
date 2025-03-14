@@ -14,7 +14,9 @@ export default function TitleAnimation(
     <span style={{ 
         fontSize: '4em',
         fontFamily: jersey.style.fontFamily,
-        position: 'relative',
+        position: 'absolute',
+        left: 0,
+        marginTop: '0.5%',
         zIndex: 20,
     }}>&gt; </span>
         <TypeAnimation
@@ -26,9 +28,12 @@ export default function TitleAnimation(
         ]}
         speed={50}
         style={{ fontSize: '4em',
-            textAlign: 'center',
+            textAlign: 'left',
+            alignItems: 'center',
             fontFamily: jersey.style.fontFamily,
-            position: 'relative',
+            position: 'absolute',
+            left: '28.45px',
+            marginTop: '0.5%',
             zIndex: 20,
         }}
         repeat={1}

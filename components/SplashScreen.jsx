@@ -17,18 +17,15 @@ const SplashScreen = ({ finishLoading }) => {
         </div>
 
         <div 
-            className="flex-1 flex justify-center"
-            style={{ transform: "translateY(-18vh)",
-                     zIndex: 10
+            className=""
+            style={{ 
+                     width: "100vw",
+                     height: '103.5px',
+                     transform: "translateY(-18vh)",
+                     zIndex: 10,
              }}
         >
             <TitleAnimation />
-        </div>
-        <div
-            className="fixed top-0 left-0"
-            style={{
-                zIndex: 10
-            }}>
             <SplashButton finishLoading={finishLoading} />
         </div>
         </>
