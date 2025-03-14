@@ -22,6 +22,7 @@ export default function Parallax(
     children,
 ) {
   return (
+    <>
     <div 
         className={styles['parallax-container']}
     >
@@ -42,7 +43,10 @@ export default function Parallax(
           <motion.div
             key={`${element}-${index}`}
             className={`${styles["parallax-layer"]} ${styles[element]}`}
-            style={{ backgroundImage: `url(/pixelart/${element}.png)` }}
+            style={{ 
+              backgroundImage: `url(/pixelart/${element}.png)`,
+              backgroundRepeat: "repeat-x",
+            }}
             initial={{ x: layer.initialX }}
             animate={{ x: layer.animateX }}
             transition={{
@@ -51,13 +55,10 @@ export default function Parallax(
               ease: "linear",
             }}
           >
-            <div
-              className={styles["parallax-layer"]}
-              style={{ backgroundImage: `url(/pixelart/${element}.png)` }}
-            />
           </motion.div>
         ))
       )}
     </div>
+    </>
   );
 }

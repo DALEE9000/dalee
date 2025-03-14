@@ -9,10 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lottiefiles/lottie-player": "^2.0.12",
     "@next/font": "^14.2.15",
     "@tailwindcss/postcss": "^4.0.12",
     "animejs": "^3.2.2",
     "classcat": "^5.0.5",
+    "lottie-react": "^2.4.1",
     "motion": "^12.4.10",
     "next": "^15.2.1",
     "react": "^19.0.0",

@@ -1,20 +1,16 @@
 "use client"
 
 import React, { useState, useEffect } from "react";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
 import { usePathname } from "next/navigation";
+import { Jersey_15 } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const jersey = Jersey_15({
+    variable: "--font-jersey-15",
+    weight: "400",
+    subsets: ['latin'],
+})
 
 /* export const metadata: Metadata = {
   title: "Create Next App",
@@ -40,8 +36,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+    <head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${isLoading ? "splash-active" : ""}`}
+        className={`${jersey.variable} antialiased ${isLoading ? "splash-active" : ""}`}
       >
         {isLoading && isHome ? (
           <SplashScreen finishLoading={() => setIsLoading(false)} />

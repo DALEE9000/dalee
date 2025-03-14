@@ -4,16 +4,9 @@ import React, { useState, useEffect } from "react";
 import Link from 'next/link';
 import TitleAnimation from '@/components/TitleAnimation';
 import Parallax from '@/components/Parallax';
-
+import SplashButton from '@/components/Buttons';
 
 const SplashScreen = ({ finishLoading }) => {
-    const [isButtonVisible, setIsButtonVisible] = useState(false);
-
-            useEffect(() => {
-                setTimeout(() => {
-                    setIsButtonVisible(true);
-                }, 3000); // Match text animation duration
-            }, []);
 
     return (
         (
@@ -24,14 +17,20 @@ const SplashScreen = ({ finishLoading }) => {
         </div>
 
         <div 
-            className="h-screen w-screen flex items-center justify-center text-center relative z-10"
-            style={{ transform: "translateY(-160%)",
+            className="flex-1 flex justify-center"
+            style={{ transform: "translateY(-18vh)",
                      zIndex: 10
              }}
         >
             <TitleAnimation />
         </div>
-        {/*isButtonVisible && <button style={{fontSize: '2em'}} onClick={() => finishLoading()}>test button, fade appear after animation</button> */}
+        <div
+            className="fixed top-0 left-0"
+            style={{
+                zIndex: 10
+            }}>
+            <SplashButton finishLoading={finishLoading} />
+        </div>
         </>
         )
     )
