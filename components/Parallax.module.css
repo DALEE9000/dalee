@@ -9,6 +9,7 @@
   height: 100vh;
   background-size: cover; /*cover*/
   background-position: center center; /* Keep the image centered */
+  min-width: 100%;
 }
 
 /* Parallax Layer */
@@ -25,7 +26,8 @@
   background-size: 100% 100%;
   background-position: center center; /* Keep the image centered */
   background-repeat: "repeat-x";
-  transform: translate(-100%, -100%);
+  min-width: 1920px;
+  min-height: 100vh;
   z-index: 1; /* Ensure layers stack correctly */
 }
 
@@ -41,6 +43,8 @@
   aspect-ratio: 1.8125;
   background-size: 100% 100%;
   background-position: center center;
+  min-width: 1920px;
+  min-height: 100vh;
   z-index: 1; /* To ensure it's above the background layers but below parallax layers */
 }
 

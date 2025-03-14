@@ -23,7 +23,7 @@ export default function SplashButton ( { finishLoading }) {
             <>
             {isButtonVisible && 
             <button 
-                onClick={() => { finishLoading(); handleMouseEnter(); }}
+                onClick={() => finishLoading()}
                 className="fixed right-0 bottom-0 p-0 bg-transparent border-none outline-none cursor-pointer"
                 style={{
                     all: 'unset', // Remove all default button styles (including margin, padding, etc.)
