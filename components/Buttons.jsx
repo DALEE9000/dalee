@@ -26,7 +26,6 @@ export default function SplashButton ( { finishLoading }) {
                     width={200}
                     height={100}
                     alt="Splash Page Button"
-                    className="cursor-pointer"
                 />
             </button>
             </>

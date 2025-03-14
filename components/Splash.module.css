@@ -73,7 +73,7 @@
 .title-animation-div {
   width: 100vw;
   display: flex;
-  transform: translateY(-20vh);
+  transform: translateY(-18vh);
   z-index: 10;
 }
 
