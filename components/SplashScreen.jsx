@@ -19,13 +19,21 @@ const SplashScreen = ({ finishLoading }) => {
         <div 
             className=""
             style={{ 
-                     width: "100vw",
-                     height: '103.5px',
-                     transform: "translateY(-18vh)",
+                     width: '100vw',
+                     transform: 'translateY(-25vh)',
                      zIndex: 10,
              }}
         >
             <TitleAnimation />
+        </div>
+        <div
+            className=""
+            style={{
+                width: '100%',
+                position: 'absolute',
+                transform: 'translateY(+18vh)',
+                zIndex: 10,
+            }}>
             <SplashButton finishLoading={finishLoading} />
         </div>
         </>

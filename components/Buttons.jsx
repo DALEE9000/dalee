@@ -27,10 +27,10 @@ export default function SplashButton ( { finishLoading }) {
                 className="fixed p-0 bg-transparent border-none outline-none cursor-pointer"
                 style={{
                     all: 'unset', // Remove all default button styles (including margin, padding, etc.)
-                    width: 'auto', // Ensure the button takes the image size
-                    height: 'auto',
-                    position: 'absolute',
-                    right: '18%',
+                    width: '200px', // Ensure the button takes the image size
+                    height: '100px',
+                    justifyContent: 'center',
+                    position: 'relative',
                     cursor: 'pointer',
                 }}
                 onMouseEnter={handleMouseEnter}

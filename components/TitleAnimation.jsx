@@ -12,7 +12,7 @@ export default function TitleAnimation(
     return(
     <>
     <span style={{ 
-        fontSize: '4em',
+        fontSize: '7em',
         fontFamily: jersey.style.fontFamily,
         position: 'absolute',
         left: 0,
@@ -27,12 +27,12 @@ export default function TitleAnimation(
             500,
         ]}
         speed={50}
-        style={{ fontSize: '4em',
+        style={{ fontSize: '7em',
             textAlign: 'left',
             alignItems: 'center',
             fontFamily: jersey.style.fontFamily,
             position: 'absolute',
-            left: '28.45px',
+            left: '49.7833px',
             marginTop: '0.5%',
             zIndex: 20,
         }}
