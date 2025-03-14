@@ -27,7 +27,7 @@
   background-position: center center; /* Keep the image centered */
   background-repeat: "repeat-x";
   min-width: 1920px;
-  min-height: 100vh;
+  min-height: 965px;
   z-index: 1; /* Ensure layers stack correctly */
 }
 
@@ -44,7 +44,7 @@
   background-size: 100% 100%;
   background-position: center center;
   min-width: 1920px;
-  min-height: 100vh;
+  min-height: 965px;
   z-index: 1; /* To ensure it's above the background layers but below parallax layers */
 }
 
