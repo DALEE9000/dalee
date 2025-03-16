@@ -2,6 +2,6 @@
 
 <samp>
 
-`Welcome to the repo for my personal website.` :alien:
+Welcome to the repo for my personal website. :alien:
 
 </samp>
