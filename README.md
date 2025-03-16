@@ -1,3 +1,3 @@
-#Salutations, I'm David! 
+# Salutations, I'm David! 
 
 `Welcome to the repo for my personal website.` :alien:
