@@ -24,7 +24,7 @@ export default function SplashButton ( { finishLoading }) {
                 <Image
                     src={imageSrc}
                     width={200}
-                    height={100}
+                    height={100} /* try using window.innerHeight, tho it doesn't change immediately */
                     alt="Splash Page Button"
                 />
             </button>
