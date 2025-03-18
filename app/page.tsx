@@ -1,17 +1,22 @@
 import Link from 'next/link';
+import TwinkleStar from '@/components/TwinkleStar';  // Adjust path if needed
+import "./globals.css";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 items-center text-center">
+    <div className="twinkle">
+      <main>
+        <div className="twinkle">
+          <TwinkleStar>
+          <p>Welcome to David&apos;s website</p>
 
-        <div className="flex flex-col sm:flex-row gap-4 items-center">
-            <p>Welcome to David&apos;s website</p>
-
-            <p>This is a <Link href="/about">link to my about page</Link>.</p>
+          <p>
+            This is a <Link href="/about">link to my about page</Link>.
+          </p>
+          </TwinkleStar>  {/* Self-closing tag */}
         </div>
       </main>
-      <footer className="mt-8 flex gap-6 flex-wrap items-center justify-center">
+      <footer>
       </footer>
     </div>
   );

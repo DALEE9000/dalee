@@ -34,3 +34,30 @@ html, body {
   margin: 0; /* Remove default margin */
   text-align: center; /* Centers text inside elements */
 }
+
+.home-page {
+  color: var(--foreground);
+  background: var(--background);
+    /* Flexbox to center everything */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100vw;
+  height: auto; /* Ensure full viewport height */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Centers text inside elements */
+}
+
+.twinkle {
+  color: var(--foreground);
+  background: var(--background);
+    /* Flexbox to center everything */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100vw;
+  height: auto; /* Ensure full viewport height */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Centers text inside elements */
+}
+

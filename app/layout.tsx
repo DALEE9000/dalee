@@ -43,7 +43,7 @@ export default function RootLayout({
       <title>David A. Lee</title>
     </head>
       <body
-        className={`${jersey.variable} antialiased ${isLoading ? "splash-active" : ""}`}
+        className={`${jersey.variable} antialiased ${isLoading ? "splash-active" : "home-page"}`}
       >
         {/* NOTE THAT LAYOUT MAINTAINS STATE. Once we finish loading the splash page and go to the home page, it won't show up unless the user refreshes */}
         {isLoading && isHome ? (
