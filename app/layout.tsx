@@ -5,6 +5,7 @@ import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
 import { usePathname } from "next/navigation";
 import { Jersey_15 } from 'next/font/google';
+import Transition from "@/components/Transition";
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -44,11 +45,12 @@ export default function RootLayout({
       <body
         className={`${jersey.variable} antialiased ${isLoading ? "splash-active" : ""}`}
       >
+        {/* NOTE THAT LAYOUT MAINTAINS STATE. Once we finish loading the splash page and go to the home page, it won't show up unless the user refreshes */}
         {isLoading && isHome ? (
           <SplashScreen finishLoading={() => setIsLoading(false)} />
         ) : (
           <>
-            {children}
+            <Transition>{children}</Transition>
           </>
         )}
       </body>

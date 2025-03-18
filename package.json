@@ -11,7 +11,9 @@
   "dependencies": {
     "@lottiefiles/lottie-player": "^2.0.12",
     "@next/font": "^14.2.15",
+    "@react-three/fiber": "^9.1.0",
     "@tailwindcss/postcss": "^4.0.12",
+    "@types/three": "^0.174.0",
     "animejs": "^3.2.2",
     "classcat": "^5.0.5",
     "lottie-react": "^2.4.1",
@@ -19,7 +21,8 @@
     "next": "^15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-type-animation": "^3.2.0"
+    "react-type-animation": "^3.2.0",
+    "three": "^0.174.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
