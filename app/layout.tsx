@@ -36,7 +36,7 @@ export default function RootLayout({
 /* need to ensure body has proper CSS definition to force the splashscreen div to center */
 
   return (
-    <html lang="en">
+    <html lang="en" className={jersey.variable}>
     <head>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
