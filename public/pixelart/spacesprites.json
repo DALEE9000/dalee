@@ -269,11 +269,22 @@
    { "name": "RedNebula05", "opacity": 255, "blendMode": "normal" },
    { "name": "Planet01", "opacity": 255, "blendMode": "normal" },
    { "name": "Foreground", "opacity": 255, "blendMode": "normal" },
-   { "name": "AnimateStar01", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar010", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar016", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar011", "opacity": 255, "blendMode": "normal" },
-   { "name": "AnimateStar02", "opacity": 255, "blendMode": "normal" },
-   { "name": "AnimateStar03", "opacity": 255, "blendMode": "normal" },
-   { "name": "AnimateStar04", "opacity": 255, "blendMode": "normal" }
+   { "name": "AnimateStar012", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar013", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar014", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar015", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar020", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar021", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar022", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar023", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar024", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar030", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar031", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar032", "opacity": 255, "blendMode": "normal" },
+   { "name": "AnimateStar033", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
