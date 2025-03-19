@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 /* import { Metadata } from 'next';*/
-import dynamic from 'next/dynamic';
 import { usePathname } from "next/navigation";
 import { Jersey_15 } from 'next/font/google';
 import "./globals.css";
