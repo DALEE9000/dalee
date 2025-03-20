@@ -1,13 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import styles from './Splash.module.css';
 
 export default function SplashButton ( { setOnSplash, setIsButtonLoading }) {
     const [imageSrc, setImageSrc] = useState("/pixelart/button1.png");
-
-    useEffect(() => {
-        setIsButtonLoading();
-    }, []);
 
     function handleMouseEnter() {
         setImageSrc("/pixelart/button2.png");

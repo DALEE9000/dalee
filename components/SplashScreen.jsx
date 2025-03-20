@@ -13,7 +13,6 @@ export default function SplashScreen({ setOnSplash }){
             <div className=""
             >
                 <Parallax 
-                    setIsParallaxLoading={setIsParallaxLoading}
                 />
             </div>
 
@@ -21,7 +20,6 @@ export default function SplashScreen({ setOnSplash }){
                 className={`${styles['title-animation-div']}`}
             >
                 <TitleAnimation 
-                    setIsTitleLoading={setIsTitleLoading}
                 />
             </div>
             <div
@@ -29,7 +27,6 @@ export default function SplashScreen({ setOnSplash }){
             >
                 <SplashButton 
                     setOnSplash={setOnSplash} 
-                    setIsButtonLoading={setIsButtonLoading}
                 />
             </div>
         </>

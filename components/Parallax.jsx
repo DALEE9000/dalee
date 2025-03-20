@@ -1,7 +1,6 @@
 "use client"
 
 import React from 'react';
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from "./Splash.module.css";
 
@@ -20,10 +19,7 @@ const elements = [
   { element: "mountains", duration: 240 }
 ]
 
-export default React.memo(function Parallax({ setIsParallaxLoading }) {
-  useEffect(() => {
-    setIsParallaxLoading()
-  }, []);
+export default React.memo(function Parallax() {
 
   return (
     <>
