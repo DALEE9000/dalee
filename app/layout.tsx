@@ -25,9 +25,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [onSplash, setOnSplash] = useState(true);
-  const [isButtonLoading, setIsButtonLoading] = useState(true);
-  const [isParallaxLoading, setIsParallaxLoading] = useState(true);
-  const [isTitleLoading, setIsTitleLoading] = useState(true);
 
 /* the body here wraps the div in SplashScreen*/
 /* need to ensure body has proper CSS definition to force the splashscreen div to center */
