@@ -1,34 +1,38 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
 import TitleAnimation from '@/components/TitleAnimation';
 import Parallax from '@/components/Parallax';
 import SplashButton from '@/components/Buttons';
 import styles from './Splash.module.css';
 
-const SplashScreen = ({ finishLoading }) => {
+export default function SplashScreen({ setOnSplash, setIsButtonLoading, setIsTitleLoading, setIsParallaxLoading }){
 
     return (
         (
         <>
             <div className=""
             >
-                <Parallax />
+                <Parallax 
+                    setIsParallaxLoading={setIsParallaxLoading}
+                />
             </div>
 
             <div 
                 className={`${styles['title-animation-div']}`}
             >
-                <TitleAnimation />
+                <TitleAnimation 
+                    setIsTitleLoading={setIsTitleLoading}
+                />
             </div>
             <div
                 className={`${styles['splash-button-div']}`}
             >
-                <SplashButton finishLoading={finishLoading} />
+                <SplashButton 
+                    setOnSplash={setOnSplash} 
+                    setIsButtonLoading={setIsButtonLoading}
+                />
             </div>
         </>
         )
     )
 }
-
-export default SplashScreen;

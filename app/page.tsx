@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
-import TwinkleStar from '@/components/TwinkleStar';  // Adjust path if needed
 import "./globals.css";
 import { Jersey_15 } from 'next/font/google';
+import TwinkleStar from '@/components/TwinkleStar';  // Adjust path if needed
+import Loader from "@/components/Loader";
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -11,33 +13,35 @@ const jersey = Jersey_15({
 
 export default function Home() {
   return (
-    <div className="twinkle">
+    <div>
       <main>
+        <Suspense fallback={<Loader />}>
         <div className="twinkle">
-          <TwinkleStar>
-            <div className="twinkle-box">
-              <p className={`${jersey.variable} intro`}
-                style={{ 
-                  fontSize: 100,
-                  fontFamily: jersey.style.fontFamily,
-                  zIndex: 10,
-                }}
-              >
-                Welcome to David&apos;s website
-              </p>
+            <TwinkleStar>
+              <div className="twinkle-box">
+                <p className={`${jersey.variable} intro`}
+                  style={{ 
+                    fontSize: 100,
+                    fontFamily: jersey.style.fontFamily,
+                    zIndex: 10,
+                  }}
+                >
+                  Welcome to David&apos;s website
+                </p>
 
-              <p className="intro"
-                style={{ 
-                  fontSize: 100,
-                  fontFamily: jersey.style.fontFamily,
-                  zIndex: 10,
-                }}
-              >
-                This is a <Link href="/about">link to my about page</Link>.
-              </p>
-            </div>
-          </TwinkleStar>  {/* Self-closing tag */}
+                <p className="intro"
+                  style={{ 
+                    fontSize: 100,
+                    fontFamily: jersey.style.fontFamily,
+                    zIndex: 10,
+                  }}
+                >
+                  This is a <Link href="/about">link to my about page</Link>.
+                </p>
+              </div>
+            </TwinkleStar>
         </div>
+        </Suspense>
       </main>
       <footer>
       </footer>

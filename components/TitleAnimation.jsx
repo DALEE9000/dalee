@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { TypeAnimation } from 'react-type-animation';
 import { Jersey_15 } from 'next/font/google';
 import styles from './Splash.module.css';
@@ -7,9 +8,11 @@ const jersey = Jersey_15({
     subsets: ['latin'],
 })
 
-export default function TitleAnimation(
-    children
-) {
+export default function TitleAnimation( { setIsTitleLoading } ) {
+    useEffect(() => {
+        setIsTitleLoading();
+    }, []);
+
     return(
     <>
         <div

@@ -48,19 +48,6 @@ html, body {
   text-align: center; /* Centers text inside elements */
 }
 
-.twinkle {
-  color: var(--foreground);
-  background: var(--background);
-    /* Flexbox to center everything */
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  width: 100vw;
-  height: auto; /* Ensure full viewport height */
-  margin: 0; /* Remove default margin */
-  text-align: center; /* Centers text inside elements */
-}
-
 .twinkle-box {
   position: absolute;
   top: 460px;
@@ -72,4 +59,17 @@ html, body {
   justify-content: center;
   align-items: center;
   z-index: 1;  /* Make sure it's behind the text */
+}
+
+.sweet-loading {
+  color: var(--foreground);
+  background: var(--background);
+    /* Flexbox to center everything */
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100vw;
+  height: auto; /* Ensure full viewport height */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Centers text inside elements */
 }

@@ -1,12 +1,13 @@
 "use client"
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 /* import { Metadata } from 'next';*/
 import { usePathname } from "next/navigation";
 import { Jersey_15 } from 'next/font/google';
 import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
 import Transition from "@/components/Transition";
+import Loader from "@/components/Loader";
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -26,12 +27,10 @@ export default function RootLayout({
 }>) {
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [isLoading, setIsLoading] = useState(isHome)
-
-  useEffect(() => {
-    if (isLoading) return
-  }, [isLoading])
-
+  const [onSplash, setOnSplash] = useState(true);
+  const [isButtonLoading, setIsButtonLoading] = useState(true);
+  const [isParallaxLoading, setIsParallaxLoading] = useState(true);
+  const [isTitleLoading, setIsTitleLoading] = useState(true);
 
 /* the body here wraps the div in SplashScreen*/
 /* need to ensure body has proper CSS definition to force the splashscreen div to center */
@@ -44,19 +43,51 @@ export default function RootLayout({
       <title>David A. Lee</title>
     </head>
       <body
-        className={`${jersey.variable} antialiased ${isLoading ? "splash-active" : "home-page"}`}
+        className={`${jersey.variable} antialiased ${onSplash ? "splash-active" : "home-page"}`}
       >
-        {/* NOTE THAT LAYOUT MAINTAINS STATE. Once we finish loading the splash page and go to the home page, it won't show up unless the user refreshes */}
-        {isLoading && isHome ? (
-          <SplashScreen finishLoading={() => setIsLoading(false)} />
+        {onSplash ? (
+        <Suspense fallback={<Loader />}>
+          <SplashScreen 
+            setOnSplash={() => setOnSplash(false)} 
+            setIsButtonLoading={setIsButtonLoading}
+            setIsTitleLoading={setIsTitleLoading}
+            setIsParallaxLoading={setIsParallaxLoading}
+          />
+        </Suspense>) : (
+          <>
+          <Transition>
+            {children}
+          </Transition>
+          </>
+        )}
+        {/* onSplash ? (
+          <Loader
+            setOnSplash={() => setOnSplash(false)} 
+          /> 
         ) : (
           <>
             <Transition>
               {children}
             </Transition>
           </>
-        )}
+        ) */}
       </body>
     </html>
   );
 }
+
+/* 
+Use switch statement to navigate through the following possibilities:
+
+isLoading: True, onSplash: False -- Loader
+isLoading: False, onSplash: True -- Splash
+isLoading: False, onSplash: False -- Home
+
+onSplash needs to be initialized with FALSE.
+isLoading needs to be initialized with TRUE.
+
+Also: need to figure out how to get the twinkle animation state into layout, so we don't render anything until that is loaded
+
+EDIT: New problem: the title, parallax, and button loading states don't change to false because we can't even get to the point of the splash page being called. I think we need to re-engineer the structure such that the loader is INSIDE the splash-page component.
+
+*/
