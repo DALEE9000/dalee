@@ -5,7 +5,7 @@ import Parallax from '@/components/Parallax';
 import SplashButton from '@/components/Buttons';
 import styles from './Splash.module.css';
 
-export default function SplashScreen({ setOnSplash, setIsButtonLoading, setIsTitleLoading, setIsParallaxLoading }){
+export default function SplashScreen({ setOnSplash }){
 
     return (
         (

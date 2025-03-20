@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useState, useEffect, Suspense } from "react";
+import React, { useState, Suspense } from "react";
 /* import { Metadata } from 'next';*/
-import { usePathname } from "next/navigation";
 import { Jersey_15 } from 'next/font/google';
 import "./globals.css";
 import SplashScreen from "@/components/SplashScreen";
@@ -25,8 +24,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  const isHome = pathname === "/";
   const [onSplash, setOnSplash] = useState(true);
   const [isButtonLoading, setIsButtonLoading] = useState(true);
   const [isParallaxLoading, setIsParallaxLoading] = useState(true);
@@ -49,9 +46,6 @@ export default function RootLayout({
         <Suspense fallback={<Loader />}>
           <SplashScreen 
             setOnSplash={() => setOnSplash(false)} 
-            setIsButtonLoading={setIsButtonLoading}
-            setIsTitleLoading={setIsTitleLoading}
-            setIsParallaxLoading={setIsParallaxLoading}
           />
         </Suspense>) : (
           <>
