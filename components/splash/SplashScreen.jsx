@@ -7,8 +7,8 @@ import Loader from "@/components/Loader";
 import styles from './Splash.module.css'; 
 
 // Dynamically import all components
-const Parallax = dynamic(() => import("@/components/Parallax"), { ssr: false });
-const TitleAnimation = dynamic(() => import("@/components/TitleAnimation"), { ssr: false });
+const Parallax = dynamic(() => import("./Parallax"), { ssr: false });
+const TitleAnimation = dynamic(() => import("./TitleAnimation"), { ssr: false });
 const SplashButton = dynamic(() => import("@/components/Buttons"), { ssr: false });
 
 export default function SplashScreen({ setOnSplash }){
@@ -20,10 +20,10 @@ export default function SplashScreen({ setOnSplash }){
         const preloadComponents = async () => {
         try {
             // Preload Parallax
-            await import("@/components/Parallax");
+            await import("./Parallax");
             
             // Preload TitleAnimation
-            await import("@/components/TitleAnimation");
+            await import("./TitleAnimation");
             
             // Preload SplashButton
             await import("@/components/Buttons");

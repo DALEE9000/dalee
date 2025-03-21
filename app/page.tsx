@@ -19,7 +19,7 @@ export default function Home() {
         <div className="twinkle">
             <TwinkleStar>
               <div className="twinkle-box">
-                <p className={`${jersey.variable} intro`}
+                <p className={"intro"}
                   style={{ 
                     fontSize: 100,
                     fontFamily: jersey.style.fontFamily,

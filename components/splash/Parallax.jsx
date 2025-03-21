@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Loader from "@/components/Loader"; 
 import styles from "./Splash.module.css";
 
 {/* This ensures a seamless horizontal wrap */}

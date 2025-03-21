@@ -4,7 +4,7 @@ import React, { useState, Suspense } from "react";
 /* import { Metadata } from 'next';*/
 import { Jersey_15 } from 'next/font/google';
 import "./globals.css";
-import SplashScreen from "@/components/SplashScreen";
+import SplashScreen from "@/components/splash/SplashScreen";
 import Transition from "@/components/Transition";
 import Loader from "@/components/Loader";
 
