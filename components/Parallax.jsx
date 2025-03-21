@@ -1,7 +1,8 @@
 "use client"
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import Loader from "@/components/Loader"; 
 import styles from "./Splash.module.css";
 
 {/* This ensures a seamless horizontal wrap */}
@@ -17,9 +18,42 @@ const elements = [
   { element: "cloud2", duration: 90 },
   { element: "cloud3", duration: 150 },
   { element: "mountains", duration: 240 }
-]
+];
+
+{/* Add static layers here */}
+const staticImages = ["sky1", "sky2", "sky3", "sun1"];
 
 export default React.memo(function Parallax() {
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      try {
+        const imageUrls = [
+          ...staticImages.map((bg) => `/pixelart/${bg}.png`),
+          ...elements.map((el) => `/pixelart/${el.element}.png`),
+        ];
+
+        const imagePromises = imageUrls.map((src) => {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+            img.onerror = reject;
+          });
+        });
+
+        await Promise.all(imagePromises); // Wait for all images to load
+        setIsLoaded(true);
+      } catch (error) {
+        console.error("Failed to load images:", error);
+      }
+    };
+
+    preloadImages();
+  }, []);
+
 
   return (
     <>
@@ -27,7 +61,7 @@ export default React.memo(function Parallax() {
         className={styles['parallax-container']}
     >
       {/* STATIC LAYERS*/}
-      {["sky1", "sky2", "sky3", "sun1"].map((bg) => (
+      {staticImages.map((bg) => (
         <div
           key={bg}
           className={`${styles['static-layer']}`}

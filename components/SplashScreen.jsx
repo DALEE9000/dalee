@@ -1,27 +1,86 @@
 "use client"
 
-import TitleAnimation from '@/components/TitleAnimation';
-import Parallax from '@/components/Parallax';
-import SplashButton from '@/components/Buttons';
-import styles from './Splash.module.css';
+import React, { useState, useEffect } from 'react';
+import dynamic from "next/dynamic";
+import { motion, AnimatePresence } from "framer-motion";
+import Loader from "@/components/Loader";
+import styles from './Splash.module.css'; 
+
+// Dynamically import all components
+const Parallax = dynamic(() => import("@/components/Parallax"), { ssr: false });
+const TitleAnimation = dynamic(() => import("@/components/TitleAnimation"), { ssr: false });
+const SplashButton = dynamic(() => import("@/components/Buttons"), { ssr: false });
 
 export default function SplashScreen({ setOnSplash }){
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [showTransition, setShowTransition] = useState(false);
+
+    // Simulate preloading all components
+    useEffect(() => {
+        const preloadComponents = async () => {
+        try {
+            // Preload Parallax
+            await import("@/components/Parallax");
+            
+            // Preload TitleAnimation
+            await import("@/components/TitleAnimation");
+            
+            // Preload SplashButton
+            await import("@/components/Buttons");
+
+            // Simulate a small delay to ensure visual stability
+            setTimeout(() => {
+                setIsLoaded(true);
+                setShowTransition(true); // Trigger the transition effect
+            }, 500);
+        } catch (error) {
+            console.error("Error preloading components:", error);
+        }
+        };
+
+        preloadComponents();
+    }, []);
+
+    if (!isLoaded) {
+        return <Loader />;  // Show the loader until all components are ready
+    }
+
 
     return (
-        (
+        showTransition && (
         <>
-            <div className=""
-            >
-                <Parallax 
-                />
+        <motion.div
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
+            <div>
+                <Parallax />
             </div>
+        </motion.div>
 
+        <motion.div
+          className={styles["title-animation-div"]}
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        >
             <div 
                 className={`${styles['title-animation-div']}`}
             >
-                <TitleAnimation 
-                />
+                <TitleAnimation />
             </div>
+        </motion.div>
+
+        <motion.div
+          className={styles["splash-button-div"]}
+          initial={{ opacity: 0, scale: 1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1 }}
+          transition={{ duration: 1, ease: "easeInOut" }}
+        >
             <div
                 className={`${styles['splash-button-div']}`}
             >
@@ -29,7 +88,8 @@ export default function SplashScreen({ setOnSplash }){
                     setOnSplash={setOnSplash} 
                 />
             </div>
+        </motion.div>
         </>
         )
-    )
+    );
 }

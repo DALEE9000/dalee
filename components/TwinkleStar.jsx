@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import ClipLoader from "react-spinners/ClipLoader";
 import Loader from "@/components/Loader";
 
 const spritesheet = "/pixelart/spacesprites.png";

@@ -51,17 +51,6 @@ export default function RootLayout({
           </Transition>
           </>
         )}
-        {/* onSplash ? (
-          <Loader
-            setOnSplash={() => setOnSplash(false)} 
-          /> 
-        ) : (
-          <>
-            <Transition>
-              {children}
-            </Transition>
-          </>
-        ) */}
       </body>
     </html>
   );
