@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import '../globals.css';
 import 'tailwindcss/tailwind.css';  // Force load Tailwind
 
