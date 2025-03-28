@@ -2,22 +2,17 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Loader from "@/components/Loader";
+import styles from "./Home.module.css";
 
 const spritesheet = "/pixelart/spacesprites.png";
 const spriteDataUrl = "/pixelart/spacesprites.json";
 
-const AnimatedBackground = React.memo(({ children }) => {
+export default function AnimatedBackground({ children }) {
   const [frame, setFrame] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [spriteData, setSpriteData] = useState(null);
   const animationSpeed = 100; // Adjust for desired animation speed (milliseconds)
   const animationInterval = useRef(null);
-
-  const override = {
-    display: "block",
-    margin: "0 auto",
-    borderColor: "white",
-  };
 
   useEffect(() => {
     const preloadAssets = async () => {
@@ -70,14 +65,15 @@ const AnimatedBackground = React.memo(({ children }) => {
     width: frameData.w,
     height: frameData.h,
     backgroundPosition: `-${frameData.x}px -${frameData.y}px`,
-    animation: "none", // Disable CSS animation
   };
 
+
   return (
-    <div className="m-0 p-0 w-full h-full" style={backgroundStyle}>
+    <div 
+      className={`${styles['twinkle-background']}`}
+      style={backgroundStyle}
+    >
       {children}
     </div>
   );
-});
-
-export default AnimatedBackground;
+};

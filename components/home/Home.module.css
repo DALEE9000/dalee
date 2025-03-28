@@ -1,0 +1,23 @@
+.bio-animation {
+  font-size: 7rem;
+}
+
+.bio {
+  font-size: 3rem;
+}
+
+.twinkle-background {
+  display: flex;
+  justify-content: center;
+  image-rendering: crisp-edges;
+}
+
+@media (width < 800px) {
+  .bio-animation {
+    font-size: 4rem;
+  }
+
+  .bio {
+    font-size: 2rem;
+  }
+}

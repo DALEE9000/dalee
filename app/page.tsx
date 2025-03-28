@@ -2,7 +2,8 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import "./globals.css";
 import { Jersey_15 } from 'next/font/google';
-import TwinkleStar from '@/components/TwinkleStar';  // Adjust path if needed
+import TwinkleStar from '@/components/home/TwinkleStar';
+import BioAnimation from '@/components/home/BioAnimation';
 import Loader from "@/components/Loader";
 
 const jersey = Jersey_15({
@@ -13,27 +14,16 @@ const jersey = Jersey_15({
 
 export default function Home() {
   return (
-    <div>
-      <main>
-        <Suspense fallback={<Loader />}>
+    <>
+      <Suspense fallback={<Loader />}>
         <div className="twinkle">
             <TwinkleStar>
               <div className="twinkle-box">
-                <p className={"intro"}
-                  style={{ 
-                    fontSize: 100,
-                    fontFamily: jersey.style.fontFamily,
-                    zIndex: 10,
-                  }}
-                >
-                  Welcome to David&apos;s website
-                </p>
-
+                <BioAnimation />
                 <p className="intro"
                   style={{ 
-                    fontSize: 100,
+                    fontSize: 20,
                     fontFamily: jersey.style.fontFamily,
-                    zIndex: 10,
                   }}
                 >
                   This is a <Link href="/about">link to my about page</Link>.
@@ -41,10 +31,9 @@ export default function Home() {
               </div>
             </TwinkleStar>
         </div>
-        </Suspense>
-      </main>
-      <footer>
-      </footer>
-    </div>
-  );
+      </Suspense>
+    <footer>
+    </footer>
+  </>
+);
 }
