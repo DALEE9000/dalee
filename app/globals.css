@@ -67,6 +67,7 @@ html, body {
   top: 50vh;
   width: 75vw;
   padding-inline: 100px;
+  padding-top: 50px;
   margin: 0;
   height: 50%;
   background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */

@@ -67,6 +67,8 @@ export default function AnimatedBackground({ children }) {
     backgroundPosition: `-${frameData.x}px -${frameData.y}px`,
   };
 
+  console.log(frameData.y)
+
 
   return (
     <div 

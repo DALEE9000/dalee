@@ -24,16 +24,16 @@ export default function BioAnimation() {
             preRenderFirstString={true}
             sequence={[
                 500,
-                'Hi! I\'m David, a researcher',
+                'david a. lee is a researcher',
                 1000,
-                'Hi! I\'m David, a writer',
+                'david a. lee is a writer',
                 1000,
-                'Hi! I\'m David, a policy expert',
+                'david a. lee is a policy expert',
                 1000,
             ]}
             speed={40}
             style={{
-                fontFamily: jersey.style.fontFamily,
+                fontFamily: raleway.style.fontFamily,
                 minHeight: 200,
             }}
             repeat={Infinity}

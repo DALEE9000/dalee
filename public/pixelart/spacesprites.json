@@ -148,7 +148,6 @@
    { "name": "RedNebula03", "opacity": 255, "blendMode": "normal" },
    { "name": "RedNebula05", "opacity": 255, "blendMode": "normal" },
    { "name": "Planet01", "opacity": 255, "blendMode": "normal" },
-   { "name": "Foreground", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar010", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar016", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar011", "opacity": 255, "blendMode": "normal" },
@@ -164,7 +163,8 @@
    { "name": "AnimateStar030", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar031", "opacity": 255, "blendMode": "normal" },
    { "name": "AnimateStar032", "opacity": 255, "blendMode": "normal" },
-   { "name": "AnimateStar033", "opacity": 255, "blendMode": "normal" }
+   { "name": "AnimateStar033", "opacity": 255, "blendMode": "normal" },
+   { "name": "Foreground", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
