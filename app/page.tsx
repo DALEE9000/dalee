@@ -13,6 +13,8 @@ const jersey = Jersey_15({
 })
 
 export default function Home() {
+  const today = new Date();
+
   return (
     <>
       <Suspense fallback={<Loader />}>
@@ -32,7 +34,13 @@ export default function Home() {
             </TwinkleStar>
         </div>
       </Suspense>
-    <footer>
+
+    <footer
+      style={{
+        fontFamily: jersey.style.fontFamily,
+      }}
+    >
+      Created with Next.js, &copy; {today.getFullYear()} David A. Lee
     </footer>
   </>
 );
