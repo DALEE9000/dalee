@@ -24,20 +24,16 @@
   flex-direction: column;
   justify-content: space-between;
   text-align: left;
-  position: relative;
   padding-inline: 100px;
   padding-top: 50px;
   margin: 0;
   background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
-  backdrop-filter: blur(0px);  /* Optional: Glass effect */
-  z-index: 1;  /* Make sure it's behind the text */
   border: 5px solid white;
 }
 
 .twinkle-background {
   display: flex;
   justify-content: center;
-  image-rendering: crisp-edges;
 }
 
 @media (width < 800px) {
