@@ -13,19 +13,7 @@ export default function Loader() {
 
   return (
     <>
-    <div className="sweet-loading"
-      style={{
-        position: "absolute", // Ensure it's positioned relative to the viewport
-        top: "0",
-        left: "0",
-        width: "100vw", // Take up the full width of the viewport
-        height: "100vh", // Take up the full height of the viewport
-        display: "flex",
-        justifyContent: "center", // Center horizontally
-        alignItems: "center", // Center vertically
-        backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: add a semi-transparent background
-      }}
-    >
+    <div className="sweet-loading">
 
       <ClipLoader
         color={color}

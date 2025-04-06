@@ -15,19 +15,42 @@ export default function SplashButton ( { setOnSplash, setIsButtonLoading }) {
 
     return (
         <>
-        <button 
-            onClick={() => setOnSplash()}
-            className={`${styles['splash-button']}`}
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseExit}
-        >
-            <Image
-                src={imageSrc}
-                width={200}
-                height={100} /* try using window.innerHeight, tho it doesn't change immediately */
-                alt="Splash Page Button"
-            />
-        </button>
+            <button 
+                onClick={() => setOnSplash()}
+                className={styles['splash-button']}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseExit}
+            >
+                <Image
+                    src={imageSrc}
+                    width={200}
+                    height={100}
+                    alt="Splash Page Button"
+                    className="desktop-splash-button"
+                />
+                <Image
+                    src={imageSrc}
+                    width={100}
+                    height={50}
+                    alt="Splash Page Button"
+                    className="mobile-splash-button"
+                />
+                <style jsx global>{`
+                    .mobile-splash-button {
+                        display: none;
+                    }
+
+                    @media (max-width: 800px) {
+                        .desktop-splash-button {
+                            display: none;
+                        }
+
+                        .mobile-splash-button {
+                            display: block;
+                        }
+                    }
+                `}</style>
+            </button>
         </>
     );
 }

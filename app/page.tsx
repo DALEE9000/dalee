@@ -1,10 +1,8 @@
-import { Suspense } from 'react';
 import Link from 'next/link';
 import "./globals.css";
+import styles from "@/components/home/Home.module.css";
 import { Jersey_15 } from 'next/font/google';
-import TwinkleStar from '@/components/home/TwinkleStar';
 import BioAnimation from '@/components/home/BioAnimation';
-import Loader from "@/components/Loader";
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -17,31 +15,27 @@ export default function Home() {
 
   return (
     <>
-      <Suspense fallback={<Loader />}>
-        <div className="twinkle">
-            <TwinkleStar>
-              <div className="twinkle-box">
-                <BioAnimation />
-                <p className="intro"
-                  style={{ 
-                    fontSize: 20,
-                    fontFamily: jersey.style.fontFamily,
-                  }}
-                >
-                  This is a <Link href="/about">link to my about page</Link>.
-                </p>
-              </div>
-            </TwinkleStar>
+      <div className={styles['starry-page']}>
+        <div className={styles['twinkle-box']}>
+          <BioAnimation />
+          <p
+            style={{ 
+              fontSize: 20,
+              fontFamily: jersey.style.fontFamily,
+            }}
+          >
+            This is a <Link href="/about">link to my about page</Link>.
+          </p>
         </div>
-      </Suspense>
 
-    <footer
-      style={{
-        fontFamily: jersey.style.fontFamily,
-      }}
-    >
-      Created with Next.js, &copy; {today.getFullYear()} David A. Lee
-    </footer>
-  </>
+        <footer
+          style={{
+            fontFamily: jersey.style.fontFamily,
+          }}
+        >
+          Created with Next.js, &copy; {today.getFullYear()} David A. Lee
+        </footer>
+      </div>
+    </>
 );
 }

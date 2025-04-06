@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import styles from "./Splash.module.css";
 
@@ -22,37 +21,7 @@ const elements = [
 {/* Add static layers here */}
 const staticImages = ["sky1", "sky2", "sky3", "sun1"];
 
-export default React.memo(function Parallax() {
-
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const preloadImages = async () => {
-      try {
-        const imageUrls = [
-          ...staticImages.map((bg) => `/pixelart/${bg}.png`),
-          ...elements.map((el) => `/pixelart/${el.element}.png`),
-        ];
-
-        const imagePromises = imageUrls.map((src) => {
-          return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = resolve;
-            img.onerror = reject;
-          });
-        });
-
-        await Promise.all(imagePromises); // Wait for all images to load
-        setIsLoaded(true);
-      } catch (error) {
-        console.error("Failed to load images:", error);
-      }
-    };
-
-    preloadImages();
-  }, []);
-
+export default function Parallax() {
 
   return (
     <>
@@ -63,19 +32,18 @@ export default React.memo(function Parallax() {
       {staticImages.map((bg) => (
         <div
           key={bg}
-          className={`${styles['static-layer']}`}
+          className={styles['static-layer']}
           style={{ backgroundImage: `url(/pixelart/${bg}.png)` }}
         />
       ))}
 
       {/*DYNAMIC LAYERS*/}
-      {/* You need to triple each motion.div so that the animation loops correctly. */}
 
       {elements.map(({ element, duration }) =>
         animateparam.map((layer, index) => (
           <motion.div
             key={`${element}-${index}`}
-            className={`${styles["parallax-layer"]} ${styles[element]}`}
+            className={styles["parallax-layer"]}
             style={{ 
               backgroundImage: `url(/pixelart/${element}.png)`,
             }}
@@ -93,4 +61,4 @@ export default React.memo(function Parallax() {
     </div>
     </>
   );
-});
+};

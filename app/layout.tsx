@@ -7,6 +7,7 @@ import "./globals.css";
 import SplashScreen from "@/components/splash/SplashScreen";
 import Transition from "@/components/Transition";
 import Loader from "@/components/Loader";
+import TwinkleStar from '@/components/home/TwinkleStar';
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -26,9 +27,6 @@ export default function RootLayout({
 }>) {
   const [onSplash, setOnSplash] = useState(true);
 
-/* the body here wraps the div in SplashScreen*/
-/* need to ensure body has proper CSS definition to force the splashscreen div to center */
-
   return (
     <html lang="en" className={jersey.variable}>
     <head>
@@ -37,7 +35,7 @@ export default function RootLayout({
       <title>David A. Lee</title>
     </head>
       <body
-        className={`${jersey.variable} antialiased ${onSplash ? "splash-active" : "home-page"}`}
+        className="home-page"
       >
         {onSplash ? (
         <Suspense fallback={<Loader />}>
@@ -47,7 +45,11 @@ export default function RootLayout({
         </Suspense>) : (
           <>
           <Transition>
-            {children}
+              <Suspense fallback={<Loader />}>
+                    <TwinkleStar>
+                        {children}
+                    </TwinkleStar>
+              </Suspense>
           </Transition>
           </>
         )}
@@ -55,19 +57,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-/* 
-Use switch statement to navigate through the following possibilities:
-
-isLoading: True, onSplash: False -- Loader
-isLoading: False, onSplash: True -- Splash
-isLoading: False, onSplash: False -- Home
-
-onSplash needs to be initialized with FALSE.
-isLoading needs to be initialized with TRUE.
-
-Also: need to figure out how to get the twinkle animation state into layout, so we don't render anything until that is loaded
-
-EDIT: New problem: the title, parallax, and button loading states don't change to false because we can't even get to the point of the splash page being called. I think we need to re-engineer the structure such that the loader is INSIDE the splash-page component.
-
-*/

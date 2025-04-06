@@ -1,3 +1,11 @@
+.starry-page {
+  height: 100%;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 75vw 1fr;
+  grid-template-rows: 50vh auto auto;
+}
+
 .bio-animation {
   font-size: 6rem;
   font-weight: 700;
@@ -5,6 +13,25 @@
 
 .bio {
   font-size: 3rem;
+  margin-top: 100px;
+}
+
+.twinkle-box {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  position: relative;
+  padding-inline: 100px;
+  padding-top: 50px;
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
+  backdrop-filter: blur(0px);  /* Optional: Glass effect */
+  z-index: 1;  /* Make sure it's behind the text */
+  border: 5px solid white;
 }
 
 .twinkle-background {

@@ -8,41 +8,31 @@ const jersey = Jersey_15({
 })
 
 export default function TitleAnimation() {
-
     return(
     <>
-        <div
-            className=""
+        <span 
+            className={styles['arrow-cursor']}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
         >
-            <span 
-                className={`${styles['arrow-cursor']}`}
-                style={{
-                    fontFamily: jersey.style.fontFamily,
-                }}
-            >
-                &gt; 
-            </span>
-        </div>
+            &gt; 
+        </span>
 
-        <div
-            className=""
-        >
-            <TypeAnimation
-                className={`${styles['type-animation']}`}
-                sequence={[
-                    // Same substring at the start will only be typed out once, initially
-                    500,
-                    'David A. Lee\'s Personal Webpage',
-                    500,
-                ]}
-                speed={50}
-                style={{ 
-                    left: 0,
-                    fontFamily: jersey.style.fontFamily,
-                }}
-                repeat={1}
-            />
-        </div>
+        <TypeAnimation
+            className={styles['type-animation']}
+            sequence={[
+                // Same substring at the start will only be typed out once, initially
+                500,
+                'David A. Lee\'s Personal Webpage',
+                500,
+            ]}
+            speed={50}
+            style={{ 
+                fontFamily: jersey.style.fontFamily,
+            }}
+            repeat={1}
+        />
     </>
     );
 }

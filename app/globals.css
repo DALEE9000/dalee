@@ -11,84 +11,36 @@
   --foreground: #ffffff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-  }
-}
-
 html, body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
   overflow-x: hidden;
-  position: absolute;
-  margin: 0;
-}
-
-.splash-active {
-  color: var(--foreground);
-  background: var(--background);
-    /* Flexbox to center everything */
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  height: 100vh; /* Ensure full viewport height */
-  margin: 0; /* Remove default margin */
-  text-align: center; /* Centers text inside elements */
 }
 
 .home-page {
-    /* Flexbox to center everything */
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  width: 100vw;
-  height: auto; /* Ensure full viewport height */
-  margin: 0; /* Remove default margin */
-  text-align: center; /* Centers text inside elements */
-}
-
-.twinkle {
-  width: 100vw;
-  height: auto;
   display: flex;
   justify-content: center;
-}
-
-.twinkle-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  text-align: left;
-  position: relative;
-  top: 50vh;
-  width: 75vw;
-  padding-inline: 100px;
-  padding-top: 50px;
+  align-items: center;
   margin: 0;
-  height: 50%;
-  background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
-  backdrop-filter: blur(0px);  /* Optional: Glass effect */
-  z-index: 1;  /* Make sure it's behind the text */
-  border: 5px solid white;
+  text-align: center;
 }
 
 .sweet-loading {
-  color: var(--foreground);
   background: var(--background);
-    /* Flexbox to center everything */
   display: flex;
-  justify-content: left;
+  justify-content: center;
   align-items: center;
   width: 100vw;
-  height: auto; /* Ensure full viewport height */
-  margin: 0; /* Remove default margin */
-  text-align: center; /* Centers text inside elements */
+  height: 100vh; /* Ensure full viewport height */
 }
 
 footer {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  justify-content: center;
+  align-self: flex-end;
   margin: 25px;
   font-size: 1.5rem;
 }
