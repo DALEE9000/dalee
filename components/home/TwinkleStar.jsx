@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Loader from "@/components/Loader";
 import styles from "./Home.module.css";
 
 const spritesheet = "/pixelart/spacesprites.png";
@@ -53,7 +54,7 @@ export default function AnimatedBackground({ children }) {
 
   if (!isLoaded || !spriteData) {
     return (
-      console.log('yay')
+      <Loader />
     );
   }
 
