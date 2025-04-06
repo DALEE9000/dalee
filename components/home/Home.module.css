@@ -38,10 +38,14 @@
 
 @media (width < 800px) {
   .bio-animation {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 
   .bio {
-    font-size: 2rem;
+    font-size: 1rem;
+  }
+
+  .twinkle-box {
+    padding-inline: 25px;
   }
 }
