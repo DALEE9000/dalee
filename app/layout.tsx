@@ -35,7 +35,7 @@ export default function RootLayout({
       <title>David A. Lee</title>
     </head>
       <body
-        className={`home-page {onSplash} ? home-page-scroll : `}
+        className={`home-page ${onSplash ? 'home-page-scroll' : ''}`}
       >
         {onSplash ? (
         <Suspense fallback={<Loader />}>
