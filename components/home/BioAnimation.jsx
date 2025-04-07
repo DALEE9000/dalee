@@ -1,6 +1,7 @@
 "use client"
 
 import { TypeAnimation } from 'react-type-animation';
+import { Textfit } from 'react-textfit';
 import { Jersey_15 } from 'next/font/google';
 import { Raleway } from 'next/font/google';
 import styles from './Home.module.css';
@@ -19,33 +20,48 @@ export default function BioAnimation() {
 
     return(
     <>
-        <span
-            className={styles['bio-animation']}
+        <Textfit
+            mode={"single"}
             style={{
-                fontFamily: raleway.style.fontFamily,
+                forceSingleModeWidth: false,
+                height: 'auto',
             }}
         >
-            david a. lee is a...
-        </span>
-
-        <TypeAnimation
-            className={styles['bio-animation']}
-            preRenderFirstString={true}
-            sequence={[
-                500,
-                '...researcher',
-                1000,
-                '...writer',
-                1000,
-                '...policy expert',
-                1000,
-            ]}
-            speed={40}
+            <span
+                className={styles['bio-animation']}
+                style={{
+                    fontFamily: raleway.style.fontFamily,
+                }}
+            >
+                david a. lee is a...
+            </span>
+        </Textfit>
+        
+        <Textfit
+            mode={"single"}
             style={{
-                fontFamily: raleway.style.fontFamily,
             }}
-            repeat={Infinity}
-        />
+        >
+            <TypeAnimation
+                className={styles['bio-animation']}
+                preRenderFirstString={true}
+                sequence={[
+                    500,
+                    'climate researcher',
+                    1000,
+                    'writer',
+                    1000,
+                    'policy expert',
+                    1000,
+                ]}
+                speed={40}
+                style={{
+                    fontFamily: raleway.style.fontFamily,
+                }}
+                wrapper="span"
+                repeat={Infinity}
+            />
+        </Textfit>
 
         <p
             className={`${styles['bio']}`}

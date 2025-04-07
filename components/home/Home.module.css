@@ -7,13 +7,12 @@
 }
 
 .bio-animation {
-  font-size: 6rem;
   font-weight: 700;
 }
 
 .bio {
   font-size: 3rem;
-  margin-top: 100px;
+  margin-top: clamp(25px, 80vw, 100px);
 }
 
 .twinkle-box {
@@ -36,13 +35,13 @@
   justify-content: center;
 }
 
-@media (width < 800px) {
+@media (max-width: 800px) {
   .bio-animation {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .bio {
-    font-size: 3rem;
+    font-size: 1rem;
   }
 
   .twinkle-box {

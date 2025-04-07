@@ -28,7 +28,10 @@ export default function RootLayout({
   const [onSplash, setOnSplash] = useState(true);
 
   return (
-    <html lang="en" className={jersey.variable}>
+    <html 
+      lang="en"
+      className={`${onSplash ? 'home-page-scroll' : ''}`}
+    >
     <head>
       <meta charSet="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>

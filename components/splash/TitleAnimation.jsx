@@ -31,6 +31,7 @@ export default function TitleAnimation() {
             style={{ 
                 fontFamily: jersey.style.fontFamily,
             }}
+            wrapper="span"
             repeat={1}
         />
     </>
