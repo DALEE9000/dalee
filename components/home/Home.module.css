@@ -3,7 +3,7 @@
   width: 100vw;
   display: grid;
   grid-template-columns: 1fr 75vw 1fr;
-  grid-template-rows: 50vh auto auto;
+  grid-template-rows: 30% auto auto;
 }
 
 .bio-animation {
