@@ -47,3 +47,9 @@ footer {
   margin: 25px;
   font-size: 1.5rem;
 }
+
+@media (max-width: 800px) {
+  html, body {
+    overflow-x: hidden;
+  }
+}
