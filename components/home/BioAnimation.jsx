@@ -1,15 +1,8 @@
 "use client"
 
 import { TypeAnimation } from 'react-type-animation';
-import { Textfit } from 'react-textfit';
-import { Jersey_15 } from 'next/font/google';
 import { Raleway } from 'next/font/google';
 import styles from './Home.module.css';
-
-const jersey = Jersey_15({
-    weight: "400",
-    subsets: ['latin'],
-})
 
 const raleway = Raleway({
     weight: "400",
@@ -20,13 +13,6 @@ export default function BioAnimation() {
 
     return(
     <>
-        <Textfit
-            mode={"single"}
-            style={{
-                forceSingleModeWidth: false,
-                height: 'auto',
-            }}
-        >
             <span
                 className={styles['bio-animation']}
                 style={{
@@ -35,13 +21,7 @@ export default function BioAnimation() {
             >
                 david a. lee is a...
             </span>
-        </Textfit>
         
-        <Textfit
-            mode={"single"}
-            style={{
-            }}
-        >
             <TypeAnimation
                 className={styles['bio-animation']}
                 preRenderFirstString={true}
@@ -61,7 +41,6 @@ export default function BioAnimation() {
                 wrapper="span"
                 repeat={Infinity}
             />
-        </Textfit>
 
         <p
             className={`${styles['bio']}`}

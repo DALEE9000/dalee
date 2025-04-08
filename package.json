@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@dalee9000/react19-ts-textfit": "^1.0.2",
     "@lottiefiles/lottie-player": "^2.0.12",
     "@next/font": "^14.2.15",
     "@react-three/fiber": "^9.1.0",
@@ -22,7 +23,6 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-spinners": "^0.15.0",
-    "react-textfit": "^1.1.1",
     "react-type-animation": "^3.2.0",
     "three": "^0.174.0"
   },

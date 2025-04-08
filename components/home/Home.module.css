@@ -7,12 +7,13 @@
 }
 
 .bio-animation {
+  font-size: 5vw;
   font-weight: 700;
 }
 
 .bio {
-  font-size: 3rem;
-  margin-top: clamp(25px, 80vw, 100px);
+  font-size: 3vw;
+  margin-top: 10vh;
 }
 
 .twinkle-box {
@@ -36,14 +37,6 @@
 }
 
 @media (max-width: 800px) {
-  .bio-animation {
-    font-size: 1.5rem;
-  }
-
-  .bio {
-    font-size: 1rem;
-  }
-
   .twinkle-box {
     padding-inline: 25px;
   }
