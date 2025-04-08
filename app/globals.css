@@ -6,10 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  outline: 5px solid red;
-}
-
 :root {
   --background: #000000;
   --foreground: #ffffff;
