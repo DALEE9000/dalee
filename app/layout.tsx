@@ -2,18 +2,11 @@
 
 import React, { useState, Suspense } from "react";
 /* import { Metadata } from 'next';*/
-import { Jersey_15 } from 'next/font/google';
 import "./globals.css";
 import SplashScreen from "@/components/splash/SplashScreen";
 import Transition from "@/components/Transition";
 import Loader from "@/components/Loader";
 import TwinkleStar from '@/components/home/TwinkleStar';
-
-const jersey = Jersey_15({
-    variable: "--font-jersey-15",
-    weight: "400",
-    subsets: ['latin'],
-})
 
 /*export const metadata: Metadata = {
   title: "David A. Lee",
