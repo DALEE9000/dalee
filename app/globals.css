@@ -16,7 +16,7 @@ html, body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .home-page {
@@ -50,10 +50,6 @@ footer {
 }
 
 @media (width <= 800px) {
-  html, body {
-    overflow-x: clip;
-  }
-
   footer {
     font-size: 1rem;
   }
