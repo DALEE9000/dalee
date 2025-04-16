@@ -1,15 +1,54 @@
 .NavLinks {
     position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 35vw;
+    height: 100vh;
+}
+
+@media (width <= 800px) {
+    .NavLinks {
+        width: 100vw;
+    }
+}
+
+@media (width > 1024px) {
+    .NavLinks {
+        width: 15vw;
+    }
+}
+
+.menu-on {
+    background-color: rgba(0, 0, 0, 0.5);  /* Translucent black background */
+    backdrop-filter: blur(5px);
+}
+
+.Hamburger {
+    position: absolute;
     top: 20px;
     right: 20px;
 }
 
 #NavBar {
     list-style-type: none;
+    margin: 0;
+    position: relative;
+    top: 88px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(7, 1fr);
 }
 
-.Hamburger {
-    position: absolute;
-    top: 0;
-    right: 0;
+.list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.link-props {
+    text-decoration: none;
+    font-size: 3rem;
+    color: white;
 }
