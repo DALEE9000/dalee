@@ -4,7 +4,9 @@ import 'tailwindcss/tailwind.css';  // Force load Tailwind
 export default function Home() {
   return (
     <>
-      My about page
+      <section id="about">
+        My about page
+      </section>
     </>
   );
 }

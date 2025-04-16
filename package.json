@@ -15,9 +15,11 @@
     "@react-three/fiber": "^9.1.0",
     "@tailwindcss/postcss": "^4.0.12",
     "@types/three": "^0.174.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "animejs": "^3.2.2",
     "classcat": "^5.0.5",
     "clsx": "^2.1.1",
+    "hamburger-react": "^2.5.2",
     "lottie-react": "^2.4.1",
     "motion": "^12.4.10",
     "next": "^15.2.1",
@@ -25,6 +27,7 @@
     "react-dom": "^19.0.0",
     "react-spinners": "^0.15.0",
     "react-type-animation": "^3.2.0",
+    "react-use": "^17.6.0",
     "three": "^0.174.0"
   },
   "devDependencies": {

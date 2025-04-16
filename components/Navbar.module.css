@@ -1,0 +1,15 @@
+.NavLinks {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+}
+
+#NavBar {
+    list-style-type: none;
+}
+
+.Hamburger {
+    position: absolute;
+    top: 0;
+    right: 0;
+}

@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import clsx from 'clsx';
 import "./globals.css";
 import styles from "@/components/home/Home.module.css";
 import { Jersey_15 } from 'next/font/google';
 import { Raleway } from 'next/font/google';
 import BioAnimation from '@/components/home/BioAnimation';
+import Navbar from '@/components/Navbar';
 
 const jersey = Jersey_15({
     variable: "--font-jersey-15",
@@ -27,20 +27,20 @@ export default function Home() {
   return (
     <>
       <div className={styles['starry-page']}>
+        <Navbar />
+
         <div className={box1}>
           <BioAnimation />
         </div>
 
         <div className={box2}>
           <p
-              className={`${styles['bio']}`}
+              className={styles['bio']}
               style={{
                   fontFamily: raleway.style.fontFamily,
               }}
           >
               I&apos;m David. I do cool things. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-
-              <Link href="/about">blah</Link>
           </p>
         </div>
 
