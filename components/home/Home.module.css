@@ -2,8 +2,10 @@
   height: 100%;
   width: 100vw;
   display: grid;
-  grid-template-columns: 1fr 75vw 1fr;
-  grid-template-rows: 30% auto 25%;
+  gap: 5vw;
+  grid-template-columns: 1fr 70vw 1fr;
+  grid-template-rows: 15% auto auto;
+  align-content: flex-start;
 }
 
 .bio-animation {
@@ -19,9 +21,10 @@
 .twinkle-box {
   text-align: left;
   padding: 50px 50px;
-  margin: 5vw 5vw;
   background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
   border: 5px solid white;
+  border-radius: 50px;
+  backdrop-filter: blur(2px);
 }
 
 .box-1 {
@@ -31,12 +34,14 @@
   justify-content: space-between;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  margin: 0;
 }
 
 .box-2 {
   align-self: flex-end;
   grid-column: 2 / 3;
   grid-row: 3 / 4;
+  margin: 0;
 }
 
 .twinkle-background {
@@ -44,16 +49,50 @@
   justify-content: center;
 }
 
-@media (max-width: 800px) {
-  .twinkle-box {
-    margin: 5vw 5vw;
-  }
+#about {
+  display: grid;
+  gap: 2vw;
+  grid-template-columns: 1fr 70vw 1fr;
+  grid-template-rows: 15% repeat(3, auto);
+  justify-items: center;
+  align-content: flex-start;
+}
 
+#about-text {
+  font-size: 2rem;
+}
+
+.portrait {
+  border-radius: 50%;
+  border: 5px solid white;
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.about-box1 {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+  margin: 0;
+  width: 100%;
+}
+
+.about-box2 {
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  margin: 0;
+  width: 100%;
+}
+
+@media (max-width: 800px) {
   .bio {
     font-size: 5vw;
   }
 
   .twinkle-box {
     padding-inline: 25px;
+  }
+
+  #about-text {
+    font-size: 5vw;
   }
 }
