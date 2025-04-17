@@ -20,7 +20,7 @@ export default function Home() {
                   fontFamily: raleway.style.fontFamily,
               }}
           >
-            I'm David. I wear many hats.
+            I&apos;m David. I wear many hats.
           </p>
         </div>
       </section>
