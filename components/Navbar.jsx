@@ -100,7 +100,7 @@ export default function Navbar() {
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
-                            <span className={jersey.className}>Stargazer Mode</span>
+                            <span className={linkStyles}>Stargazer</span>
                         </li>
                     </ul>
                 </nav>

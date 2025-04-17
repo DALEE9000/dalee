@@ -1,11 +1,28 @@
 import '../globals.css';
-import 'tailwindcss/tailwind.css';  // Force load Tailwind
+import clsx from 'clsx';
+import { Raleway } from 'next/font/google';
+import styles from "@/components/home/Home.module.css";
+
+const raleway = Raleway({
+    weight: "400",
+    subsets: ['latin'],
+})
+
+const box1 = clsx(styles['twinkle-box'], styles['box-1'])
 
 export default function Home() {
   return (
     <>
       <section id="about">
-        My about page
+        <div className={box1}>
+          <p
+              style={{
+                  fontFamily: raleway.style.fontFamily,
+              }}
+          >
+            I'm David. I wear many hats.
+          </p>
+        </div>
       </section>
     </>
   );
