@@ -83,6 +83,12 @@
   width: 100%;
 }
 
+.substack-post-embed {
+  text-align: left;
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+}
+
 @media (max-width: 800px) {
   .bio {
     font-size: 5vw;

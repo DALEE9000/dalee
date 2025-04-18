@@ -8,7 +8,7 @@ const box1 = clsx(styles['twinkle-box'], styles['about-box1'])
 
 const box2 = clsx(styles['twinkle-box'], styles['about-box2'])
 
-export default function Home() {
+export default function About() {
   return (
     <>
       <section id={styles['about']}>
