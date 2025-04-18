@@ -1,13 +1,8 @@
 import '../globals.css';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { Raleway } from 'next/font/google';
+import { raleway } from '@/components/Fonts';
 import styles from "@/components/home/Home.module.css";
-
-const raleway = Raleway({
-    weight: "400",
-    subsets: ['latin'],
-})
 
 const box1 = clsx(styles['twinkle-box'], styles['about-box1'])
 
@@ -26,8 +21,16 @@ export default function Home() {
         />
 
         <div className={box1}>
+          <h1
+            className={styles['about-text']}
+            style={{
+              fontFamily: raleway.style.fontFamily,
+            }}
+          >
+            About Me
+          </h1>
           <p
-            id={styles['about-text']}
+            className={styles['about-text']}
             style={{
                 fontFamily: raleway.style.fontFamily,
             }}
@@ -35,7 +38,15 @@ export default function Home() {
             I am an independent researcher, with investigative endeavors ranging between atmospheric and ocean physics, legal institutionalism and political economy, and applied statistics in the physical and social sciences. 
           </p>
           <p
-            id={styles['about-text']}
+            className={styles['about-text']}
+            style={{
+                fontFamily: raleway.style.fontFamily,
+            }}
+          >
+            Currently, I work as a Research Staff Assistant in the Ocean Transport group at Columbia University's Lamont Doherty Earth Observatory. I also moonlight as a political consultant for Democratic Party candidates running for office in New York City.
+          </p>
+          <p
+            className={styles['about-text']}
             style={{
                 fontFamily: raleway.style.fontFamily,
             }}
@@ -43,7 +54,7 @@ export default function Home() {
             Most recently, I was an Adjunct Professor of Economics at the Adelphi University Robert B. Willumstad School of Business. In past lives, I held roles as eclectic as Legislative Director to New York State Assemblymember Ron Kim, Research Intern at the NASA Goddard Institute for Space Studies, and a Teaching Artist at the New York Philharmonic.
           </p>
           <p
-            id={styles['about-text']}
+            className={styles['about-text']}
             style={{
                 fontFamily: raleway.style.fontFamily,
             }}
@@ -51,7 +62,7 @@ export default function Home() {
             My work in New York State government and politics has been featured in national and local journalism outlets such as The American Prospect, The Guardian, New York Focus, The Christian Science Monitor, and Singtao Daily. Additionally, I have presented original legal and science research at venues like Yale Law School, the American Bar Association Section on Labor and Employment Law, and the Microsoft Technology Center in New York City. My media appearances include the Netflix-acclaimed documentary Knock Down The House (2019) and For Whom the Alarm Sounds (2022).
           </p>
           <p
-            id={styles['about-text']}
+            className={styles['about-text']}
             style={{
                 fontFamily: raleway.style.fontFamily,
             }}
@@ -62,7 +73,7 @@ export default function Home() {
 
         <div className={box2}>
           <p
-            id={styles['about-text']}
+            className={styles['about-text']}
             style={{
                 fontFamily: raleway.style.fontFamily,
             }}

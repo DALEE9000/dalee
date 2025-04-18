@@ -4,16 +4,10 @@ import { useClickAway} from "react-use";
 import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
-import { Jersey_15 } from 'next/font/google';
+import { jersey } from '@/components/Fonts';
 import clsx from 'clsx';
 import Link from "next/link";
 import styles from "./Navbar.module.css";
-
-const jersey = Jersey_15({
-    variable: "--font-jersey-15",
-    weight: "400",
-    subsets: ['latin'],
-})
 
 export default function Navbar() {
     const [isOpen, setOpen] = useState(false);

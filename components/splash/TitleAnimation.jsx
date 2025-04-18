@@ -1,11 +1,6 @@
 import { TypeAnimation } from 'react-type-animation';
-import { Jersey_15 } from 'next/font/google';
+import { jersey } from '@/components/Fonts';
 import styles from './Splash.module.css';
-
-const jersey = Jersey_15({
-    weight: "400",
-    subsets: ['latin'],
-})
 
 export default function TitleAnimation() {
     return(

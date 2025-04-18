@@ -1,5 +1,5 @@
 import '../globals.css';
-import 'tailwindcss/tailwind.css';  // Force load Tailwind
+import styles from "@/components/home/Home.module.css";
 
 export default function Home() {
   return (

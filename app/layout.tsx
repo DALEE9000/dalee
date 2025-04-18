@@ -8,18 +8,12 @@ import Transition from "@/components/Transition";
 import Loader from "@/components/Loader";
 import TwinkleStar from '@/components/home/TwinkleStar';
 import Navbar from '@/components/Navbar';
-import { Jersey_15 } from 'next/font/google';
+import { jersey } from '@/components/Fonts';
 
 /*export const metadata: Metadata = {
   title: "David A. Lee",
   description: "Personal website of David A. Lee",
 };*/
-
-const jersey = Jersey_15({
-    variable: "--font-jersey-15",
-    weight: "400",
-    subsets: ['latin'],
-})
 
 export default function RootLayout({
   children,

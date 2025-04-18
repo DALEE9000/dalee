@@ -1,13 +1,8 @@
 "use client"
 
 import { TypeAnimation } from 'react-type-animation';
-import { Raleway } from 'next/font/google';
+import { raleway } from '@/components/Fonts';
 import styles from './Home.module.css';
-
-const raleway = Raleway({
-    weight: "400",
-    subsets: ['latin'],
-})
 
 export default function BioAnimation() {
 

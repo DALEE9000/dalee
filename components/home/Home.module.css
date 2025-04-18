@@ -58,7 +58,7 @@
   align-content: flex-start;
 }
 
-#about-text {
+.about-text {
   font-size: 2rem;
 }
 
