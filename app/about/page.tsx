@@ -43,7 +43,7 @@ export default function About() {
                 fontFamily: raleway.style.fontFamily,
             }}
           >
-            Currently, I work as a Research Staff Assistant in the Ocean Transport group at Columbia University's Lamont Doherty Earth Observatory. I also moonlight as a political consultant for Democratic Party candidates running for office in New York City.
+            Currently, I work as a Research Staff Assistant in the Ocean Transport group at Columbia University&apos;s Lamont Doherty Earth Observatory. I also moonlight as a political consultant for Democratic Party candidates running for office in New York City.
           </p>
           <p
             className={styles['about-text']}
