@@ -4,7 +4,7 @@
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
-  grid-template-rows: 15% auto auto;
+  grid-template-rows: 5vw auto auto;
   align-content: flex-start;
 }
 

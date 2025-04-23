@@ -50,7 +50,12 @@ export default function Writing() {
   return (
     <>
       <section id={styles['about']}>
+
         <div className={box1}>
+          <h1>
+            My Writing
+          </h1>
+
           <p
             className={styles['about-text']}
             style={{
