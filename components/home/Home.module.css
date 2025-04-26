@@ -22,9 +22,47 @@
   text-align: left;
   padding: 50px 50px;
   background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
-  border: 5px solid white;
   border-radius: 50px;
   backdrop-filter: blur(2px);
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 2rem 0.3rem #a683ff; /* */
+}
+
+.twinkle-box::before,
+.twinkle-box::after {
+  content: "";
+  border-radius: inherit;
+  position: absolute;
+  inset: -0.1rem;
+  z-index: -1;
+  background: linear-gradient(
+    var(--gradient-angle),
+    white,
+    #0a001d,
+    #1c1639
+  );
+  animation: rotation 20s linear infinite;
+  mask: 
+    linear-gradient(#fff 0 0) content-box, /* content-box here covers the stuff in the box EXCEPT the padding */
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude; /* excludes the overlapping parts of the masks */
+  padding: 0.5rem;
+}
+
+.card::after {
+  filter: blur(3.5rem);
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotation {
+  0%   { --gradient-angle: 0deg; }
+  100% { --gradient-angle: 360deg; }
 }
 
 .box-1 {
@@ -44,16 +82,17 @@
   margin: 0;
 }
 
-.twinkle-background {
+.twinkle-background::before { /* we use the pseudo-class here so that the child elements do NOT inherit the background animation height */
+  /* this is so that the child elements can expand based on their content, ensuring that the <Footer /> goes below these elements! */
   display: flex;
   justify-content: center;
 }
 
 #about {
   display: grid;
-  gap: 2vw;
+  gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
-  grid-template-rows: 15% repeat(3, auto);
+  grid-template-rows: 5vw repeat(3, auto);
   justify-items: center;
   align-content: flex-start;
 }

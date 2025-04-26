@@ -8,7 +8,7 @@ import Transition from "@/components/Transition";
 import Loader from "@/components/Loader";
 import TwinkleStar from '@/components/home/TwinkleStar';
 import Navbar from '@/components/Navbar';
-import { jersey } from '@/components/Fonts';
+import Footer from '@/components/Footer';
 
 /*export const metadata: Metadata = {
   title: "David A. Lee",
@@ -20,8 +20,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const today = new Date();
-
   const [onSplash, setOnSplash] = useState(true);
 
   return (
@@ -44,19 +42,15 @@ export default function RootLayout({
           />
         </Suspense>) : (
           <>
-          <Transition>
-            <TwinkleStar>
-                <Navbar />
-                {children}
-            </TwinkleStar>
-            <footer
-              style={{
-                fontFamily: jersey.style.fontFamily,
-              }}
-            >
-              Created with Next.js, &copy; {today.getFullYear()} David A. Lee
-            </footer>
-          </Transition>
+            <Transition>
+              <div id="page-wrapper">
+                  <TwinkleStar>
+                      <Navbar />
+                      {children}
+                      <Footer />
+                  </TwinkleStar>
+              </div>
+            </Transition>
           </>
         )}
       </body>
