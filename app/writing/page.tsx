@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { raleway } from '@/components/Fonts';
 import styles from "@/components/home/Home.module.css";
 
-const box1 = clsx(styles['twinkle-box'], styles['about-box1'])
+const box1 = clsx(styles['twinkle-box'], styles['writing-box1'])
 
 declare global {
   interface Window {
@@ -49,7 +49,7 @@ export default function Writing() {
 
   return (
     <>
-      <section id={styles['about']}>
+      <section id={styles['writing']}>
 
         <div className={box1}>
           <h1>

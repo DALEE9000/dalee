@@ -96,6 +96,16 @@
   align-content: flex-start;
 }
 
+#writing {
+  height: 100%;
+  display: grid;
+  gap: 5vw;
+  grid-template-columns: 1fr 70vw 1fr;
+  grid-template-rows: 5vw repeat(3, auto);
+  justify-items: center;
+  align-content: flex-start;
+}
+
 .about-text {
   font-size: 2rem;
 }
@@ -121,6 +131,12 @@
   width: 100%;
 }
 
+.writing-box1 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+  width: 100%;
+}
+
 .substack-post-embed {
   text-align: left;
   grid-column: 2 / 3;
@@ -128,6 +144,11 @@
 }
 
 @media (max-width: 800px) {
+  .starry-page {
+    grid-template-rows: 25vw auto auto;
+    gap: 15vw;
+  }
+
   .bio {
     font-size: 5vw;
   }
@@ -136,7 +157,13 @@
     padding-inline: 25px;
   }
 
-  #about-text {
+  #about,
+  #writing {
+    grid-template-rows: 25vw repeat(3, auto);
+    gap: 15vw;
+  }
+
+  .about-text {
     font-size: 5vw;
   }
 }
