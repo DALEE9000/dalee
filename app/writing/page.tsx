@@ -4,6 +4,7 @@ import '../globals.css';
 import { useEffect } from 'react';
 import clsx from 'clsx';
 import { raleway } from '@/components/Fonts';
+import { WritingAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 
 const box1 = clsx(styles['twinkle-box'], styles['writing-box1'])
@@ -52,9 +53,8 @@ export default function Writing() {
       <section id={styles['writing']}>
 
         <div className={box1}>
-          <h1>
-            My Writing
-          </h1>
+
+          <WritingAnimation />
 
           <p
             className={styles['about-text']}

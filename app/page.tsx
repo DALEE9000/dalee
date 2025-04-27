@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import "./globals.css";
 import styles from "@/components/home/Home.module.css";
 import { raleway } from '@/components/Fonts';
-import BioAnimation from '@/components/home/BioAnimation';
+import { BioAnimation } from '@/components/TextAnimations';
 import { motion } from "framer-motion";
 
 const box1 = clsx(styles['twinkle-box'], styles['box-1'])
@@ -13,7 +13,7 @@ const box2 = clsx(styles['twinkle-box'], styles['box-2'])
 
 const boxVariants = {
   hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, type: "spring", bounce: 0.5 } },
+  visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", bounce: 0.5 } },
 };
 
 export default function Home() {

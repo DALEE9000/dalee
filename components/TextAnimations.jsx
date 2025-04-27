@@ -1,0 +1,78 @@
+"use client"
+
+import { TypeAnimation } from 'react-type-animation';
+import { jersey } from '@/components/Fonts';
+import { raleway } from '@/components/Fonts';
+import stylesHome from './home/Home.module.css';
+
+export function BioAnimation() {
+
+    return(
+    <>
+        <span
+            className={stylesHome['bio-animation']}
+            style={{
+                fontFamily: raleway.style.fontFamily,
+            }}
+        >
+            david a. lee is a...
+        </span>
+    
+        <TypeAnimation
+            className={stylesHome['bio-animation']}
+            preRenderFirstString={true}
+            sequence={[
+                500,
+                'climate researcher',
+                1000,
+                'writer',
+                1000,
+                'policy expert',
+                1000,
+            ]}
+            speed={40}
+            style={{
+                fontFamily: raleway.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={Infinity}
+        />
+    </>
+    );
+}
+
+export function AboutMeAnimation() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['aboutme-animation']}
+            sequence={[
+                'About Me',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}
+
+export function WritingAnimation() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['writing-animation']}
+            sequence={[
+                'My Writing',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}

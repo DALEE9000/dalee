@@ -12,6 +12,12 @@
   font-weight: 700;
 }
 
+.aboutme-animation,
+.writing-animation {
+  font-size: 5vw;
+  font-weight: 700;
+}
+
 .bio {
   font-size: 3vw;
   margin: 0;
