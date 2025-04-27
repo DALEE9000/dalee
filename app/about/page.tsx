@@ -1,12 +1,20 @@
+"use client"
+
 import '../globals.css';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { raleway } from '@/components/Fonts';
 import styles from "@/components/home/Home.module.css";
+import { motion } from "framer-motion";
 
 const box1 = clsx(styles['twinkle-box'], styles['about-box1'])
-
 const box2 = clsx(styles['twinkle-box'], styles['about-box2'])
+
+const boxVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.4, type: "spring", bounce: 0.5 } },
+};
+
 
 export default function About() {
   return (
@@ -20,7 +28,13 @@ export default function About() {
           alt="David A. Lee Portrait"
         />
 
-        <div className={box1}>
+        <motion.div 
+          className={box1}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={boxVariants}
+        >
           <h1
             className={styles['about-text']}
             style={{
@@ -69,9 +83,15 @@ export default function About() {
           >
             I am based in Queens, New York, where I happily enjoy collecting LEGO® minifigures, reading vintage books, and cooking.
           </p>
-        </div>
+        </motion.div>
 
-        <div className={box2}>
+        <motion.div 
+          className={box2}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={boxVariants}
+        >
           <p
             className={styles['about-text']}
             style={{
@@ -80,7 +100,7 @@ export default function About() {
           >
             Curriculum Vitae
           </p>
-        </div>
+        </motion.div>
       </section>
     </>
   );
