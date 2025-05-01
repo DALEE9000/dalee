@@ -7,11 +7,7 @@
   align-content: flex-start;
 }
 
-.bio-animation {
-  font-size: 5vw;
-  font-weight: 700;
-}
-
+.bio-animation,
 .aboutme-animation,
 .writing-animation {
   font-size: 5vw;
@@ -167,6 +163,13 @@
   #writing {
     grid-template-rows: 25vw repeat(3, auto);
     gap: 15vw;
+  }
+
+  .bio-animation,
+  .aboutme-animation,
+  .writing-animation {
+    font-size: 10vw;
+    font-weight: 700;
   }
 
   .about-text {
