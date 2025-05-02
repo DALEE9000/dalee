@@ -61,7 +61,7 @@ export default function Home() {
                 fontFamily: raleway.style.fontFamily,
             }}
           >
-            I love making new friends. Please feel free to reach out! Some nerdy topics I'm interested in are...
+            I love making new friends. Please feel free to reach out! Some nerdy topics I&apos;m interested in are...
           </p> 
         </motion.div>
       </div>
