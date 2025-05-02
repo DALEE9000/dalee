@@ -9,7 +9,8 @@
 
 .bio-animation,
 .aboutme-animation,
-.writing-animation {
+.writing-animation,
+.research-animation {
   font-size: 5vw;
   font-weight: 700;
 }
@@ -83,6 +84,13 @@
   margin: 0;
 }
 
+.box-3 {
+  align-self: flex-end;
+  grid-column: 2 / 3;
+  grid-row: 4 / 5;
+  margin: 0;
+}
+
 .twinkle-background::before { /* we use the pseudo-class here so that the child elements do NOT inherit the background animation height */
   /* this is so that the child elements can expand based on their content, ensuring that the <Footer /> goes below these elements! */
   display: flex;
@@ -98,7 +106,8 @@
   align-content: flex-start;
 }
 
-#writing {
+#writing,
+#research {
   height: 100%;
   display: grid;
   gap: 5vw;
@@ -157,16 +166,19 @@
 
   .twinkle-box {
     padding-inline: 25px;
+    border-radius: 0px;
   }
 
   #about,
-  #writing {
+  #writing,
+  #research {
     grid-template-rows: 25vw repeat(3, auto);
     gap: 15vw;
   }
 
   .aboutme-animation,
-  .writing-animation {
+  .writing-animation, 
+  .research-animation {
     font-size: 10vw;
     font-weight: 700;
   }

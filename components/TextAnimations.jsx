@@ -65,7 +65,25 @@ export function WritingAnimation() {
         <TypeAnimation
             className={stylesHome['writing-animation']}
             sequence={[
-                'My Writing',
+                'Writing',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}
+
+export function ResearchAnimation() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['research-animation']}
+            sequence={[
+                'Research',
             ]}
             speed={40}
             style={{

@@ -8,8 +8,8 @@ import { BioAnimation } from '@/components/TextAnimations';
 import { motion } from "framer-motion";
 
 const box1 = clsx(styles['twinkle-box'], styles['box-1'])
-
 const box2 = clsx(styles['twinkle-box'], styles['box-2'])
+const box3 = clsx(styles['twinkle-box'], styles['box-3'])
 
 const boxVariants = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -46,6 +46,23 @@ export default function Home() {
           >
               I&apos;m David. I do cool things involving climate, weather, and political economics. 
           </h1>
+        </motion.div>
+
+        <motion.div
+          className={box3}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={boxVariants}
+        >
+          <p
+            className={styles['bio']}
+            style={{
+                fontFamily: raleway.style.fontFamily,
+            }}
+          >
+            I love making new friends. Please feel free to reach out! Some nerdy topics I'm interested in are...
+          </p> 
         </motion.div>
       </div>
     </>
