@@ -47,8 +47,18 @@
     padding: 10px;
 }
 
+.list-item-hidden {
+    display: none;
+}
+
 .link-props {
     text-decoration: none;
     font-size: 3rem;
     color: white;
+}
+
+.stargazer-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }

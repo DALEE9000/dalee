@@ -1,13 +1,13 @@
 "use client"
 
 import '../globals.css';
-import { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
 import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
-
-const box1 = clsx(styles['twinkle-box'], styles['writing-box1'])
+import { StargazerContext } from '@/components/Context';
 
 declare global {
   interface Window {
@@ -24,6 +24,15 @@ declare global {
 }
 
 export default function Writing() {
+
+  const context = useContext(StargazerContext);
+  const box1 = clsx(styles['twinkle-box'], styles['about-box1']);
+
+  const boxVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", bounce: 0.5 } },
+  };
+
   useEffect(() => {
     // Set up the widget configuration
     window.SubstackFeedWidget = {
@@ -46,31 +55,42 @@ export default function Writing() {
       // Clean up if needed
       document.body.removeChild(script);
     };
-  }, []);
+  }, [context.stargazer]);
 
   return (
     <>
       <section id={styles['writing']}>
 
-        <div className={box1}>
+        <AnimatePresence mode="wait">
+          {!context.stargazer && (
+            <motion.div 
+              className={box1}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={boxVariants}
+              exit={{ opacity: 0, y: -20 }}
+            >
 
-          <WritingAnimation />
+              <WritingAnimation />
 
-          <p
-            className={styles['about-text']}
-            style={{
-              fontFamily: raleway.style.fontFamily,
-            }}
-          >
-            I write a Substack named Alphabet Agency. 
-          </p>
+              <p
+                className={styles['about-text']}
+                style={{
+                  fontFamily: raleway.style.fontFamily,
+                }}
+              >
+                I write a Substack named Alphabet Agency. 
+              </p>
 
-          <div 
-            id='substack-feed-embed' 
-            className={styles['substack-post-embed']}
-          />
+              <div 
+                id='substack-feed-embed' 
+                className={styles['substack-post-embed']}
+              />
 
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </section>
     </>
   );

@@ -9,6 +9,7 @@ import Loader from "@/components/Loader";
 import TwinkleStar from '@/components/home/TwinkleStar';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { StargazerProvider } from '@/components/Context';
 
 /*export const metadata: Metadata = {
   title: "David A. Lee",
@@ -35,24 +36,26 @@ export default function RootLayout({
       <body
         className={`home-page ${onSplash ? 'home-page-scroll' : ''}`}
       >
-        {onSplash ? (
-        <Suspense fallback={<Loader />}>
-          <SplashScreen 
-            setOnSplash={() => setOnSplash(false)} 
-          />
-        </Suspense>) : (
-          <>
-            <Transition>
-              <div id="page-wrapper">
-                  <TwinkleStar>
-                      <Navbar />
-                      {children}
-                      <Footer />
-                  </TwinkleStar>
-              </div>
-            </Transition>
-          </>
-        )}
+        <StargazerProvider>
+          {onSplash ? (
+          <Suspense fallback={<Loader />}>
+            <SplashScreen 
+              setOnSplash={() => setOnSplash(false)} 
+            />
+          </Suspense>) : (
+            <>
+              <Transition>
+                <div id="page-wrapper">
+                    <TwinkleStar>
+                        <Navbar />
+                            {children}
+                        <Footer />
+                    </TwinkleStar>
+                </div>
+              </Transition>
+            </>
+          )}
+        </StargazerProvider>
       </body>
     </html>
   );
