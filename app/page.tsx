@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 import "./globals.css";
 import styles from "@/components/home/Home.module.css";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { raleway } from '@/components/Fonts';
 import { BioAnimation } from '@/components/TextAnimations';
 import { AnimatePresence, motion } from "framer-motion";
