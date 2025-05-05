@@ -2,11 +2,12 @@
 
 import { useClickAway} from "react-use";
 import { useState, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
 import { jersey } from '@/components/Fonts';
 import clsx from 'clsx';
 import Link from "next/link";
+import Socials from "@/components/Socials";
 import styles from "./Navbar.module.css";
 
 export default function Navbar() {
@@ -38,14 +39,24 @@ export default function Navbar() {
             </div>
                 {isOpen && (
                 <nav>
-                    <ul id={styles["NavBar"]}>
+                    <ul 
+                        id={styles["NavBar"]}
+                    >
                         <li className={styles["list-item"]}>
                             <Link 
                                 href="/" 
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                Home
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Home
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]} >
@@ -54,7 +65,15 @@ export default function Navbar() {
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                About
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    About
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
@@ -63,7 +82,15 @@ export default function Navbar() {
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                Research
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Research
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
@@ -72,7 +99,15 @@ export default function Navbar() {
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                Library
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Library
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
@@ -81,7 +116,15 @@ export default function Navbar() {
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                Writing
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Writing
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
@@ -90,11 +133,30 @@ export default function Navbar() {
                                 className={linkStyles}
                                 onClick={() => setOpen(false)}
                             >
-                                Hire Me!
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Hire Me!
+                                </motion.span>
                             </Link>
                         </li>
                         <li className={styles["list-item"]}>
-                            <span className={linkStyles}>Stargazer</span>
+                                <motion.span
+                                    className={linkStyles}
+                                    whileHover={{
+                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    Stargazer
+                                </motion.span>
+                        </li>
+                        <li className={styles["list-item"]}>
+                            <Socials />
                         </li>
                     </ul>
                 </nav>
