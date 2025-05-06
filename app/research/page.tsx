@@ -8,6 +8,7 @@ import { ResearchAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { StargazerContext } from '@/components/Context';
+import Stargazer from '@/components/Stargazer';
 
 export default function Home() {
 
@@ -50,6 +51,8 @@ export default function Home() {
           )}
         </AnimatePresence>
       </section>
+
+      {context.stargazer && <Stargazer />}
     </>
   );
 }

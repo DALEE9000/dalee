@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { jersey } from "@/components/Fonts";
+import clsx from "clsx";
+import { AnimatePresence, motion } from 'framer-motion';
 import { StargazerAnimation } from "@/components/TextAnimations";
 import styles from "@/components/home/Home.module.css";
 
@@ -7,6 +8,13 @@ const requestAnimationFrame = window.requestAnimationFrame;
 const cancelAnimationFrame = window.cancelAnimationFrame;
 
 const Stargazer = () => {
+    const [isVisible, setIsVisible] = useState(true);
+
+    const stargazerBox = clsx({
+        [styles['stargazer-box']]: true,
+        [styles['stargazer-box-hidden']]: !isVisible,
+    })
+
     const [isDragging, setDragging] = useState(false);
     const block = useRef(null);
     const frameID = useRef(0);
@@ -15,82 +23,82 @@ const Stargazer = () => {
     const dragX = useRef(0);
     const dragY = useRef(0);
 
-useEffect(() => {
-  const centerBlock = () => {
-    if (!block.current) return;
+    useEffect(() => {
+        const centerBlock = () => {
+            if (!block.current) return;
 
-    const el = block.current;
+            const el = block.current;
 
-    // Wait until fonts are loaded and layout is stable
-    requestAnimationFrame(() => {
-      const rect = el.getBoundingClientRect();
-      const scrollX = window.scrollX || window.pageXOffset;
-      const scrollY = window.scrollY || window.pageYOffset;
-      const windowWidth = window.innerWidth;
-      const windowHeight = window.innerHeight;
+            // Wait until fonts are loaded and layout is stable
+            requestAnimationFrame(() => {
+            const rect = el.getBoundingClientRect();
+            const scrollX = window.scrollX || window.pageXOffset;
+            const scrollY = window.scrollY || window.pageYOffset;
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
 
-      dragX.current = scrollX + (windowWidth - rect.width) / 2;
-      dragY.current = scrollY + (windowHeight - rect.height) / 2;
+            dragX.current = scrollX + (windowWidth - rect.width) / 2;
+            dragY.current = scrollY + (windowHeight - rect.height) / 2;
 
-      el.style.transform = `translate3d(${dragX.current}px, ${dragY.current}px, 0)`;
-    });
-  };
+            el.style.transform = `translate3d(${dragX.current}px, ${dragY.current}px, 0)`;
+            });
+        };
 
-  centerBlock();
-}, []);
+        centerBlock();
+    }, []);
 
 
-  const handleMove = (e) => {
-    if (!isDragging) {
-      return;
-    }
+    const handleMove = (e) => {
+        if (!isDragging) {
+            return;
+        }
 
-    const deltaX = lastX.current - e.pageX;
-    const deltaY = lastY.current - e.pageY;
-    lastX.current = e.pageX;
-    lastY.current = e.pageY;
-    dragX.current -= deltaX;
-    dragY.current -= deltaY;
+        const deltaX = lastX.current - e.pageX;
+        const deltaY = lastY.current - e.pageY;
+        lastX.current = e.pageX;
+        lastY.current = e.pageY;
+        dragX.current -= deltaX;
+        dragY.current -= deltaY;
 
-    cancelAnimationFrame(frameID.current);
-    frameID.current = requestAnimationFrame(() => {
-      block.current.style.transform = `translate3d(${dragX.current}px, ${dragY.current}px, 0)`;
-    });
-  };
+        cancelAnimationFrame(frameID.current);
 
-  const handleMouseDown = (e) => {
-    lastX.current = e.pageX;
-    lastY.current = e.pageY;
-    setDragging(true);
-  };
-
-  const handleMouseUp = () => {
-    setDragging(false);
-  };
-
-  /**
-   *
-   */
-  useEffect(() => {
-    document.addEventListener('mousemove', handleMove);
-    document.addEventListener('mouseup', handleMouseUp);
-
-    return () => {
-      document.removeEventListener('mousemove', handleMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+        frameID.current = requestAnimationFrame(() => {
+            block.current.style.transform = `translate3d(${dragX.current}px, ${dragY.current}px, 0)`;
+        });
     };
-  }, [isDragging]);
 
-  return (
-    <div
-        className={styles['stargazer-box']}
+    const handleMouseDown = (e) => {
+        lastX.current = e.pageX;
+        lastY.current = e.pageY;
+        setDragging(true);
+    };
+
+    const handleMouseUp = () => {
+        setDragging(false);
+    };
+
+    useEffect(() => {
+        document.addEventListener('mousemove', handleMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        return () => {
+            document.removeEventListener('mousemove', handleMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging]);
+
+    return (
+    <motion.div
+        className={stargazerBox}
         ref={block}
         onMouseDown={handleMouseDown}
-        style={{ fontFamily: jersey.style.fontFamily }}
+        onClick={() => {
+            setIsVisible(false)
+        }}
     >
         <StargazerAnimation />
-    </div>
-  );
+    </motion.div>
+    );
 };
 
 export default Stargazer;

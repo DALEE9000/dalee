@@ -9,6 +9,7 @@ import { AboutMeAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { StargazerContext } from '@/components/Context';
+import Stargazer from '@/components/Stargazer';
 
 export default function About() {
 
@@ -179,7 +180,10 @@ export default function About() {
             </motion.div>
           )}
         </AnimatePresence>
+
       </section>
+
+      {context.stargazer && <Stargazer />}
     </>
   );
 }

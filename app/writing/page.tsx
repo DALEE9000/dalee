@@ -8,6 +8,7 @@ import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 import { StargazerContext } from '@/components/Context';
+import Stargazer from '@/components/Stargazer';
 
 declare global {
   interface Window {
@@ -92,6 +93,8 @@ export default function Writing() {
           )}
         </AnimatePresence>
       </section>
+
+      {context.stargazer && <Stargazer />}
     </>
   );
 }

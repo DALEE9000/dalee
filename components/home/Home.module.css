@@ -166,6 +166,7 @@
 }
 
 .stargazer-box {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -173,7 +174,7 @@
   text-align: left;
   user-select: none;
   width: 30vw;
-  height: 20vw;
+  height: 25vw;
   border: 0.5vw solid #606697;
   background-color: rgba(0, 0, 0, 0.5);  /* Translucent black background */
   backdrop-filter: blur(5px);
@@ -182,6 +183,12 @@
   top: 0;
   left: 0;
   will-change: transform;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.stargazer-box-hidden {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.95);
 }
 
 @media (max-width: 800px) {
@@ -220,7 +227,7 @@
   .stargazer-box {
     font-size: 6vw;
     width: 70vw;
-    height: 80vw;
+    height: 100vw;
     border: 2vw solid #606697;
     padding: 0 5vw;
   }
