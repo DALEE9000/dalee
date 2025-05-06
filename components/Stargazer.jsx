@@ -12,6 +12,7 @@ const Stargazer = () => {
 
     const stargazerBox = clsx({
         [styles['stargazer-box']]: true,
+        [styles['stargazer-box-visible']]: isVisible,
         [styles['stargazer-box-hidden']]: !isVisible,
     })
 

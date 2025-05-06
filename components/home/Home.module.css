@@ -176,14 +176,21 @@
   width: 30vw;
   height: 25vw;
   border: 0.5vw solid #606697;
-  background-color: rgba(0, 0, 0, 0.5);  /* Translucent black background */
+  background-color: rgba(0, 0, 0, 0.5); 
   backdrop-filter: blur(5px);
   padding: 0 1vw;
-  position: absolute; /* or fixed */
+  position: absolute;
   top: 0;
   left: 0;
-  will-change: transform;
+  opacity: 0;
   transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none; 
+}
+
+.stargazer-box-visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 .stargazer-box-hidden {
