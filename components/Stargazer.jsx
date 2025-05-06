@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { jersey } from "@/components/Fonts";
+import { StargazerAnimation } from "@/components/TextAnimations";
 import styles from "@/components/home/Home.module.css";
 
 const requestAnimationFrame = window.requestAnimationFrame;
@@ -36,15 +37,6 @@ useEffect(() => {
   };
 
   centerBlock();
-
-  // Optional: Recenter on resize or orientation change
-  window.addEventListener("resize", centerBlock);
-  window.addEventListener("orientationchange", centerBlock);
-
-  return () => {
-    window.removeEventListener("resize", centerBlock);
-    window.removeEventListener("orientationchange", centerBlock);
-  };
 }, []);
 
 
@@ -96,11 +88,7 @@ useEffect(() => {
         onMouseDown={handleMouseDown}
         style={{ fontFamily: jersey.style.fontFamily }}
     >
-        <p>You've opened Stargazer mode!</p>
-
-        <p>I love making pixel art animations. Please enjoy my handcrafted animated background!</p>
-
-        <p>Stargazer mode features music.</p>
+        <StargazerAnimation />
     </div>
   );
 };

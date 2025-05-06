@@ -13,9 +13,14 @@ function StargazerProvider(props) {
         }
     }
 
+    function deactivateStargazer() {
+        setStargazer(false);
+    }
+
     const value = {
         stargazer: stargazer,
-        toggleStargazer: toggleStargazer
+        toggleStargazer: toggleStargazer,
+        deactivateStargazer: deactivateStargazer,
     }
 
     return (

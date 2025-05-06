@@ -94,3 +94,25 @@ export function ResearchAnimation() {
         />
     );
 }
+
+export function StargazerAnimation() {
+
+    return(
+        <TypeAnimation
+            sequence={[
+                `You've opened Stargazer mode!\n\nI love making pixel art animations.\nPlease enjoy my handcrafted animated background!\n\nStargazer mode features music.`
+            ]}
+            speed={80}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+                whiteSpace: 'pre-line',
+                width: '100%',
+                height: '80%'
+            }}
+            wrapper="div"
+            repeat={0}
+        >
+
+        </TypeAnimation>
+    )
+}

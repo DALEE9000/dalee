@@ -36,6 +36,10 @@ export default function Navbar() {
         [jersey.className]: true,
     })
 
+    const thenavbar = clsx({
+        [styles["NavBar"]]: isOpen,
+    })
+
     useClickAway(ref, () => setOpen(false));
 
     const navContainer = {
@@ -74,7 +78,7 @@ export default function Navbar() {
                     variants={navContainer}
                 >
                     <ul 
-                        id={styles["NavBar"]}
+                        id={thenavbar}
                     >
                         {links.map(({ href, route }) => (
                             <motion.li 
@@ -85,7 +89,10 @@ export default function Navbar() {
                                 <Link 
                                     href={href} 
                                     className={linkStyles}
-                                    onClick={() => setOpen(false)}
+                                    onClick={() => {
+                                        setOpen(false)
+                                        context.deactivateStargazer()
+                                    }}
                                 >
                                     <motion.span
                                         className={linkStyles}
