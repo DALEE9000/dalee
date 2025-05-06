@@ -8,6 +8,7 @@ import { raleway } from '@/components/Fonts';
 import { BioAnimation } from '@/components/TextAnimations';
 import { AnimatePresence, motion } from "framer-motion";
 import { StargazerContext } from '@/components/Context';
+import Stargazer from '@/components/Stargazer';
 
 export default function Home() {
 
@@ -85,6 +86,8 @@ export default function Home() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {context.stargazer && <Stargazer />}
 
       </div>
     </>
