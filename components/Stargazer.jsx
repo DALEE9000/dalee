@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
 import clsx from "clsx";
-import { AnimatePresence, motion } from 'framer-motion';
 import { StargazerAnimation } from "@/components/TextAnimations";
 import styles from "@/components/home/Home.module.css";
 
@@ -91,7 +90,7 @@ const Stargazer = () => {
 
     return (
     <>
-        <motion.div
+        <div
             className={stargazerBox}
             ref={block}
             onMouseDown={handleMouseDown}
@@ -101,7 +100,7 @@ const Stargazer = () => {
             }}
         >
             <StargazerAnimation />
-        </motion.div>
+        </div>
 
         {musicOn && <audio src="/Holst-_venus.ogg" autoPlay loop preload="auto" />}
     </>
