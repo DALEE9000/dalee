@@ -100,9 +100,9 @@ export function StargazerAnimation() {
     return(
         <TypeAnimation
             sequence={[
-                `You've opened Stargazer mode!\n\nI love making pixel art animations.\nPlease enjoy my handcrafted animated background!\n\nStargazer mode features music.\n\n(click anywhere in this window to close)`
+                `You've opened Stargazer mode!\n\nI love making pixel art animations.\nPlease enjoy my handcrafted animated background!\n\nStargazer mode features the 'Venus' movement from Holst's 'The Planets' suite.\n\n(click anywhere in this window to close)`
             ]}
-            speed={80}
+            speed={90}
             style={{
                 fontFamily: jersey.style.fontFamily,
                 whiteSpace: 'pre-line',

@@ -170,11 +170,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2vw;
+  font-size: 1.5vw;
   text-align: left;
   user-select: none;
   width: 30vw;
-  height: 25vw;
+  height: 20vw;
   border: 0.5vw solid #606697;
   background-color: rgba(0, 0, 0, 0.5); 
   backdrop-filter: blur(5px);
@@ -234,7 +234,7 @@
   .stargazer-box {
     font-size: 6vw;
     width: 70vw;
-    height: 100vw;
+    height: calc(100vw + 10vw);
     border: 2vw solid #606697;
     padding: 0 5vw;
   }
