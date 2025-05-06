@@ -9,6 +9,7 @@ const cancelAnimationFrame = window.cancelAnimationFrame;
 
 const Stargazer = () => {
     const [isVisible, setIsVisible] = useState(true);
+    const [musicOn, setMusicOn] = useState(false);
 
     const stargazerBox = clsx({
         [styles['stargazer-box']]: true,
@@ -89,16 +90,21 @@ const Stargazer = () => {
     }, [isDragging]);
 
     return (
-    <motion.div
-        className={stargazerBox}
-        ref={block}
-        onMouseDown={handleMouseDown}
-        onClick={() => {
-            setIsVisible(false)
-        }}
-    >
-        <StargazerAnimation />
-    </motion.div>
+    <>
+        <motion.div
+            className={stargazerBox}
+            ref={block}
+            onMouseDown={handleMouseDown}
+            onClick={() => {
+                setIsVisible(false)
+                setMusicOn(true)
+            }}
+        >
+            <StargazerAnimation />
+        </motion.div>
+
+        {musicOn && <audio src="/Holst-_venus.ogg" autoPlay loop preload="auto" />}
+    </>
     );
 };
 
