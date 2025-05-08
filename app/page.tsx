@@ -8,6 +8,7 @@ import { raleway } from '@/components/Fonts';
 import { BioAnimation } from '@/components/TextAnimations';
 import { AnimatePresence, motion } from "framer-motion";
 import { StargazerContext } from '@/components/Context';
+import HobbyCycle from '@/components/HobbyCycle';
 import Stargazer from '@/components/Stargazer';
 
 export default function Home() {
@@ -83,6 +84,18 @@ export default function Home() {
               >
                 I love making new friends. Please feel free to reach out! Some nerdy topics I&apos;m interested in are...
               </p> 
+              
+              <p
+                className={styles['bio']}
+                style={{
+                  fontStyle: 'italic',
+                  marginTop: '2vw',
+                  textAlign: 'center',
+                  height: '8vw'
+                }}
+              >
+                <HobbyCycle />
+              </p>
             </motion.div>
           )}
         </AnimatePresence>
