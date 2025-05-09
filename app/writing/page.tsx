@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
+import { DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
@@ -28,11 +29,6 @@ export default function Writing() {
 
   const context = useContext(StargazerContext);
   const box1 = clsx(styles['twinkle-box'], styles['about-box1']);
-
-  const boxVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", bounce: 0.5 } },
-  };
 
   useEffect(() => {
     // Set up the widget configuration
@@ -64,15 +60,7 @@ export default function Writing() {
 
         <AnimatePresence mode="wait">
           {!context.stargazer && (
-            <motion.div 
-              className={box1}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={boxVariants}
-              exit={{ opacity: 0, y: -20 }}
-            >
-
+            <DivAnimation props={box1}>
               <WritingAnimation />
 
               <p
@@ -88,8 +76,7 @@ export default function Writing() {
                 id='substack-feed-embed' 
                 className={styles['substack-post-embed']}
               />
-
-            </motion.div>
+            </DivAnimation>
           )}
         </AnimatePresence>
       </section>
