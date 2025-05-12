@@ -95,6 +95,23 @@ export function ResearchAnimation() {
     );
 }
 
+export function LibraryAnimation() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['library-animation']}
+            sequence={[
+                'Library',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}
 export function StargazerAnimation() {
 
     return(

@@ -10,7 +10,7 @@ import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
-export default function Home() {
+export default function Research() {
 
   const context = useContext(StargazerContext);
   const box1 = clsx(styles['twinkle-box'], styles['about-box1']);

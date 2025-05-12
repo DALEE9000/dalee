@@ -51,19 +51,19 @@ export default function SplashScreen({ setOnSplash }){
         <>
         {/* The motion.divs here animate the transition fade-in for each of the components */}
             <motion.div
-            initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
             >
                 <Parallax />
             </motion.div>
 
             <motion.div
-            initial={{ opacity: 0, scale: 1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 1 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
+                initial={{ opacity: 0, scale: 1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 1 }}
+                transition={{ duration: 2, ease: "easeInOut" }}
             >
                 <div 
                     className={styles['title-animation-div']}

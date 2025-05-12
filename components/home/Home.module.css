@@ -10,7 +10,8 @@
 .bio-animation,
 .aboutme-animation,
 .writing-animation,
-.research-animation {
+.research-animation,
+.library-animation {
   font-size: 5vw;
   font-weight: 700;
 }
@@ -97,7 +98,8 @@
   justify-content: center;
 }
 
-#about {
+#about,
+#library {
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
@@ -215,14 +217,16 @@
 
   #about,
   #writing,
-  #research {
+  #research,
+  #library {
     grid-template-rows: 25vw repeat(3, auto);
     gap: 15vw;
   }
 
   .aboutme-animation,
   .writing-animation, 
-  .research-animation {
+  .research-animation,
+  .library-animation {
     font-size: 10vw;
     font-weight: 700;
   }
