@@ -17,3 +17,9 @@
     overflow: hidden;
     height: auto;
 }
+
+@media (max-width: 800) {
+    .library-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
