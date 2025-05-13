@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
+import Image from 'next/image';
+import styles from './Library.module.css';
 
 export default function Library() {
   const [books, setBooks] = useState([]);
@@ -17,14 +19,26 @@ export default function Library() {
 
   return (
     <>
+      <div
+        className={styles['librarygrid']}
+      >
       {books.map((item, index) => (
         <AboutMeParagraph
           key={index}
         >
-          {item.book.title}
+          {item?.book?.image?.url ? (
+          <Image
+            src={item.book.image.url}
+            width={200}
+            height={300}
+            alt={item.book.title}
+          /> ) : (
+            <span>{item.book.title}</span>
+          )}
         </AboutMeParagraph>
         )
       )}
+      </div>
     </>
   );
 }
