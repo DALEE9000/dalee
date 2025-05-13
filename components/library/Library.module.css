@@ -18,7 +18,7 @@
     height: auto;
 }
 
-@media (max-width: 800) {
+@media (max-width: 800px) {
     .library-grid {
         grid-template-columns: repeat(3, 1fr);
     }
