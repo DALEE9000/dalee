@@ -20,24 +20,35 @@ export default function Library() {
   return (
     <>
       <div
-        className={styles['librarygrid']}
+        className={styles['library-page']}
       >
-      {books.map((item, index) => (
-        <AboutMeParagraph
-          key={index}
+        <div
         >
-          {item?.book?.image?.url ? (
-          <Image
-            src={item.book.image.url}
-            width={200}
-            height={300}
-            alt={item.book.title}
-          /> ) : (
-            <span>{item.book.title}</span>
-          )}
-        </AboutMeParagraph>
-        )
-      )}
+          <p>This is going to be the menu</p>
+        </div>
+        <div
+          className={styles['library-grid']}
+        >
+        {books.map((item, index) => (
+          <DivAnimation
+            key={index}
+          >
+            {item?.book?.image?.url ? (
+              <div
+                className={styles['book-image']}
+              >
+                <Image
+                  src={item.book.image.url}
+                  fill={true}
+                  alt={item.book.title}
+                /> 
+            </div>) : (
+              <span>{item.book.title}</span>
+            )}
+          </DivAnimation>
+          )
+        )}
+        </div>
       </div>
     </>
   );
