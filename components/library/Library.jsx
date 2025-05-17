@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
+import { DivAnimation } from '@/components/BoxAnimations';
+import BookCard from '@/components/library/BookCard';
 import Image from 'next/image';
 import styles from './Library.module.css';
 
@@ -11,11 +12,15 @@ export default function Library() {
     const fetchBooks = async () => {
       const res = await fetch("/api/hardcover");
       const data = await res.json();
-      setBooks(data["data"]["me"][0]["user_books"]); // Make sure this matches the shape returned
+      const pathway = data["data"]["me"][0];
+      setBooks(pathway);
+      setBookCategory(pathway["read"]);
     };
 
     fetchBooks();
   }, []);
+
+  const [bookCategory, setBookCategory] = useState(books["read"]);
 
   return (
     <>
@@ -25,11 +30,13 @@ export default function Library() {
         <div
         >
           <p>This is going to be the menu</p>
+          <button onClick={() => setBookCategory(books["read"])}>Reading</button>
+          <button onClick={() => setBookCategory(books["currentlyReading"])}>Currently Reading</button>
         </div>
         <div
           className={styles['library-grid']}
         >
-        {books.map((item, index) => (
+        {bookCategory && bookCategory.map((item, index) => (
           <DivAnimation
             key={index}
           >
@@ -43,7 +50,7 @@ export default function Library() {
                   alt={item.book.title}
                 /> 
             </div>) : (
-              <span>{item.book.title}</span>
+              <BookCard title={item.book.title} />
             )}
           </DivAnimation>
           )

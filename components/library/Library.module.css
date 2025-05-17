@@ -18,6 +18,19 @@
     height: auto;
 }
 
+.book-card {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    background-color: #606697;
+}
+
+.book-title {
+    font-size: 1vw;
+    font-weight: bold;
+    margin: 0 2vw;
+}
+
 @media (max-width: 800px) {
     .library-grid {
         grid-template-columns: repeat(3, 1fr);
