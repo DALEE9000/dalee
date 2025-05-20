@@ -8,28 +8,35 @@ import styles from './Library.module.css';
 export default function Library() {
   const [books, setBooks] = useState([]);
   const [bookCategory, setBookCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("read");
   const [listId, setListId] = useState(167772);
 
   useEffect(() => {
-    async function fetchBooks() {
+  async function fetchBooks() {
     try {
       const res = await fetch(`/api/hardcover?listId=${listId}`);
       if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
       const data = await res.json();
 
-      const me = data?.data?.me[0];
-      const meCategory = data?.data?.me[0]?.category[0]?.list_books;
+      const me = data?.data?.me?.[0];
       if (!me) throw new Error("Missing `me` in response");
 
+      function extractBooks(me, selectedCategory) {
+        if (selectedCategory === "read" || selectedCategory === "currentlyReading") {
+          return me[selectedCategory] || [];
+        }
+        return me.category?.find(cat => cat.name === selectedCategory)?.list_books || [];
+      }
+
       setBooks(me);
-      setBookCategory(meCategory);
+      setBookCategory(extractBooks(me, selectedCategory));
     } catch (err) {
       console.error("Fetch error:", err);
     }
   }
 
     fetchBooks();
-  }, [listId]);
+  }, [listId, selectedCategory]);
 
   console.log("look here", bookCategory)
 
@@ -41,9 +48,12 @@ export default function Library() {
         <div
         >
           <p>Select category:</p>
-          <button onClick={() => setBookCategory(books.read)}>Reading</button>
-          <button onClick={() => setBookCategory(books.currentlyReading)}>Currently Reading</button>
-          <button onClick={() => setListId(167784)}>Central Banking</button>
+          <button onClick={() => setSelectedCategory("read")}>Reading</button>
+          <button onClick={() => setSelectedCategory("currentlyReading")}>Currently Reading</button>
+          <button onClick={() => {
+            setListId(167784);
+            setSelectedCategory("Economics Central Banking");
+          }}>Central Banking</button>
         </div>
         <div
           className={styles['library-grid']}
