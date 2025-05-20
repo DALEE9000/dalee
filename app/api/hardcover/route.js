@@ -8,7 +8,7 @@ export async function GET(req) {
   const listId = parseInt(listIdParam, 10);
 
   if (isNaN(listId)) {
-    return NextResponse.json({ error: "Invalid listId huhhh?" }, { status: 400 });
+    return NextResponse.json({ error: "Invalid listId" }, { status: 400 });
   }
 
   try {
@@ -57,9 +57,19 @@ export async function GET(req) {
                 last_read_date
                 book {
                   title
+                  pages
+                  description
                   image {
                     url
-                  } 
+                  }
+                  release_date
+                  rating
+                  slug
+                  contributions {
+                    author {
+                      name
+                    }
+                  }
                 }
               }
 
@@ -93,6 +103,12 @@ export async function GET(req) {
                   }
                 }
               }
+
+              myLists: lists {
+                  id
+                  name
+                }
+              
 
             }
           }

@@ -6,10 +6,10 @@ import Image from 'next/image';
 import styles from './Library.module.css';
 
 export default function Library() {
-  const [books, setBooks] = useState([]);
   const [bookCategory, setBookCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("read");
   const [listId, setListId] = useState(167772);
+  const [hardcoverLists, setHardcoverLists] = useState([]);
 
   useEffect(() => {
   async function fetchBooks() {
@@ -28,8 +28,8 @@ export default function Library() {
         return me.category?.find(cat => cat.name === selectedCategory)?.list_books || [];
       }
 
-      setBooks(me);
       setBookCategory(extractBooks(me, selectedCategory));
+      setHardcoverLists(me.myLists)
     } catch (err) {
       console.error("Fetch error:", err);
     }
@@ -37,8 +37,6 @@ export default function Library() {
 
     fetchBooks();
   }, [listId, selectedCategory]);
-
-  console.log("look here", bookCategory)
 
   return (
     <>
@@ -50,10 +48,18 @@ export default function Library() {
           <p>Select category:</p>
           <button onClick={() => setSelectedCategory("read")}>Reading</button>
           <button onClick={() => setSelectedCategory("currentlyReading")}>Currently Reading</button>
-          <button onClick={() => {
-            setListId(167784);
-            setSelectedCategory("Economics Central Banking");
-          }}>Central Banking</button>
+
+          {hardcoverLists && hardcoverLists.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setListId(item.id);
+                setSelectedCategory(item.name);
+            }}>
+              {item.name}
+            </button>
+          ))}
+
         </div>
         <div
           className={styles['library-grid']}
