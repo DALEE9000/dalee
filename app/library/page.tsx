@@ -7,7 +7,7 @@ import { LibraryAnimation } from '@/components/TextAnimations';
 import ReadBooks from '@/components/library/Library';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence } from "framer-motion";
-import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
+import { DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
