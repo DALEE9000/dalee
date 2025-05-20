@@ -53,10 +53,9 @@ export function AboutMeParagraph({
 }
 
 export function BookBounce({
-  children, props
+  children 
 }: {
   children: React.ReactNode;
-  props: string;
 }) {
 
   return (
