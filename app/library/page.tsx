@@ -26,9 +26,6 @@ export default function Library() {
 
               <ReadBooks />
 
-              <AboutMeParagraph props={styles['about-text']}>
-                Under construction
-              </AboutMeParagraph>
             </DivAnimation>
           )}
         </AnimatePresence>

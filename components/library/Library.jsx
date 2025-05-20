@@ -7,20 +7,31 @@ import styles from './Library.module.css';
 
 export default function Library() {
   const [books, setBooks] = useState([]);
+  const [bookCategory, setBookCategory] = useState([]);
+  const [listId, setListId] = useState(167772);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const res = await fetch("/api/hardcover");
+    async function fetchBooks() {
+    try {
+      const res = await fetch(`/api/hardcover?listId=${listId}`);
+      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
       const data = await res.json();
-      const pathway = data["data"]["me"][0];
-      setBooks(pathway);
-      setBookCategory(pathway["read"]);
-    };
+
+      const me = data?.data?.me[0];
+      const meCategory = data?.data?.me[0]?.category[0]?.list_books;
+      if (!me) throw new Error("Missing `me` in response");
+
+      setBooks(me);
+      setBookCategory(meCategory);
+    } catch (err) {
+      console.error("Fetch error:", err);
+    }
+  }
 
     fetchBooks();
-  }, []);
+  }, [listId]);
 
-  const [bookCategory, setBookCategory] = useState(books["read"]);
+  console.log("look here", bookCategory)
 
   return (
     <>
@@ -29,9 +40,10 @@ export default function Library() {
       >
         <div
         >
-          <p>This is going to be the menu</p>
-          <button onClick={() => setBookCategory(books["read"])}>Reading</button>
-          <button onClick={() => setBookCategory(books["currentlyReading"])}>Currently Reading</button>
+          <p>Select category:</p>
+          <button onClick={() => setBookCategory(books.read)}>Reading</button>
+          <button onClick={() => setBookCategory(books.currentlyReading)}>Currently Reading</button>
+          <button onClick={() => setListId(167784)}>Central Banking</button>
         </div>
         <div
           className={styles['library-grid']}

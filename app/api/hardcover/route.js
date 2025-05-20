@@ -1,9 +1,18 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req) {
   const apiKey = process.env.HARDCOVER_API_KEY;
 
+  const { searchParams } = new URL(req.url);
+  const listIdParam = searchParams.get("listId");
+  const listId = parseInt(listIdParam, 10);
+
+  if (isNaN(listId)) {
+    return NextResponse.json({ error: "Invalid listId huhhh?" }, { status: 400 });
+  }
+
   try {
+
     const response = await fetch("https://api.hardcover.app/v1/graphql", {
       method: "POST",
       headers: {
@@ -12,7 +21,9 @@ export async function GET() {
       },
       body: JSON.stringify({
         query: `
-          query MultiFetch {
+          query MultiFetch(
+            $listId: Int!,
+          ) {
             me {
               read: user_books(
                   where: { status_id: { _eq: 3 } },
@@ -51,9 +62,42 @@ export async function GET() {
                   } 
                 }
               }
+
+              category: lists(
+                where: { 
+                  list_books: { 
+                      list_id: { _eq: $listId }
+                      user_books: { status_id: { _eq: 3 } }
+                  } 
+                }
+                
+              ) {
+                name
+  							books_count
+                list_books {
+                  book {
+                    title
+                    pages
+                    description
+                    image { 
+                      url
+                    }
+                    release_date
+                    rating
+                    slug
+                    contributions {
+                      author {
+                        name
+                      }
+                    }
+                  }
+                }
+              }
+
             }
           }
         `,
+        variables: { listId }
       }),
     });
 
@@ -69,6 +113,7 @@ export async function GET() {
 
     const data = JSON.parse(text);
     return NextResponse.json(data);
+
   } catch (err) {
       console.error("ERROR:", err);
     return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
@@ -76,6 +121,22 @@ export async function GET() {
 }
 
 /* 
+              politicsAmerica: list_books(
+                  where: {
+                    list: {
+                      name: {_eq: "Politics America"}, 
+                      user_id: {_eq: 34855}
+                    }
+                  }
+                ) {
+                  id
+                  book {
+                    title
+                    description
+                  }
+                }
+
+
 query Lists {
   me {
     lists {
