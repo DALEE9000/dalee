@@ -133,3 +133,21 @@ export function StargazerAnimation() {
         </TypeAnimation>
     )
 }
+
+export function SWOT() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['project-animation']}
+            sequence={[
+                'SWOT, LLC4320, and HF Ocean Data Analysis',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    )
+}

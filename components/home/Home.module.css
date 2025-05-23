@@ -16,6 +16,11 @@
   font-weight: 700;
 }
 
+.project-animation {
+  font-size: 4vw;
+  font-weight: 700;
+}
+
 .bio {
   font-size: 3vw;
   margin: 0;
@@ -99,7 +104,8 @@
 }
 
 #about,
-#library {
+#library,
+#research {
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
@@ -108,8 +114,7 @@
   align-content: flex-start;
 }
 
-#writing,
-#research {
+#writing {
   height: 100%;
   display: grid;
   gap: 5vw;
@@ -228,6 +233,11 @@
   .research-animation,
   .library-animation {
     font-size: 10vw;
+    font-weight: 700;
+  }
+
+  .project-animation {
+    font-size: 8vw;
     font-weight: 700;
   }
 
