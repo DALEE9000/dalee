@@ -48,15 +48,23 @@ export default function Research() {
                 My work with the Ocean Transport Group involves benchmarking simulated ocean data from the MITgcm LLC4320 global climate model to empirical data of oceanographic variables from NASA&apos;s SWOT mission and NOAA high-frequency (HF) data.
               </AboutMeParagraph> 
 
-              <video
-                width="100%"
-                height="auto"
-                controls
-                loop
-                muted
-              >
-                <source src={'/research/strain_map.mp4'} />
-              </video>
+              {/* Responsive Vimeo iframe wrapper */}
+              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, width: '100%' }}>
+                <iframe
+                  title="vimeo-player"
+                  src="https://player.vimeo.com/video/1087250310?h=d0aae7af57&autoplay=1&muted=1&loop=1&background=1"
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    border: 'none',
+                  }}
+                  allowFullScreen
+                ></iframe>
+              </div>
+
             </DivAnimation>
           )}
         </AnimatePresence>
