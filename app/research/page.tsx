@@ -25,7 +25,7 @@ export default function Research() {
               <ResearchAnimation />
 
               <AboutMeParagraph props={styles['about-text']}>
-                I work as a Research Staff Assistant in the Ocean Transport Group under Professor Dhruv Balwada at Columbia University's Lamont-Doherty Earth Observatory.
+                I work as a Research Staff Assistant in the Ocean Transport Group under Professor Dhruv Balwada at Columbia University&amp;s Lamont-Doherty Earth Observatory.
               </AboutMeParagraph>
 
               <AboutMeParagraph props={styles['about-text']}>
