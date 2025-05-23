@@ -25,7 +25,7 @@ export default function Research() {
               <ResearchAnimation />
 
               <AboutMeParagraph props={styles['about-text']}>
-                I work as a Research Staff Assistant in the Ocean Transport Group under Professor Dhruv Balwada at Columbia University&amp;s Lamont-Doherty Earth Observatory.
+                I work as a Research Staff Assistant in the Ocean Transport Group under Professor Dhruv Balwada at Columbia University&apos;s Lamont-Doherty Earth Observatory.
               </AboutMeParagraph>
 
               <AboutMeParagraph props={styles['about-text']}>
@@ -45,7 +45,7 @@ export default function Research() {
               <SWOT />
 
               <AboutMeParagraph props={styles['about-text']}>
-                My work with the Ocean Transport Group involves benchmarking simulated ocean data from the MITgcm LLC4320 global climate model to empirical data of oceanographic variables from NASA's SWOT mission and NOAA high-frequency (HF) data.
+                My work with the Ocean Transport Group involves benchmarking simulated ocean data from the MITgcm LLC4320 global climate model to empirical data of oceanographic variables from NASA&apos;s SWOT mission and NOAA high-frequency (HF) data.
               </AboutMeParagraph> 
 
               <video
