@@ -13,9 +13,23 @@ export default function ReadBooks() {
   const [listId, setListId] = useState(167772);
   const [hardcoverLists, setHardcoverLists] = useState([]);
 
-  const categorySelect = clsx(
-    styles['category'],
+  const categorySelectRead = clsx(
+    styles['category-text'],
     (selectedCategory === "read") && styles['category-selected']);
+
+  const categorySelectCurrentlyReading = clsx(
+    styles['category-text'],
+    (selectedCategory === "currentlyReading") && styles['category-selected']);
+
+  const categoryNames = hardcoverLists.map(obj => Object.values(obj)[1]);
+
+  const economicsCategory = {
+    label: "Economics",
+    subcategories: categoryNames
+      .filter(cat => cat.startsWith("Economics"))
+      .map(cat => cat.replace(/^Economics\s?/, '')) // remove "Economics " from the start
+      .filter(sub => sub.length > 0) // remove blank entries
+  };
 
   useEffect(() => {
   async function fetchBooks() {
@@ -52,7 +66,7 @@ export default function ReadBooks() {
         <div
         >
           <AboutMeParagraph
-            props={styles['category-text']}
+            props={styles['category']}
           >
             Select category:
           </AboutMeParagraph>
@@ -66,7 +80,7 @@ export default function ReadBooks() {
                 onClick={() => setSelectedCategory("read")}
               >
                 <span
-                  className={categorySelect}
+                  className={categorySelectRead}
                 >
                   Read
                 </span>
@@ -77,9 +91,22 @@ export default function ReadBooks() {
               className={styles['category-button']}
               onClick={() => setSelectedCategory("currentlyReading")}
             >
-              Currently Reading
+              <span
+                className={categorySelectCurrentlyReading}
+              >
+                Currently Reading
+              </span>
             </button>
             </li>
+
+            {/* Here's the plan of attack:
+            
+            1. We can get rid of the hardcoverLists.map code below. we will replace it as follows:
+            2. make all the categories like economicCategories above.
+            3. cycle through the categories, building buttons.
+            4. rewrite onClick function to be setSelectedCategory("Economics" + item.name)
+
+            */}
 
             {hardcoverLists && hardcoverLists.map((item, index) => (
               <li
@@ -91,7 +118,14 @@ export default function ReadBooks() {
                     setListId(item.id);
                     setSelectedCategory(item.name);
                 }}>
-                  {item.name}
+                  <span
+                    className={clsx(
+                      styles['category-text'],
+                      (selectedCategory === item.name) && styles['category-selected'])
+                    }
+                  >
+                    {item.name}
+                  </span>
                 </button>
               </li>
             ))}
@@ -125,22 +159,3 @@ export default function ReadBooks() {
     </>
   );
 }
-
-/* const categories = [
-  "Economics General",
-  "Economics History",
-  "Economics International Trade",
-  "Philosophy",
-  "Science",
-  "Economics"
-];
-
-const economicsCategory = {
-  label: "Economics",
-  subcategories: categories
-    .filter(cat => cat.startsWith("Economics"))
-    .map(cat => cat.replace(/^Economics\s?/, '')) // remove "Economics " from the start
-    .filter(sub => sub.length > 0) // remove blank entries
-};
-
-console.log(economicsCategory); */
