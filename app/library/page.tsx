@@ -7,7 +7,7 @@ import { LibraryAnimation } from '@/components/TextAnimations';
 import ReadBooks from '@/components/library/Library';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence } from "framer-motion";
-import { DivAnimation } from '@/components/BoxAnimations';
+import { AboutMeParagraph, DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
@@ -23,6 +23,12 @@ export default function Library() {
           {!context.stargazer && (
             <DivAnimation props={box1}>
               <LibraryAnimation />
+
+              <AboutMeParagraph
+                props={styles['about-text']}
+              >
+                One personal attribute my friends would universally agree on is I am a prolific reader.
+              </AboutMeParagraph>
 
               <ReadBooks />
 

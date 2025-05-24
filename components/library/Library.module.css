@@ -2,15 +2,17 @@
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-auto-flow: row;
     gap: 2vw;
+    align-items: start;
 }
 
 .library-grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    align-items: stretch;
 }
 
+.book-card,
 .book-image {
     aspect-ratio: 2 / 3;
     position: relative;
@@ -21,7 +23,6 @@
 .book-card {
     display: flex;
     align-items: center;
-    height: 100%;
     background-color: #606697;
 }
 
@@ -29,6 +30,27 @@
     font-size: 1vw;
     font-weight: bold;
     margin: 0 2vw;
+}
+
+.category-button {
+    all: unset;
+    cursor: pointer;
+}
+
+.category-text {
+    font-size: 1.5vw;
+    transition: font-size 0.3s ease, font-weight 0.3s ease, text-shadow 0.3s ease;
+}
+
+.category-list {
+    padding: 0;
+    list-style: none;
+}
+
+.category-selected {
+    font-size: 1.5vw;
+    font-weight: 700;
+    text-shadow: 0 0 8px #cbcb85, 0 0 16px #cbcb85;
 }
 
 @media (max-width: 800px) {
