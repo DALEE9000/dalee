@@ -21,6 +21,13 @@ html, body {
   height: auto;
 }
 
+a:link,
+a:visited,
+a:hover,
+a:active { 
+  text-decoration: none; 
+} 
+
 #page-wrapper {
   height: auto;
   display: flex;

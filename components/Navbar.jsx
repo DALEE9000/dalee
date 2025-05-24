@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Sling as Hamburger } from "hamburger-react";
 import { jersey } from '@/components/Fonts';
 import { StargazerContext } from '@/components/Context';
+import { LightUpText } from '@/components/BoxAnimations';
 import clsx from 'clsx';
 import Link from "next/link";
 import Socials from "@/components/Socials";
@@ -94,15 +95,7 @@ export default function Navbar() {
                                         context.deactivateStargazer()
                                     }}
                                 >
-                                    <motion.span
-                                        className={linkStyles}
-                                        whileHover={{
-                                        textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
-                                        }}
-                                        transition={{ duration: 0.3 }}
-                                    >
-                                        {route}
-                                    </motion.span>
+                                    <LightUpText className={linkStyles}>{route}</LightUpText>
                                 </Link>
                             </motion.li>
                         ))
@@ -119,15 +112,7 @@ export default function Navbar() {
                                 }}
                                 className={styles['stargazer-button']}
                             >
-                                <motion.span
-                                    className={linkStyles}
-                                    whileHover={{
-                                    textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
-                                    }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    Stargazer
-                                </motion.span>
+                                <LightUpText props={linkStyles}>Stargazer</LightUpText>
                             </button>
                         </motion.li>
 

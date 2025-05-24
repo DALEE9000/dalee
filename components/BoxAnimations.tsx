@@ -8,6 +8,26 @@ hidden: { opacity: 0, scale: 0.8 },
 visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", bounce: 0.5 } },
 };
 
+export function LightUpText({
+  children, props
+}: {
+  children: string;
+  props: string;
+}) {
+
+    return (
+      <motion.span
+        className={props}
+        whileHover={{
+        textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
+        }}
+        transition={{ duration: 0.3 }}
+      >
+          {children}
+      </motion.span>
+    );
+}
+
 export function DivAnimation({
   children, props
 }: {

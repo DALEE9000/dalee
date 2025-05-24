@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import { ResearchAnimation, SWOT } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence } from "framer-motion";
-import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
+import { LightUpText, DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
@@ -25,7 +25,7 @@ export default function Research() {
               <ResearchAnimation />
 
               <AboutMeParagraph props={styles['about-text']}>
-                I work as a Research Staff Assistant in the Ocean Transport Group under Professor Dhruv Balwada at Columbia University&apos;s Lamont-Doherty Earth Observatory.
+                I work as a Research Staff Assistant in the <a href="https://ocean-transport.github.io/intro.html" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Ocean Transport Group</LightUpText></a> under Professor Dhruv Balwada at Columbia University&apos;s Lamont-Doherty Earth Observatory.
               </AboutMeParagraph>
 
               <AboutMeParagraph props={styles['about-text']}>
@@ -46,13 +46,23 @@ export default function Research() {
 
               <AboutMeParagraph props={styles['about-text']}>
                 My work with the Ocean Transport Group involves benchmarking simulated ocean data from the MITgcm LLC4320 global climate model to empirical data of oceanographic variables from NASA&apos;s SWOT mission and NOAA high-frequency (HF) data.
-              </AboutMeParagraph> 
+              </AboutMeParagraph>
+
+              <AboutMeParagraph props={styles['about-text']}>
+                I have a <a href="https://swot-llc-gallery.vercel.app" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>gallery of assets</LightUpText></a> created from these datasets.
+              </AboutMeParagraph>
 
               {/* Responsive Vimeo iframe wrapper */}
-              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, width: '100%' }}>
+              <div 
+                style={{ 
+                  position: 'relative', 
+                  paddingBottom: '56.25%', 
+                  height: 'auto', 
+                  width: '100%' }}
+              >
                 <iframe
                   title="vimeo-player"
-                  src="https://player.vimeo.com/video/1087250310?h=d0aae7af57&autoplay=1&muted=1&loop=1&background=1"
+                  src="https://player.vimeo.com/video/1087280103?h=a3ce494634&autoplay=1&muted=1&loop=1&background=1"
                   style={{
                     position: 'absolute',
                     top: 0,
