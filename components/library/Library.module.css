@@ -52,6 +52,10 @@
     list-style: none;
 }
 
+.subcategory-list {
+    list-style: none;
+}
+
 .category-selected {
     font-size: 1.5vw;
     font-weight: 700;
@@ -61,5 +65,13 @@
 @media (max-width: 800px) {
     .library-grid {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    .category {
+        font-size: 4.5vw;
+    }
+
+    .category-text {
+        font-size: 3vw;
     }
 }

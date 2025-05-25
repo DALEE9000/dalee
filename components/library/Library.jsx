@@ -12,6 +12,11 @@ export default function ReadBooks() {
   const [selectedCategory, setSelectedCategory] = useState("read");
   const [listId, setListId] = useState(167772);
   const [hardcoverLists, setHardcoverLists] = useState([]);
+  const [openCategory, setOpenCategory] = useState(null);
+
+  const toggleCategory = (categoryName) => {
+    setOpenCategory(prev => prev === categoryName ? null : categoryName);
+  };
 
   const categorySelectRead = clsx(
     styles['category-text'],
@@ -21,15 +26,96 @@ export default function ReadBooks() {
     styles['category-text'],
     (selectedCategory === "currentlyReading") && styles['category-selected']);
 
-  const categoryNames = hardcoverLists.map(obj => Object.values(obj)[1]);
+  function createCategory(category) {
+    return {
+      label: category,
+      subcategories: hardcoverLists
+        .filter(obj => obj.name && obj.name.startsWith(category))
+        .map(obj => ({
+          id: obj.id,
+          name: obj.name.replace(new RegExp(`^${category}\\s?`), '')
+        }))
+        .filter(obj => obj.name.length > 0)
+    };
+  }
+  const economicsCategory = createCategory("Economics");
+  const historyCategory = createCategory("History");
+  const politicsCategory = createCategory("Politics");
+  const philosophyCategory = createCategory("Philosophy");
+  const lawCategory = createCategory("Law");
+  const literatureCategory = createCategory("Literature");
 
-  const economicsCategory = {
-    label: "Economics",
-    subcategories: categoryNames
-      .filter(cat => cat.startsWith("Economics"))
-      .map(cat => cat.replace(/^Economics\s?/, '')) // remove "Economics " from the start
-      .filter(sub => sub.length > 0) // remove blank entries
+  const otherCategory = {
+    label: "Other",
+    subcategories: hardcoverLists
+      .filter(obj =>
+        obj.name && // guard against undefined
+        !/^(Economics|History|Law|Literature|Philosophy|Politics)\b/.test(obj.name) // exclude categories that start with those
+      )
+      .map(obj => ({
+        id: obj.id,
+        name: obj.name
+      }))
   };
+
+  function renderCategoryItems(categoryObj, prefix) {
+    return (
+      <li 
+        key={prefix}
+      >
+        <button
+          className={styles['category-button']}
+          onClick={() => toggleCategory(prefix)}
+        >
+          <span
+            className={clsx(
+              styles['category-text'],
+              selectedCategory.startsWith(prefix) && styles['category-selected']
+            )}
+          >
+            {prefix}
+          </span>
+        </button>
+
+        {openCategory === prefix && (
+          <ul
+            className={styles['subcategory-list']}
+            style={{ fontFamily: raleway.style.fontFamily }}
+          >
+            {categoryObj.subcategories.map((item, index) => (
+              <li key={index}>
+                <button
+                  className={styles['category-button']}
+                  onClick={() => {
+                    setListId(item.id);
+                    setSelectedCategory(`${prefix} ${item.name}`);
+                  }}
+                >
+                  <span
+                    className={clsx(
+                      styles['category-text'],
+                      selectedCategory === `${prefix} ${item.name}` && styles['category-selected']
+                    )}
+                  >
+                    {item.name}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    );
+  }
+
+  const theCategories = [
+    {"object": economicsCategory, "name": "Economics"},
+    {"object": historyCategory, "name": "History"},
+    {"object": politicsCategory, "name": "Politics"},
+    {"object": lawCategory, "name": "Law"},
+    {"object": philosophyCategory, "name": "Philosophy"},
+    {"object": literatureCategory, "name": "Literature"}
+  ]
 
   useEffect(() => {
   async function fetchBooks() {
@@ -49,7 +135,7 @@ export default function ReadBooks() {
       }
 
       setBookCategory(extractBooks(me, selectedCategory));
-      setHardcoverLists(me.myLists)
+      setHardcoverLists([...me.myListsPart1, ...me.myListsPart2])
     } catch (err) {
       console.error("Fetch error:", err);
     }
@@ -77,7 +163,10 @@ export default function ReadBooks() {
             <li>
               <button
                 className={styles['category-button']}
-                onClick={() => setSelectedCategory("read")}
+                onClick={() => {
+                  setSelectedCategory("read");
+                  setOpenCategory(null);
+                }}
               >
                 <span
                   className={categorySelectRead}
@@ -89,7 +178,10 @@ export default function ReadBooks() {
             <li>
             <button
               className={styles['category-button']}
-              onClick={() => setSelectedCategory("currentlyReading")}
+              onClick={() => {
+                setSelectedCategory("currentlyReading");
+                setOpenCategory(null);
+              }}
             >
               <span
                 className={categorySelectCurrentlyReading}
@@ -108,7 +200,11 @@ export default function ReadBooks() {
 
             */}
 
-            {hardcoverLists && hardcoverLists.map((item, index) => (
+            {hardcoverLists && theCategories.map(cat =>
+              renderCategoryItems(cat.object, cat.name)
+            )}
+
+            {hardcoverLists && otherCategory.subcategories.map((item, index) => (
               <li
                 key={index}
               >
@@ -117,6 +213,7 @@ export default function ReadBooks() {
                   onClick={() => {
                     setListId(item.id);
                     setSelectedCategory(item.name);
+                    setOpenCategory(null);
                 }}>
                   <span
                     className={clsx(
