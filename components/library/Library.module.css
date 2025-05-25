@@ -62,17 +62,6 @@
     text-shadow: 0 0 8px #cbcb85, 0 0 16px #cbcb85;
 }
 
-.list-item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-}
-
-.list-item-hidden {
-    display: none;
-}
-
 @media (max-width: 800px) {
     .library-grid {
         grid-template-columns: repeat(3, 1fr);

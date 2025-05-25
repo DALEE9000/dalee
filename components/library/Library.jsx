@@ -130,6 +130,7 @@ export default function ReadBooks() {
       overflow: 'hidden',
       transition: {
         when: "afterChildren",
+        duration: 0.05
       },
     },
     visible: {
@@ -138,7 +139,8 @@ export default function ReadBooks() {
       overflow: "hidden",
       transition: {
         when: "beforeChildren",
-        staggerChildren: 0.07,
+        duration: 0.05,
+        staggerChildren: 0.03,
       },
     },
   };
