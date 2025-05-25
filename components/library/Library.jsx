@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { raleway } from '@/components/Fonts';
 import { AboutMeParagraph, DivAnimation } from '@/components/BoxAnimations';
@@ -60,9 +61,7 @@ export default function ReadBooks() {
 
   function renderCategoryItems(categoryObj, prefix) {
     return (
-      <li 
-        key={prefix}
-      >
+      <li key={prefix}>
         <button
           className={styles['category-button']}
           onClick={() => toggleCategory(prefix)}
@@ -77,33 +76,40 @@ export default function ReadBooks() {
           </span>
         </button>
 
-        {openCategory === prefix && (
-          <ul
-            className={styles['subcategory-list']}
-            style={{ fontFamily: raleway.style.fontFamily }}
-          >
-            {categoryObj.subcategories.map((item, index) => (
-              <li key={index}>
-                <button
-                  className={styles['category-button']}
-                  onClick={() => {
-                    setListId(item.id);
-                    setSelectedCategory(`${prefix} ${item.name}`);
-                  }}
-                >
-                  <span
-                    className={clsx(
-                      styles['category-text'],
-                      selectedCategory === `${prefix} ${item.name}` && styles['category-selected']
-                    )}
+        <AnimatePresence initial={false}>
+          {openCategory === prefix && (
+            <motion.ul
+              className={styles['subcategory-list']}
+              style={{ fontFamily: raleway.style.fontFamily }}
+              variants={listVariant}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {categoryObj.subcategories.map((item, index) => (
+                <motion.li key={index} variants={itemVariant}>
+                  <button
+                    className={styles['category-button']}
+                    onClick={() => {
+                      setListId(item.id);
+                      setSelectedCategory(`${prefix} ${item.name}`);
+                    }}
                   >
-                    {item.name}
-                  </span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        )}
+                    <span
+                      className={clsx(
+                        styles['category-text'],
+                        selectedCategory === `${prefix} ${item.name}` &&
+                          styles['category-selected']
+                      )}
+                    >
+                      {item.name}
+                    </span>
+                  </button>
+                </motion.li>
+              ))}
+            </motion.ul>
+          )}
+        </AnimatePresence>
       </li>
     );
   }
@@ -116,6 +122,32 @@ export default function ReadBooks() {
     {"object": philosophyCategory, "name": "Philosophy"},
     {"object": literatureCategory, "name": "Literature"}
   ]
+
+  const listVariant = {
+    hidden: {
+      height: 0,
+      opacity: 0,
+      overflow: 'hidden',
+      transition: {
+        when: "afterChildren",
+      },
+    },
+    visible: {
+      height: "auto",
+      opacity: 1,
+      overflow: "hidden",
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.07,
+      },
+    },
+  };
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 10 },
+  visible: { opacity: 1, y: 0 },
+};
+
 
   useEffect(() => {
   async function fetchBooks() {
