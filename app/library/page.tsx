@@ -6,8 +6,9 @@ import { useContext } from 'react';
 import { LibraryAnimation } from '@/components/TextAnimations';
 import ReadBooks from '@/components/library/Library';
 import styles from "@/components/home/Home.module.css";
+import { raleway } from '@/components/Fonts';
 import { AnimatePresence } from "framer-motion";
-import { AboutMeParagraph, DivAnimation } from '@/components/BoxAnimations';
+import { LightUpText, AboutMeParagraph, DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
@@ -28,6 +29,35 @@ export default function Library() {
                 props={styles['about-text']}
               >
                 One personal attribute my friends would universally agree on is I am a prolific reader.
+              </AboutMeParagraph>
+
+              <AboutMeParagraph
+                props={styles['about-text']}
+              >
+                My online addiction is perusing through bespoke libraries from think tanks and government organizations on niche public policy. Some of my recommendations for organizations  you should follow for reading lists are:
+
+              </AboutMeParagraph>
+
+              <ul
+                className={styles['about-text']}
+                style={{ fontFamily: raleway.style.fontFamily }}
+              >
+                <li>
+                  <a href="https://bookshop.org/shop/FAI" target="_blank" rel="noopener noreferrer">
+                    <LightUpText props={styles['link-props']}>Foundation for American Innovation Bookshop</LightUpText>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://natolibguides.info/natolibrary" target="_blank" rel="noopener noreferrer">
+                    <LightUpText props={styles['link-props']}>NATO Library</LightUpText>
+                  </a>
+                </li>
+              </ul>
+
+              <AboutMeParagraph
+                props={styles['about-text']}
+              >
+                Otherwise, check out what I'm reading!
               </AboutMeParagraph>
 
               <ReadBooks />
