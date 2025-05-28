@@ -63,10 +63,7 @@ export default function ReadBooks() {
     return (
       <li key={prefix}>
         <button
-          className={clsx(
-            styles['category-button'],
-            openCategory && styles['category-selected']
-          )}
+          className={styles['category-button']}
           onClick={() => toggleCategory(prefix)}
         >
           <span
