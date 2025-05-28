@@ -57,7 +57,7 @@ export default function Library() {
               <AboutMeParagraph
                 props={styles['about-text']}
               >
-                Otherwise, check out what I'm reading!
+                Otherwise, check out what I&apos;m reading!
               </AboutMeParagraph>
 
               <ReadBooks />
