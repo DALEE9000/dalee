@@ -15,7 +15,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 15;
+  const booksPerPage = 18;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -213,7 +213,11 @@ export default function ReadBooks() {
             <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
               {item?.book?.image?.url ? (
                 <div className={styles['book-image']}>
-                  <Image src={item.book.image.url} fill={true} alt={item.book.title} />
+                  <Image 
+                    src={item.book.image.url} 
+                    fill={true} 
+                    alt={item.book.title} 
+                  />
                 </div>
               ) : (
                 <BookCard title={item.book.title} />
