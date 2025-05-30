@@ -73,8 +73,10 @@ export function AboutMeParagraph({
 }
 
 export function BookBounce({
+  delayIndex,
   children 
 }: {
+  delayIndex: number;
   children: React.ReactNode;
 }) {
 
@@ -82,7 +84,8 @@ export function BookBounce({
     <motion.div
       initial={{ opacity: 0, y: 200 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      exit={{ opacity: 0, y: 100 }}
+      transition={{ duration: 0.1, delay: delayIndex * 0.03}}
     >
       {children}
     </motion.div>

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { raleway } from '@/components/Fonts';
-import { AboutMeParagraph, DivAnimation } from '@/components/BoxAnimations';
+import { AboutMeParagraph, BookBounce } from '@/components/BoxAnimations';
 import BookCard from '@/components/library/BookCard';
 import Image from 'next/image';
 import styles from './Library.module.css';
@@ -14,6 +14,8 @@ export default function ReadBooks() {
   const [listId, setListId] = useState(167772);
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const booksPerPage = 15;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -39,24 +41,24 @@ export default function ReadBooks() {
         .filter(obj => obj.name.length > 0)
     };
   }
-  const economicsCategory = createCategory("Economics");
-  const historyCategory = createCategory("History");
-  const politicsCategory = createCategory("Politics");
-  const philosophyCategory = createCategory("Philosophy");
-  const lawCategory = createCategory("Law");
-  const literatureCategory = createCategory("Literature");
+
+  const categories = [
+    { label: "Economics", object: createCategory("Economics") },
+    { label: "History", object: createCategory("History") },
+    { label: "Politics", object: createCategory("Politics") },
+    { label: "Law", object: createCategory("Law") },
+    { label: "Philosophy", object: createCategory("Philosophy") },
+    { label: "Literature", object: createCategory("Literature") },
+  ];
 
   const otherCategory = {
     label: "Other",
     subcategories: hardcoverLists
       .filter(obj =>
-        obj.name && // guard against undefined
-        !/^(Economics|History|Law|Literature|Philosophy|Politics)\b/.test(obj.name) // exclude categories that start with those
+        obj.name &&
+        !/^(Economics|History|Law|Literature|Philosophy|Politics)\b/.test(obj.name)
       )
-      .map(obj => ({
-        id: obj.id,
-        name: obj.name
-      }))
+      .map(obj => ({ id: obj.id, name: obj.name }))
   };
 
   function renderCategoryItems(categoryObj, prefix) {
@@ -66,12 +68,10 @@ export default function ReadBooks() {
           className={styles['category-button']}
           onClick={() => toggleCategory(prefix)}
         >
-          <span
-            className={clsx(
-              styles['category-text'],
-              selectedCategory.startsWith(prefix) && styles['category-selected']
-            )}
-          >
+          <span className={clsx(
+            styles['category-text'],
+            selectedCategory.startsWith(prefix) && styles['category-selected']
+          )}>
             {prefix}
           </span>
         </button>
@@ -95,13 +95,10 @@ export default function ReadBooks() {
                       setSelectedCategory(`${prefix} ${item.name}`);
                     }}
                   >
-                    <span
-                      className={clsx(
-                        styles['category-text'],
-                        selectedCategory === `${prefix} ${item.name}` &&
-                          styles['category-selected']
-                      )}
-                    >
+                    <span className={clsx(
+                      styles['category-text'],
+                      selectedCategory === `${prefix} ${item.name}` && styles['category-selected']
+                    )}>
                       {item.name}
                     </span>
                   </button>
@@ -114,179 +111,123 @@ export default function ReadBooks() {
     );
   }
 
-  const theCategories = [
-    {"object": economicsCategory, "name": "Economics"},
-    {"object": historyCategory, "name": "History"},
-    {"object": politicsCategory, "name": "Politics"},
-    {"object": lawCategory, "name": "Law"},
-    {"object": philosophyCategory, "name": "Philosophy"},
-    {"object": literatureCategory, "name": "Literature"}
-  ]
-
   const listVariant = {
     hidden: {
       height: 0,
       opacity: 0,
       overflow: 'hidden',
-      transition: {
-        when: "afterChildren",
-        duration: 0.05
-      },
+      transition: { when: "afterChildren", duration: 0.05 },
     },
     visible: {
       height: "auto",
       opacity: 1,
       overflow: "hidden",
-      transition: {
-        when: "beforeChildren",
-        duration: 0.05,
-        staggerChildren: 0.03,
-      },
+      transition: { when: "beforeChildren", duration: 0.05, staggerChildren: 0.03 },
     },
   };
 
-const itemVariant = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
-
+  const itemVariant = {
+    hidden: { opacity: 0, y: 10 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   useEffect(() => {
-  async function fetchBooks() {
-    try {
-      const res = await fetch(`/api/hardcover?listId=${listId}`);
-      if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
-      const data = await res.json();
+    async function fetchBooks() {
+      try {
+        const res = await fetch(`/api/hardcover?listId=${listId}`);
+        if (!res.ok) throw new Error(`Fetch failed: ${res.status}`);
+        const data = await res.json();
 
-      const me = data?.data?.me?.[0];
-      if (!me) throw new Error("Missing `me` in response");
+        const me = data?.data?.me?.[0];
+        if (!me) throw new Error("Missing `me` in response");
 
-      function extractBooks(me, selectedCategory) {
-        if (selectedCategory === "read" || selectedCategory === "currentlyReading") {
-          return me[selectedCategory] || [];
+        function extractBooks(me, selectedCategory) {
+          if (selectedCategory === "read" || selectedCategory === "currentlyReading") {
+            return me[selectedCategory] || [];
+          }
+          return me.category?.find(cat => cat.name === selectedCategory)?.list_books || [];
         }
-        return me.category?.find(cat => cat.name === selectedCategory)?.list_books || [];
+
+        setBookCategory(extractBooks(me, selectedCategory));
+        setHardcoverLists([...me.myListsPart1, ...me.myListsPart2]);
+      } catch (err) {
+        console.error("Fetch error:", err);
       }
-
-      setBookCategory(extractBooks(me, selectedCategory));
-      setHardcoverLists([...me.myListsPart1, ...me.myListsPart2])
-    } catch (err) {
-      console.error("Fetch error:", err);
     }
-  }
-
     fetchBooks();
   }, [listId, selectedCategory]);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory, listId]);
+
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = bookCategory.slice(indexOfFirstBook, indexOfLastBook);
+  const totalPages = Math.ceil(bookCategory.length / booksPerPage);
+
   return (
-    <>
-      <div
-        className={styles['library-page']}
-      >
-        <div
-        >
-          <AboutMeParagraph
-            props={styles['category']}
-          >
-            Select category:
-          </AboutMeParagraph>
-          <ul
-            className={styles['category-list']}
-            style={{ fontFamily: raleway.style.fontFamily }}
-          >
-            <li>
+    <div className={styles['library-page']}>
+      <div>
+        <AboutMeParagraph props={styles['category']}>
+          Select category:
+        </AboutMeParagraph>
+        <ul className={styles['category-list']} style={{ fontFamily: raleway.style.fontFamily }}>
+          <li>
+            <button className={styles['category-button']} onClick={() => { setSelectedCategory("read"); setOpenCategory(null); }}>
+              <span className={categorySelectRead}>Read</span>
+            </button>
+          </li>
+          <li>
+            <button className={styles['category-button']} onClick={() => { setSelectedCategory("currentlyReading"); setOpenCategory(null); }}>
+              <span className={categorySelectCurrentlyReading}>Currently Reading</span>
+            </button>
+          </li>
+
+          {hardcoverLists && categories.map(cat => renderCategoryItems(cat.object, cat.label))}
+
+          {hardcoverLists && otherCategory.subcategories.map((item, index) => (
+            <li key={index}>
               <button
                 className={styles['category-button']}
                 onClick={() => {
-                  setSelectedCategory("read");
+                  setListId(item.id);
+                  setSelectedCategory(item.name);
                   setOpenCategory(null);
-                }}
-              >
-                <span
-                  className={categorySelectRead}
-                >
-                  Read
+                }}>
+                <span className={clsx(
+                  styles['category-text'],
+                  selectedCategory === item.name && styles['category-selected']
+                )}>
+                  {item.name}
                 </span>
               </button>
             </li>
-            <li>
-            <button
-              className={styles['category-button']}
-              onClick={() => {
-                setSelectedCategory("currentlyReading");
-                setOpenCategory(null);
-              }}
-            >
-              <span
-                className={categorySelectCurrentlyReading}
-              >
-                Currently Reading
-              </span>
-            </button>
-            </li>
-
-            {/* Here's the plan of attack:
-            
-            1. We can get rid of the hardcoverLists.map code below. we will replace it as follows:
-            2. make all the categories like economicCategories above.
-            3. cycle through the categories, building buttons.
-            4. rewrite onClick function to be setSelectedCategory("Economics" + item.name)
-
-            */}
-
-            {hardcoverLists && theCategories.map(cat =>
-              renderCategoryItems(cat.object, cat.name)
-            )}
-
-            {hardcoverLists && otherCategory.subcategories.map((item, index) => (
-              <li
-                key={index}
-              >
-                <button
-                  className={styles['category-button']}
-                  onClick={() => {
-                    setListId(item.id);
-                    setSelectedCategory(item.name);
-                    setOpenCategory(null);
-                }}>
-                  <span
-                    className={clsx(
-                      styles['category-text'],
-                      (selectedCategory === item.name) && styles['category-selected'])
-                    }
-                  >
-                    {item.name}
-                  </span>
-                </button>
-              </li>
-            ))}
-
-          </ul>
-        </div>
-        <div
-          className={styles['library-grid']}
-        >
-        {bookCategory && bookCategory.map((item, index) => (
-          <DivAnimation
-            key={index}
-          >
-            {item?.book?.image?.url ? (
-              <div
-                className={styles['book-image']}
-              >
-                <Image
-                  src={item.book.image.url}
-                  fill={true}
-                  alt={item.book.title}
-                /> 
-            </div>) : (
-              <BookCard title={item.book.title} />
-            )}
-          </DivAnimation>
-          )
-        )}
-        </div>
+          ))}
+        </ul>
       </div>
-    </>
+
+      <div className={styles['library-grid']}>
+        <AnimatePresence mode="wait">
+          {currentBooks.map((item, index) => (
+            <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
+              {item?.book?.image?.url ? (
+                <div className={styles['book-image']}>
+                  <Image src={item.book.image.url} fill={true} alt={item.book.title} />
+                </div>
+              ) : (
+                <BookCard title={item.book.title} />
+              )}
+            </BookBounce>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      <div className={styles['pagination']}>
+        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
+        <span>{currentPage} / {totalPages}</span>
+        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+      </div>
+    </div>
   );
 }
