@@ -15,7 +15,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 15;
+  const booksPerPage = 30;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -207,31 +207,34 @@ export default function ReadBooks() {
         </ul>
       </div>
 
-      <div className={styles['library-grid']}>
-        <AnimatePresence mode="wait">
-          {currentBooks.map((item, index) => (
-            <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
-              {item?.book?.image?.url ? (
-                <div className={styles['book-image']}>
-                  <Image 
-                    src={item.book.image.url} 
-                    fill={true} 
-                    alt={item.book.title} 
-                  />
-                </div>
-              ) : (
-                <BookCard title={item.book.title} />
-              )}
-            </BookBounce>
-          ))}
-        </AnimatePresence>
+      <div className={styles['library-second-col']}>
+        <div className={styles['library-grid']}>
+          <AnimatePresence mode="wait">
+            {currentBooks.map((item, index) => (
+              <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
+                {item?.book?.image?.url ? (
+                  <div className={styles['book-image']}>
+                    <Image 
+                      src={item.book.image.url} 
+                      fill={true} 
+                      alt={item.book.title} 
+                    />
+                  </div>
+                ) : (
+                  <BookCard title={item.book.title} />
+                )}
+              </BookBounce>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        <div className={styles['pagination']}>
+          <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
+          <span>{currentPage} / {totalPages}</span>
+          <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+        </div>
       </div>
 
-      <div className={styles['pagination']}>
-        <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
-        <span>{currentPage} / {totalPages}</span>
-        <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
-      </div>
     </div>
   );
 }

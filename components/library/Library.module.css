@@ -7,9 +7,16 @@
 }
 
 .library-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(5, minmax(50px, 1fr));
     align-items: stretch;
+}
+
+.library-second-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .book-card,
@@ -63,9 +70,7 @@
 }
 
 .pagination {
-    grid-column: 2;
-    display: flex;
-    justify-content: center;
+    margin: 20px;
 }
 
 @media (max-width: 800px) {
