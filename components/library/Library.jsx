@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
-import { raleway } from '@/components/Fonts';
-import { AboutMeParagraph, BookBounce } from '@/components/BoxAnimations';
+import { jersey, raleway } from '@/components/Fonts';
+import { AboutMeParagraph, BookBounce, LightUpText } from '@/components/BoxAnimations';
 import BookCard from '@/components/library/BookCard';
 import Image from 'next/image';
 import styles from './Library.module.css';
@@ -15,7 +15,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 30;
+  const booksPerPage = 15;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -214,7 +214,8 @@ export default function ReadBooks() {
               <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
                 {item?.book?.image?.url ? (
                   <div className={styles['book-image']}>
-                    <Image 
+                    <Image
+                      unoptimized
                       src={item.book.image.url} 
                       fill={true} 
                       alt={item.book.title} 
@@ -229,9 +230,26 @@ export default function ReadBooks() {
         </div>
 
         <div className={styles['pagination']}>
-          <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
-          <span>{currentPage} / {totalPages}</span>
-          <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+          <button
+            className={styles['category-button']}
+            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+            disabled={currentPage === 1}
+          >
+            {(currentPage === 1) ? 
+              <span className={clsx(styles['page-button'], styles['disabled'])} style={{ fontFamily: jersey.style.fontFamily }}>Prev</span> 
+              : <LightUpText props={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}>Prev</LightUpText>}
+          </button>
+              <span className={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}> {currentPage} / {totalPages} </span>
+          <button
+            className={styles['category-button']}
+            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} 
+            disabled={currentPage === totalPages}
+          >
+            {(currentPage === totalPages) ?
+              <span className={clsx(styles['page-button'], styles['disabled'])} style={{ fontFamily: jersey.style.fontFamily }}>Next</span>
+              : <LightUpText props={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}>Next</LightUpText>}
+            {/* make sure text DOESN'T light up at end of pagination */}
+          </button>
         </div>
       </div>
 

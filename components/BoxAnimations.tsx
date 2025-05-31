@@ -9,15 +9,17 @@ visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", boun
 };
 
 export function LightUpText({
-  children, props
+  children, props, style
 }: {
   children: string;
-  props: string;
+  props?: string;
+  style?: React.CSSProperties;
 }) {
 
     return (
       <motion.span
         className={props}
+        style={style}
         whileHover={{
         textShadow: '0 0 8px #cbcb85, 0 0 16px #cbcb85',
         }}

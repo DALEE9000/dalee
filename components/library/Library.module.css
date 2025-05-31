@@ -73,6 +73,17 @@
     margin: 20px;
 }
 
+.page-button,
+.disabled {
+    font-size: 1.5vw;
+    margin: 0 10px;
+}
+
+.disabled {
+    color: grey;
+    cursor: default;
+}
+
 @media (max-width: 800px) {
     .library-page {
         grid-template-columns: 1fr 1.5fr;
