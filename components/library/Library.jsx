@@ -211,7 +211,7 @@ export default function ReadBooks() {
         <div className={styles['library-grid']}>
           <AnimatePresence mode="wait">
             {currentBooks.map((item, index) => (
-              <BookBounce key={`${index}-${currentPage}`} delayIndex={index}>
+              <BookBounce key={`${item.book.title}-${currentPage}-${index}`} delayIndex={index}>
                 {item?.book?.image?.url ? (
                   <div className={styles['book-image']}>
                     <Image
