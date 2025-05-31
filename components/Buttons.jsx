@@ -22,6 +22,7 @@ export default function SplashButton ( { setOnSplash }) {
                 onMouseLeave={handleMouseExit}
             >
                 <Image
+                    unoptimized
                     src={imageSrc}
                     width={200}
                     height={100}
@@ -29,6 +30,7 @@ export default function SplashButton ( { setOnSplash }) {
                     className="desktop-splash-button"
                 />
                 <Image
+                    unoptimized
                     src={imageSrc}
                     width={100}
                     height={50}
