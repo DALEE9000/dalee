@@ -70,13 +70,13 @@
 }
 
 .pagination {
-    margin: 20px;
+    margin: 2vw;
 }
 
 .page-button,
 .disabled {
     font-size: 1.5vw;
-    margin: 0 10px;
+    margin: 0 1vw;
 }
 
 .disabled {
@@ -102,4 +102,9 @@
         font-size: 2.5vw;
     }
 
+    .page-button,
+    .disabled {
+        font-size: 3vw;
+        margin: 0 1vw;
+    }
 }
