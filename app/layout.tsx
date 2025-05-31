@@ -45,13 +45,11 @@ export default function RootLayout({
           </Suspense>) : (
             <>
               <Transition>
-                <div id="page-wrapper">
-                    <TwinkleStar>
-                        <Navbar />
-                            {children}
-                        <Footer />
-                    </TwinkleStar>
-                </div>
+                  <TwinkleStar>
+                      <Navbar />
+                          {children}
+                      <Footer />
+                  </TwinkleStar>
               </Transition>
             </>
           )}

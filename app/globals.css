@@ -28,17 +28,6 @@ a:active {
   text-decoration: none; 
 } 
 
-#page-wrapper {
-  height: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-#page-wrapper > main {
-  flex-grow: 1;
-  display: block; /* or unset, just make sure it's not fixed height */
-}
-
 .home-page {
   display: flex;
   justify-content: center;

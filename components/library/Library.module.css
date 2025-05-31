@@ -8,7 +8,7 @@
 
 .library-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: repeat(5, minmax(50px, 1fr));
     align-items: stretch;
 }
 
@@ -62,20 +62,28 @@
     text-shadow: 0 0 8px #cbcb85, 0 0 16px #cbcb85;
 }
 
+.pagination {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+}
+
 @media (max-width: 800px) {
+    .library-page {
+        grid-template-columns: 1fr 1.5fr;
+        gap: 5vw;
+    }
+    
     .library-grid {
         grid-template-columns: repeat(3, 1fr);
     }
 
     .category {
-        font-size: 4.5vw;
-    }
-
-    .category-text {
         font-size: 3vw;
     }
 
-    .subcategory-list {
-        padding: 0;
+    .category-text {
+        font-size: 2vw;
     }
+
 }

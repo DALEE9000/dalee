@@ -67,12 +67,9 @@ export default function AnimatedBackground({ children }) {
     backgroundPosition: `-${frameData.x}px -${frameData.y}px`,
   };
 
-  console.log(frameData.y)
-
-
   return (
     <div 
-      className={`${styles['twinkle-background']}`}
+      className={styles['twinkle-background']}
       style={backgroundStyle}
     >
       {children}

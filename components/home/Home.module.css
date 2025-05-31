@@ -1,5 +1,4 @@
 .starry-page {
-  height: 100%;
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;

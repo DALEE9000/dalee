@@ -34,7 +34,7 @@ export default function Library() {
               <AboutMeParagraph
                 props={styles['about-text']}
               >
-                My online addiction is perusing through bespoke libraries from think tanks and government organizations on niche public policy. Some of my recommendations for organizations  you should follow for reading lists are:
+                My online addiction is perusing through bespoke libraries from think tanks and government organizations on niche public policy. Some of my recommendations for organizations you should follow for reading lists are:
 
               </AboutMeParagraph>
 

@@ -15,7 +15,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 18;
+  const booksPerPage = 15;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
