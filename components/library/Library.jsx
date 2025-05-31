@@ -209,24 +209,24 @@ export default function ReadBooks() {
 
       <div className={styles['library-second-col']}>
         <div className={styles['library-grid']}>
-          <AnimatePresence mode="wait">
-            {currentBooks.map((item, index) => (
-              <BookBounce key={`${item.book.title}-${currentPage}`} delayIndex={index}>
-                {item?.book?.image?.url ? (
-                  <div className={styles['book-image']}>
-                    <Image
-                      unoptimized
-                      src={item.book.image.url} 
-                      fill={true} 
-                      alt={item.book.title} 
-                    />
-                  </div>
-                ) : (
-                  <BookCard title={item.book.title} />
-                )}
-              </BookBounce>
-            ))}
-          </AnimatePresence>
+          {currentBooks.map((item, index) => (
+            <AnimatePresence mode="wait" key={`${index}-${currentPage}`}>
+                <BookBounce delayIndex={index}>
+                  {item?.book?.image?.url ? (
+                    <div className={styles['book-image']}>
+                      <Image
+                        unoptimized
+                        src={item.book.image.url} 
+                        fill={true} 
+                        alt={item.book.title} 
+                      />
+                    </div>
+                  ) : (
+                    <BookCard title={item.book.title} />
+                  )}
+                </BookBounce>
+            </AnimatePresence>
+          ))}
         </div>
 
         <div className={styles['pagination']}>
