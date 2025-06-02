@@ -254,7 +254,11 @@ export default function ReadBooks() {
                     </button>
                   </div>
                 ) : (
-                  <BookCard title={item.book.title} />
+                  <button
+                    className={styles['category-button']}
+                  >
+                    <BookCard title={item.book.title} />
+                  </button>
                 )}
               </BookBounce>
             ))}
