@@ -11,6 +11,7 @@
     display: grid;
     grid-template-columns: repeat(5, minmax(50px, 1fr));
     align-items: stretch;
+    gap: 1vw;
 }
 
 .library-second-col {
@@ -47,6 +48,7 @@
 .category-button {
     all: unset;
     cursor: pointer;
+    padding: 5px 0;
 }
 
 .category-text {

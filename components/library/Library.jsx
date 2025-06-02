@@ -15,7 +15,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 15;
+  const booksPerPage = 30;
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -66,7 +66,10 @@ export default function ReadBooks() {
       <li key={prefix}>
         <button
           className={styles['category-button']}
-          onClick={() => toggleCategory(prefix)}
+          onClick={() => {
+            toggleCategory(prefix);
+            scrollToId("scroll");
+          }}
         >
           <span className={clsx(
             styles['category-text'],
@@ -93,6 +96,7 @@ export default function ReadBooks() {
                     onClick={() => {
                       setListId(item.id);
                       setSelectedCategory(`${prefix} ${item.name}`);
+                      scrollToId("scroll");
                     }}
                   >
                     <span className={clsx(
@@ -166,20 +170,43 @@ export default function ReadBooks() {
   const currentBooks = bookCategory.slice(indexOfFirstBook, indexOfLastBook);
   const totalPages = Math.ceil(bookCategory.length / booksPerPage);
 
+  /* Scroll checkpoint */
+
+  function scrollToId(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className={styles['library-page']}>
+    <div id="scroll" className={styles['library-page']}>
       <div>
         <AboutMeParagraph props={styles['category']}>
           Select category:
         </AboutMeParagraph>
         <ul className={styles['category-list']} style={{ fontFamily: raleway.style.fontFamily }}>
           <li>
-            <button className={styles['category-button']} onClick={() => { setSelectedCategory("read"); setOpenCategory(null); }}>
-              <span className={categorySelectRead}>Read</span>
+            <button 
+              className={styles['category-button']} 
+              onClick={() => { 
+                setSelectedCategory("read"); 
+                setOpenCategory(null);
+                scrollToId("scroll");
+              }}
+            >
+              <span className={categorySelectRead}>Books I've Read</span>
             </button>
           </li>
           <li>
-            <button className={styles['category-button']} onClick={() => { setSelectedCategory("currentlyReading"); setOpenCategory(null); }}>
+            <button 
+              className={styles['category-button']} 
+              onClick={() => { 
+                setSelectedCategory("currentlyReading"); 
+                setOpenCategory(null);
+                scrollToId("scroll");
+              }}
+            >
               <span className={categorySelectCurrentlyReading}>Currently Reading</span>
             </button>
           </li>
@@ -194,6 +221,7 @@ export default function ReadBooks() {
                   setListId(item.id);
                   setSelectedCategory(item.name);
                   setOpenCategory(null);
+                  scrollToId("scroll");
                 }}>
                 <span className={clsx(
                   styles['category-text'],
@@ -214,12 +242,16 @@ export default function ReadBooks() {
               <BookBounce key={`${item.book.title}-${currentPage}-${index}`} delayIndex={index}>
                 {item?.book?.image?.url ? (
                   <div className={styles['book-image']}>
-                    <Image
-                      unoptimized
-                      src={item.book.image.url} 
-                      fill={true} 
-                      alt={item.book.title} 
-                    />
+                    <button
+                      className={styles['category-button']}
+                    >
+                      <Image
+                        unoptimized
+                        src={item.book.image.url} 
+                        fill={true} 
+                        alt={item.book.title} 
+                      />
+                    </button>
                   </div>
                 ) : (
                   <BookCard title={item.book.title} />
@@ -232,7 +264,10 @@ export default function ReadBooks() {
         <div className={styles['pagination']}>
           <button
             className={styles['category-button']}
-            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+            onClick={() => {
+              setCurrentPage(prev => Math.max(prev - 1, 1));
+              scrollToId("scroll");
+            }}
             disabled={currentPage === 1}
           >
             {(currentPage === 1) ? 
@@ -242,7 +277,10 @@ export default function ReadBooks() {
               <span className={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}> {currentPage} / {totalPages} </span>
           <button
             className={styles['category-button']}
-            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} 
+            onClick={() => {
+              setCurrentPage(prev => Math.min(prev + 1, totalPages));
+              scrollToId("scroll");
+            }} 
             disabled={currentPage === totalPages}
           >
             {(currentPage === totalPages) ?
