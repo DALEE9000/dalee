@@ -3,6 +3,7 @@
 import { useState, createContext } from "react";
 
 const StargazerContext = createContext();
+const LibraryContext = createContext();
 
 function StargazerProvider(props) {
     const [stargazer, setStargazer] = useState(false);
@@ -31,5 +32,9 @@ function StargazerProvider(props) {
         </StargazerContext.Provider>
     );
 };
+
+function LibraryProvider(props) {
+    const [displayLibrary, setDisplayLibrary] = useState(true);
+}
 
 export { StargazerContext, StargazerProvider };

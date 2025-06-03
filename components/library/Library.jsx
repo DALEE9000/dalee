@@ -5,8 +5,11 @@ import clsx from "clsx";
 import { jersey, raleway } from '@/components/Fonts';
 import { AboutMeParagraph, BookBounce, LightUpText } from '@/components/BoxAnimations';
 import BookCard from '@/components/library/BookCard';
+import BookSummary from '@/components/library/BookSummary';
 import Image from 'next/image';
-import styles from './Library.module.css';
+import styles from '@/components/library/Library.module.css';
+import bookStyles from "@/components/library/ThreeDBook.module.css";
+import ThreeDBook from "@/components/library/ThreeDBook";
 
 export default function ReadBooks() {
   const [bookCategory, setBookCategory] = useState([]);
@@ -15,6 +18,7 @@ export default function ReadBooks() {
   const [hardcoverLists, setHardcoverLists] = useState([]);
   const [openCategory, setOpenCategory] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [displayLibrary, setDisplayLibrary] = useState(true);
   const booksPerPage = 30;
 
   const toggleCategory = (categoryName) => {
@@ -236,21 +240,28 @@ export default function ReadBooks() {
       </div>
 
       <div className={styles['library-second-col']}>
-        <div className={styles['library-grid']}>
+        <div className={clsx(
+          styles['library-grid'],
+          !displayLibrary && styles['dismount'])}
+        >
           <AnimatePresence mode="wait">
             {currentBooks.map((item, index) => (
               <BookBounce key={`${item.book.title}-${currentPage}-${index}`} delayIndex={index}>
                 {item?.book?.image?.url ? (
                   <div className={styles['book-image']}>
                     <button
-                      className={styles['category-button']}
+                      className={clsx(styles['category-button'], bookStyles['book-container'])}
+                      onClick={() => {
+                        setDisplayLibrary(false);
+                      }}
                     >
-                      <Image
+                      <ThreeDBook image={item.book.image.url} alt={item.book.title} />
+                      {/* <Image
                         unoptimized
                         src={item.book.image.url} 
                         fill={true} 
                         alt={item.book.title} 
-                      />
+                      /> */}
                     </button>
                   </div>
                 ) : (
@@ -265,7 +276,10 @@ export default function ReadBooks() {
           </AnimatePresence>
         </div>
 
-        <div className={styles['pagination']}>
+        <div className={clsx(
+          styles['pagination'],
+          !displayLibrary && styles['dismount'])}
+        >
           <button
             className={styles['category-button']}
             onClick={() => {
@@ -293,6 +307,9 @@ export default function ReadBooks() {
             {/* make sure text DOESN'T light up at end of pagination */}
           </button>
         </div>
+
+        {!displayLibrary && <BookSummary />}
+
       </div>
 
     </div>
