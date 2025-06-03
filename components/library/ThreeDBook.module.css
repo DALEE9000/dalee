@@ -15,8 +15,8 @@
 }
 
 .book {
-  width: 5.208vw;
-  height: 10.417vw;
+  width: 125px;
+  height: 250px;
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(-30deg);
@@ -34,12 +34,12 @@
   top: 0;
   left: 0;
   background-color: red;
-  width: 100px;
-  height: 200px;
-  transform: translateZ(15px);
+  width: 125px;
+  height: 250px;
+  transform: translateZ(12.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
-  box-shadow: 5px 5px 20px #666;
+  box-shadow: 5px 5px 10px #666;
 }
 
 .book::before {
@@ -47,10 +47,10 @@
   content: ' ';
   background-color: blue;
   left: 0;
-  top: 0px;
-  width: 28px;
-  height: 200px;
-  transform: translateX(85px) rotateY(90deg);
+  top: 1px;
+  width: 23px;
+  height: 248px;
+  transform: translateX(111.5px) rotateY(90deg);
   background: linear-gradient(90deg, 
     #fff 0%,
     #f9f9f9 5%,
@@ -81,12 +81,14 @@
   top: 0;
   left: 0;
   content: ' ';
-  width: 100px;
-  height: 200px;
-  transform: translateZ(-15px);
+  width: 125px;
+  height: 250px;
+  transform: translateZ(-12.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
 }
+
+/* @media (max-width: 1500px) */
 
 @media (max-width: 800px) {
 .book-container {
@@ -106,8 +108,8 @@
 }
 
 .book {
-  width: 60px;
-  height: 120px;
+  width: 80px;
+  height: 160px;
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(-30deg);
@@ -125,8 +127,8 @@
   top: 0;
   left: 0;
   background-color: red;
-  width: 60px;
-  height: 120px;
+  width: 80px;
+  height: 160px;
   transform: translateZ(7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
@@ -140,8 +142,8 @@
   left: 0;
   top: 1px;
   width: 13px;
-  height: 118px;
-  transform: translateX(51.5px) rotateY(90deg);
+  height: 158px;
+  transform: translateX(71.5px) rotateY(90deg);
   background: linear-gradient(90deg, 
     #fff 0%,
     #f9f9f9 5%,
@@ -172,8 +174,8 @@
   top: 0;
   left: 0;
   content: ' ';
-  width: 60px;
-  height: 120px;
+  width: 80px;
+  height: 160px;
   transform: translateZ(-7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;

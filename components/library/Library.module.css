@@ -22,10 +22,14 @@
 
 .book-card,
 .book-image {
-    aspect-ratio: 2 / 3;
+    width: 100%;
+    aspect-ratio: 1 / 2;
     position: relative;
     overflow: hidden;
     height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .book-card {
@@ -99,6 +103,11 @@
     .library-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 2vw;
+    }
+
+    .book-card,
+    .book-image {
+        aspect-ratio: 1 / 2.5;
     }
 
     .category {
