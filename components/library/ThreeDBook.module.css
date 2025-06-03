@@ -132,7 +132,7 @@
   transform: translateZ(7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
-  box-shadow: 5px 5px 10px #666;
+  box-shadow: 5px 5px 5px #666;
 }
 
 .book::before {
