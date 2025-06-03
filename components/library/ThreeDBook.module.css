@@ -106,8 +106,8 @@
 }
 
 .book {
-  width: 50px;
-  height: 75px;
+  width: 75px;
+  height: 150px;
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(-30deg);
@@ -125,8 +125,8 @@
   top: 0;
   left: 0;
   background-color: red;
-  width: 50px;
-  height: 75px;
+  width: 75px;
+  height: 150px;
   transform: translateZ(7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
@@ -140,8 +140,8 @@
   left: 0;
   top: 1px;
   width: 13px;
-  height: 73px;
-  transform: translateX(41.5px) rotateY(90deg);
+  height: 148px;
+  transform: translateX(66.5px) rotateY(90deg);
   background: linear-gradient(90deg, 
     #fff 0%,
     #f9f9f9 5%,
@@ -172,8 +172,8 @@
   top: 0;
   left: 0;
   content: ' ';
-  width: 50px;
-  height: 75px;
+  width: 75px;
+  height: 150px;
   transform: translateZ(-7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
