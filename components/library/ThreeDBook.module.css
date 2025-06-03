@@ -89,7 +89,7 @@
 }
 
 @media (max-width: 800px) {
-  .book-container {
+.book-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,8 +106,8 @@
 }
 
 .book {
-  width: 75px;
-  height: 150px;
+  width: 60px;
+  height: 120px;
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(-30deg);
@@ -125,12 +125,12 @@
   top: 0;
   left: 0;
   background-color: red;
-  width: 75px;
-  height: 150px;
+  width: 60px;
+  height: 120px;
   transform: translateZ(7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
-  box-shadow: 5px 5px 20px #666;
+  box-shadow: 5px 5px 10px #666;
 }
 
 .book::before {
@@ -140,8 +140,8 @@
   left: 0;
   top: 1px;
   width: 13px;
-  height: 148px;
-  transform: translateX(66.5px) rotateY(90deg);
+  height: 118px;
+  transform: translateX(51.5px) rotateY(90deg);
   background: linear-gradient(90deg, 
     #fff 0%,
     #f9f9f9 5%,
@@ -172,8 +172,8 @@
   top: 0;
   left: 0;
   content: ' ';
-  width: 75px;
-  height: 150px;
+  width: 60px;
+  height: 120px;
   transform: translateZ(-7.5px);
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
