@@ -201,7 +201,10 @@ export default function ReadBooks() {
   function scrollToId(id) {
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      el.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start',
+      });
     }
   };
 
@@ -290,7 +293,7 @@ export default function ReadBooks() {
                         setBookCover(item.book.image.url);
                         setDesc(item.book.description);
                         setPages(item.book.pages);
-                        scrollToId("scroll");
+                        setTimeout(() => scrollToId("scroll"), 100);
                       }}
                     >
                       <ThreeDBook image={item.book.image.url} alt={item.book.title} />
