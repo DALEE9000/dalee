@@ -94,7 +94,14 @@
     display: none;
 }
 
-@media (max-width: 800px) {
+@media (min-width: 900px) and (max-width: 1200px) {
+    .library-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2vw;
+    }
+}
+
+@media (max-width: 900px) {
     .library-page {
         grid-template-columns: 1fr 1.5fr;
         gap: 5vw;
