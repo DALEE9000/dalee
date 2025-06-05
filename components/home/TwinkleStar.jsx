@@ -1,86 +1,97 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Loader from "@/components/Loader";
-import styles from "./Home.module.css";
+import React, { useRef, useEffect, useState } from "react";
 
-const spritesheet = "/pixelart/spacesprites.png";
+const spritesheetUrl = "/pixelart/spacesprites.png";
 const spriteDataUrl = "/pixelart/spacesprites.json";
 
 export default function AnimatedBackground({ children }) {
-  const [frame, setFrame] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [spriteData, setSpriteData] = useState(null);
-  const animationSpeed = 100; // Adjust for desired animation speed (milliseconds)
-  const animationInterval = useRef(null);
+  const canvasRef = useRef(null);
+  const spriteSheetRef = useRef(null);
+  const spriteDataRef = useRef(null);
+  const frameRef = useRef(0);
+  const animationRef = useRef(null);
+
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const preloadAssets = async () => {
+    const loadAssets = async () => {
       try {
-        // Load image
         const img = new Image();
-        img.src = spritesheet;
-        // await img.decode(); // Ensure image is fully loaded, but doesn't work on Chrome Android for some reason?
+        img.src = spritesheetUrl;
+        img.crossOrigin = "anonymous";
+        await new Promise((res, rej) => {
+          img.onload = res;
+          img.onerror = rej;
+        });
+        spriteSheetRef.current = img;
 
-      await new Promise((resolve, reject) => {
-        img.onload = () => resolve();
-        img.onerror = (err) => {
-          console.error("Image failed to load:", err);
-          reject(new Error("Image load failed"));
-        };
-      });
-
-        // Load JSON
         const res = await fetch(spriteDataUrl);
-        const data = await res.json();
-        setSpriteData(data);
+        const json = await res.json();
+        spriteDataRef.current = json;
 
-        // Mark as loaded
-        setIsLoaded(true);
-      } catch (error) {
-        console.error("Failed to load assets:", error);
+        setIsReady(true);
+      } catch (e) {
+        console.error("Asset loading error:", e);
       }
     };
 
-    preloadAssets();
+    loadAssets();
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !spriteData) return;
+    if (!isReady) return;
 
-    const frames = spriteData.frames;
-    const frameCount = Object.keys(frames).length;
-    let currentFrame = 0;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    const sheet = spriteSheetRef.current;
+    const data = spriteDataRef.current;
 
-    animationInterval.current = setInterval(() => {
-      setFrame(currentFrame);
-      currentFrame = (currentFrame + 1) % frameCount;
-    }, animationSpeed);
+    if (!ctx || !sheet || !data) return;
 
-    return () => clearInterval(animationInterval.current);
-  }, [isLoaded, spriteData]);
+    const frameKeys = Object.keys(data.frames);
+    const frameCount = frameKeys.length;
 
-  if (!isLoaded || !spriteData) {
-    return (
-      <Loader />
-    );
-  }
+    const width = window.innerWidth;
+    const height = width / 1.33;
+    canvas.width = width;
+    canvas.height = height;
 
-  const frameData = spriteData.frames[Object.keys(spriteData.frames)[frame]].frame;
+    ctx.imageSmoothingEnabled = false;
 
-  const backgroundStyle = {
-    backgroundImage: `url(${spritesheet})`,
-    width: frameData.w,
-    height: frameData.h,
-    backgroundPosition: `-${frameData.x}px -${frameData.y}px`,
-  };
+    const draw = () => {
+      const key = frameKeys[frameRef.current];
+      const frame = data.frames[key].frame;
+
+      ctx.drawImage(
+        sheet, // Image source
+        frame.x, frame.y, // Top left corner to crop from
+        frame.w, frame.h, // Section to crop (i.e. each frame)
+        0, 0, // where to place cropped section
+        width, height // size of the cropped section
+      );
+
+      frameRef.current = (frameRef.current + 1) % frameCount;
+    };
+
+    animationRef.current = setInterval(draw, 100); // 10 FPS
+    return () => clearInterval(animationRef.current);
+  }, [isReady]);
 
   return (
-    <div 
-      className={styles['twinkle-background']}
-      style={backgroundStyle}
-    >
+    <div style={{ position: "relative", width: "100vw", height: "0px" }}>
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "auto",
+          zIndex: -1,
+        }}
+      />
       {children}
     </div>
   );
-};
+}
