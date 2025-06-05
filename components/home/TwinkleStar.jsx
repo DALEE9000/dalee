@@ -20,9 +20,9 @@ export default function AnimatedBackground({ children }) {
         // Load image
         const img = new Image();
         img.src = spritesheet;
-        // await img.decode(); // Ensure image is fully loaded
+        // await img.decode(); // Ensure image is fully loaded, but doesn't work on Chrome Android for some reason?
 
-        await new Promise((resolve, reject) => {
+      await new Promise((resolve, reject) => {
         img.onload = () => resolve();
         img.onerror = (err) => {
           console.error("Image failed to load:", err);
