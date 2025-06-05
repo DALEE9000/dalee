@@ -35,6 +35,26 @@ function StargazerProvider(props) {
 
 function LibraryProvider(props) {
     const [displayLibrary, setDisplayLibrary] = useState(true);
+
+    function activateBookProfile() {
+        setDisplayLibrary(false);
+    }
+
+    function deactivateBookProfile() {
+        setDisplayLibrary(true);
+    }
+
+    const value = {
+        displayLibrary: displayLibrary,
+        activateBookProfile: activateBookProfile,
+        deactivateBookProfile: deactivateBookProfile,
+    }
+
+    return (
+        <LibraryContext.Provider value={value}>
+            {props.children}
+        </LibraryContext.Provider>
+    );
 }
 
-export { StargazerContext, StargazerProvider };
+export { StargazerContext, StargazerProvider, LibraryContext, LibraryProvider };

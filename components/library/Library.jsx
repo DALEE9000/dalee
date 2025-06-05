@@ -1,25 +1,46 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
 import { jersey, raleway } from '@/components/Fonts';
 import { AboutMeParagraph, BookBounce, LightUpText } from '@/components/BoxAnimations';
+import { LibraryContext } from '@/components/Context';
 import BookCard from '@/components/library/BookCard';
 import BookSummary from '@/components/library/BookSummary';
-import Image from 'next/image';
 import styles from '@/components/library/Library.module.css';
 import bookStyles from "@/components/library/ThreeDBook.module.css";
 import ThreeDBook from "@/components/library/ThreeDBook";
 
 export default function ReadBooks() {
+
+  // Establishing category from which to load books on library grid
   const [bookCategory, setBookCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("read");
+
+  // Establishing API route for list
   const [listId, setListId] = useState(167772);
+
+  // Building object of book list
   const [hardcoverLists, setHardcoverLists] = useState([]);
+
+  // Establishing highlighted category
   const [openCategory, setOpenCategory] = useState(null);
+
+  // Establishing current page on library grid
   const [currentPage, setCurrentPage] = useState(1);
-  const [displayLibrary, setDisplayLibrary] = useState(true);
+
+  // Total number of books per page
   const booksPerPage = 30;
+
+  // Establishing book data to load book profile
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+  const [bookCover, setBookCover] = useState('');
+  const [desc, setDesc] = useState('');
+  const [pages, setPages] = useState(0);
+
+  // BookSummary context
+  const context = useContext(LibraryContext);
 
   const toggleCategory = (categoryName) => {
     setOpenCategory(prev => prev === categoryName ? null : categoryName);
@@ -100,6 +121,7 @@ export default function ReadBooks() {
                     onClick={() => {
                       setListId(item.id);
                       setSelectedCategory(`${prefix} ${item.name}`);
+                      context.deactivateBookProfile();
                       scrollToId("scroll");
                     }}
                   >
@@ -174,7 +196,7 @@ export default function ReadBooks() {
   const currentBooks = bookCategory.slice(indexOfFirstBook, indexOfLastBook);
   const totalPages = Math.ceil(bookCategory.length / booksPerPage);
 
-  /* Scroll checkpoint */
+  // Scroll checkpoint
 
   function scrollToId(id) {
     const el = document.getElementById(id);
@@ -182,6 +204,13 @@ export default function ReadBooks() {
       el.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Pull authors
+  function concatenateAuthors(arr) {
+    return arr
+      .map(obj => obj.author.name)
+      .join(', ');
+  }
 
   return (
     <div id="scroll" className={styles['library-page']}>
@@ -196,6 +225,7 @@ export default function ReadBooks() {
               onClick={() => { 
                 setSelectedCategory("read"); 
                 setOpenCategory(null);
+                context.deactivateBookProfile();
                 scrollToId("scroll");
               }}
             >
@@ -208,6 +238,7 @@ export default function ReadBooks() {
               onClick={() => { 
                 setSelectedCategory("currentlyReading"); 
                 setOpenCategory(null);
+                context.deactivateBookProfile();
                 scrollToId("scroll");
               }}
             >
@@ -225,6 +256,7 @@ export default function ReadBooks() {
                   setListId(item.id);
                   setSelectedCategory(item.name);
                   setOpenCategory(null);
+                  context.deactivateBookProfile();
                   scrollToId("scroll");
                 }}>
                 <span className={clsx(
@@ -242,7 +274,7 @@ export default function ReadBooks() {
       <div className={styles['library-second-col']}>
         <div className={clsx(
           styles['library-grid'],
-          !displayLibrary && styles['dismount'])}
+          !context.displayLibrary && styles['dismount'])}
         >
           <AnimatePresence mode="wait">
             {currentBooks.map((item, index) => (
@@ -252,16 +284,16 @@ export default function ReadBooks() {
                     <button
                       className={clsx(styles['category-button'], bookStyles['book-container'])}
                       onClick={() => {
-                        setDisplayLibrary(false);
+                        context.activateBookProfile();
+                        setTitle(item.book.title);
+                        setAuthor(concatenateAuthors(item.book.contributions))
+                        setBookCover(item.book.image.url);
+                        setDesc(item.book.description);
+                        setPages(item.book.pages);
+                        scrollToId("scroll");
                       }}
                     >
                       <ThreeDBook image={item.book.image.url} alt={item.book.title} />
-                      {/* <Image
-                        unoptimized
-                        src={item.book.image.url} 
-                        fill={true} 
-                        alt={item.book.title} 
-                      /> */}
                     </button>
                   </div>
                 ) : (
@@ -278,7 +310,7 @@ export default function ReadBooks() {
 
         <div className={clsx(
           styles['pagination'],
-          !displayLibrary && styles['dismount'])}
+          !context.displayLibrary && styles['dismount'])}
         >
           <button
             className={styles['category-button']}
@@ -308,7 +340,7 @@ export default function ReadBooks() {
           </button>
         </div>
 
-        {!displayLibrary && <BookSummary />}
+        {!context.displayLibrary && <BookSummary title={title} author={author} bookCover={bookCover} desc={desc} pages={pages} />}
 
       </div>
 
