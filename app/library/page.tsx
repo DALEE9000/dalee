@@ -17,6 +17,13 @@ export default function Library() {
   const context = useContext(StargazerContext);
   const box1 = clsx(styles['twinkle-box'], styles['about-box1']);
 
+  const readingLists = [
+    {"link": "https://bookshop.org/shop/FAI", "title": "Foundation for American Innovation Bookshop"},
+    {"link": "https://natolibguides.info/natolibrary", "title": "NATO Library"},
+    {"link": "https://www.usni.org/press/books", "title": "United States Naval Institute"},
+    {"link": "https://press.stripe.com/", "title": "Stripe Press"}
+  ]
+
   return (
     <>
       <section id={styles['library']}>
@@ -42,16 +49,13 @@ export default function Library() {
                 className={styles['about-text']}
                 style={{ fontFamily: raleway.style.fontFamily }}
               >
-                <li>
-                  <a href="https://bookshop.org/shop/FAI" target="_blank" rel="noopener noreferrer">
-                    <LightUpText props={styles['link-props']}>Foundation for American Innovation Bookshop</LightUpText>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://natolibguides.info/natolibrary" target="_blank" rel="noopener noreferrer">
-                    <LightUpText props={styles['link-props']}>NATO Library</LightUpText>
-                  </a>
-                </li>
+                {readingLists.map((item, index) => 
+                  <li key={index}>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer">
+                      <LightUpText props={styles['link-props']}>{item.title}</LightUpText>
+                    </a>
+                  </li>
+                )}
               </ul>
 
               <AboutMeParagraph

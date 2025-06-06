@@ -60,14 +60,14 @@ export function AboutMeParagraph({
 
     return (
         <motion.p
-        className={props}
-        style={{
-            fontFamily: raleway.style.fontFamily,
-        }}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={boxVariants}
+          className={props}
+          style={{
+              fontFamily: raleway.style.fontFamily,
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={boxVariants}
         >
             {children}
         </motion.p>
