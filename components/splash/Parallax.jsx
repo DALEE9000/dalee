@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { getWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
+import { preconnect } from 'react-dom';
 
 // This ensures a seamless horizontal wrap
 const animateparam = [
@@ -38,15 +39,18 @@ export default function Parallax() {
 
   if (!weather) return null;
 
+  var precipitation = weather.current.current.precip_mm;
+  precipitation = 9;
+
   // Add static layers here
   const staticImages = [
     "sky1", 
     "sky2", 
     "sky3", 
-    ...(weather.precip_mm > 0 ? [] : ["sun1"])
+    ...(precipitation > 0 ? [] : ["sun1"])
   ];
 
-  // weather.precip_mm = 9// testing parameters
+  console.log(weather.current.location.name, weather.current.location.region, weather.current.current.precip_mm)
 
   return (
     <>
@@ -54,7 +58,7 @@ export default function Parallax() {
         className={styles['parallax-container']}
     >
       {/* RAIN ANIMATION */}
-      {(weather.precip_mm < 8 && weather.precip_mm > 0) &&
+      {(precipitation < 8 && precipitation > 0) &&
       <AnimatedBackground 
         spriteSheetURL={rainySkySpriteSheet}
         spriteDataURL={rainySkySpriteSheetData}
@@ -63,7 +67,7 @@ export default function Parallax() {
       />}
 
       {/* STORMY ANIMATION */}
-      {(weather.precip_mm >= 8) &&
+      {(precipitation >= 8) &&
       <AnimatedBackground 
         spriteSheetURL={stormySkySpriteSheet}
         spriteDataURL={stormySkySpriteSheetData}
@@ -72,7 +76,7 @@ export default function Parallax() {
       />}
 
       {/* RAINY DAY MASK */}
-      {(weather.precip_mm > 0 && weather.precip_mm < 8) && <div
+      {(precipitation > 0 && precipitation < 8) && <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day.png)`,
@@ -81,7 +85,7 @@ export default function Parallax() {
       />}
 
       {/* STORMY DAY MASK */}
-      {(weather.precip_mm >= 8) && <div
+      {(precipitation >= 8) && <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day-stormy.png)`,
