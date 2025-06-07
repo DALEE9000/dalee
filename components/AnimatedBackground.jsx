@@ -61,10 +61,15 @@ export default function AnimatedBackground({
     const frameKeys = Object.keys(data.frames);
     const frameCount = frameKeys.length;
 
-    const width = window.innerWidth;
-    const height = context.onSplash ? window.innerHeight : width / aspectRatio;
-    canvas.width = width;
-    canvas.height = height;
+    const resizeCanvas = () => {
+      const width = window.innerWidth;
+      const height = context.onSplash ? window.innerHeight : width / aspectRatio;
+      canvas.width = width;
+      canvas.height = height;
+    };
+
+    resizeCanvas(); // Initial sizing
+    window.addEventListener("resize", resizeCanvas);
 
     ctx.imageSmoothingEnabled = false;
 
@@ -74,19 +79,23 @@ export default function AnimatedBackground({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(
-        sheet, // Image source
-        frame.x, frame.y, // Top left corner to crop from
-        frame.w, frame.h, // Section to crop (i.e. each frame)
-        0, 0, // where to place cropped section
-        width, height // size of the cropped section
+        sheet,
+        frame.x, frame.y,
+        frame.w, frame.h,
+        0, 0,
+        canvas.width, canvas.height
       );
 
       frameRef.current = (frameRef.current + 1) % frameCount;
     };
 
     animationRef.current = setInterval(draw, 100); // 10 FPS
-    return () => clearInterval(animationRef.current);
-  }, [isReady]);
+
+    return () => {
+      clearInterval(animationRef.current);
+      window.removeEventListener("resize", resizeCanvas);
+    };
+  }, [isReady, context.onSplash, aspectRatio]);
 
   return (
     <div style={{ position: "relative", width: "100vw", height: "0px" }}>
