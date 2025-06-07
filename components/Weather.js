@@ -4,8 +4,8 @@ export async function getWeather() {
     const geoRes = await fetch('/api/geolocate');
     if (geoRes.ok) {
       const geoData = await geoRes.json();
-      lat = geoData.lat;
-      lon = geoData.lon;
+      lat = geoData.latitude;
+      lon = geoData.longitude;
       city = geoData.city;
       country = geoData.country;
 
