@@ -19,6 +19,7 @@ export async function getWeather() {
     let weatherUrl = `/api/weather`;
     if (lat && lon) {
       weatherUrl += `?lat=${lat}&lon=${lon}`;
+      console.log('weaterurl', weatherUrl)
     } else {
       console.warn("Falling back to auto:ip");
       // Leave URL as default
