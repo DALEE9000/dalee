@@ -79,11 +79,11 @@ export default function AnimatedBackground({
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(
-        sheet,
-        frame.x, frame.y,
-        frame.w, frame.h,
-        0, 0,
-        canvas.width, canvas.height
+        sheet, // Image source
+        frame.x, frame.y, // Top-left corner starting point of crop
+        frame.w, frame.h, // Area to crop
+        0, 0, // Where to place cropped image
+        canvas.width, canvas.height // How the cropped image should resize
       );
 
       frameRef.current = (frameRef.current + 1) % frameCount;

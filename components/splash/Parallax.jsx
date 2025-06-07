@@ -40,7 +40,7 @@ export default function Parallax() {
   if (!weather) return null;
 
   var precipitation = weather.current.current.precip_mm;
-  precipitation = 9;
+  // precipitation = 9;
 
   // Add static layers here
   const staticImages = [
