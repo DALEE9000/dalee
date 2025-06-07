@@ -54,7 +54,7 @@ export default function SplashScreen() {
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
+                transition={{ duration: 5, ease: "easeInOut" }}
             >
                 <Parallax />
             </motion.div>
@@ -64,10 +64,10 @@ export default function SplashScreen() {
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1 }}
-                transition={{ duration: 2, ease: "easeInOut" }}
+                transition={{ duration: 5, ease: "easeInOut" }}
             >
-                    <TitleAnimation />
-                    <SplashButton />
+                <TitleAnimation />
+                <SplashButton />
             </motion.div>
         </>
         )

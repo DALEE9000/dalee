@@ -76,7 +76,8 @@ export default function Parallax() {
       />}
 
       {/* RAINY / CLOUDY DAY MASK */}
-      {((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80)) && <div
+      {((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80)) && 
+      <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day.png)`,
@@ -85,7 +86,8 @@ export default function Parallax() {
       />}
 
       {/* STORMY / VERY CLOUDY DAY MASK */}
-      {(precipitation >= 8) || (cloudCover >= 80) && <div
+      {(precipitation >= 8) || (cloudCover >= 80) && 
+      <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day-stormy.png)`,
