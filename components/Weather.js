@@ -1,5 +1,6 @@
 export async function getWeather() {
   try {
+    let geoData = null;
     let lat = null;
     let lon = null;
     let city = null;
