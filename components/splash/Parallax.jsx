@@ -1,16 +1,19 @@
 "use client"
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import AnimatedBackground from '@/components/AnimatedBackground';
+import { getWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
 
-{/* This ensures a seamless horizontal wrap */}
+// This ensures a seamless horizontal wrap
 const animateparam = [
   { initialX: '100%', animateX: '-100%' },
   { initialX: '0%', animateX: '-200%' },
   { initialX: '200%', animateX: '0%' },
 ];
 
-{/* Add dynamic layers here */}
+// Add dynamic layers here
 const elements = [
   { element: "cloud1", duration: 120 },
   { element: "cloud2", duration: 90 },
@@ -18,16 +21,74 @@ const elements = [
   { element: "mountains", duration: 240 }
 ];
 
-{/* Add static layers here */}
-const staticImages = ["sky1", "sky2", "sky3", "sun1"];
+// Paths
+const rainySkySpriteSheet = '/pixelart/rainy-sky-day.png';
+const rainySkySpriteSheetData = '/pixelart/rainy-sky-day.json';
+
+const stormySkySpriteSheet = '/pixelart/stormy-sky-day.png';
+const stormySkySpriteSheetData = '/pixelart/stormy-sky-day.json';
 
 export default function Parallax() {
+
+  const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    getWeather().then(setWeather);
+  }, []);
+
+  if (!weather) return null;
+
+  // Add static layers here
+  const staticImages = [
+    "sky1", 
+    "sky2", 
+    "sky3", 
+    ...(weather.precip_mm > 0 ? [] : ["sun"])
+  ];
+
+  // weather.precip_mm = 9// testing parameters
 
   return (
     <>
     <div 
         className={styles['parallax-container']}
     >
+      {/* RAIN ANIMATION */}
+      {(weather.precip_mm < 8 && weather.precip_mm > 0) &&
+      <AnimatedBackground 
+        spriteSheetURL={rainySkySpriteSheet}
+        spriteDataURL={rainySkySpriteSheetData}
+        aspectRatio={1.8125}
+        zIndex={15}
+      />}
+
+      {/* STORMY ANIMATION */}
+      {(weather.precip_mm >= 8) &&
+      <AnimatedBackground 
+        spriteSheetURL={stormySkySpriteSheet}
+        spriteDataURL={stormySkySpriteSheetData}
+        aspectRatio={1.8125}
+        zIndex={15}
+      />}
+
+      {/* RAINY DAY MASK */}
+      {(weather.precip_mm > 0 && weather.precip_mm < 8) && <div
+        className={styles['static-layer']}
+        style={{ 
+          backgroundImage: `url(/pixelart/muggymask-day.png)`,
+          zIndex: 13,
+        }}
+      />}
+
+      {/* STORMY DAY MASK */}
+      {(weather.precip_mm >= 8) && <div
+        className={styles['static-layer']}
+        style={{ 
+          backgroundImage: `url(/pixelart/muggymask-day-stormy.png)`,
+          zIndex: 13,
+        }}
+      />}
+
       {/* STATIC LAYERS*/}
       {staticImages.map((bg) => (
         <div

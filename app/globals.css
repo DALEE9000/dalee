@@ -29,11 +29,15 @@ a:active {
 } 
 
 .home-page {
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   margin: 0;
   text-align: center;
+}
+
+.home-page > * {
+  grid-area: 1 / 1;
 }
 
 .home-page-scroll {

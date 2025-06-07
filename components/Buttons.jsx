@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Image from 'next/image';
+import { SplashContext } from '@/components/Context';
 import styles from './splash/Splash.module.css';
 
-export default function SplashButton ( { setOnSplash }) {
+export default function SplashButton() {
     const [imageSrc, setImageSrc] = useState("/pixelart/button1.png");
+
+    const context = useContext(SplashContext);
 
     function handleMouseEnter() {
         setImageSrc("/pixelart/button2.png");
@@ -16,7 +19,7 @@ export default function SplashButton ( { setOnSplash }) {
     return (
         <>
             <button 
-                onClick={() => setOnSplash()}
+                onClick={() => context.offSplash()}
                 className={styles['splash-button']}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseExit}

@@ -1,11 +1,18 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { SplashContext } from '@/components/Context';
 
-const spritesheetUrl = "/pixelart/spacesprites.png";
-const spriteDataUrl = "/pixelart/spacesprites.json";
+// Starry night: aspect ratio is 1.33, zIndex is -1
+// Splash page: aspect ratio is 1.8125, zIndex is 15
 
-export default function AnimatedBackground({ children }) {
+export default function AnimatedBackground({ 
+  children,
+  spriteSheetURL,
+  spriteDataURL,
+  aspectRatio,
+  zIndex
+ }) {
   const canvasRef = useRef(null);
   const spriteSheetRef = useRef(null);
   const spriteDataRef = useRef(null);
@@ -14,11 +21,13 @@ export default function AnimatedBackground({ children }) {
 
   const [isReady, setIsReady] = useState(false);
 
+  const context = useContext(SplashContext);
+
   useEffect(() => {
     const loadAssets = async () => {
       try {
         const img = new Image();
-        img.src = spritesheetUrl;
+        img.src = spriteSheetURL;
         img.crossOrigin = "anonymous";
         await new Promise((res, rej) => {
           img.onload = res;
@@ -26,7 +35,7 @@ export default function AnimatedBackground({ children }) {
         });
         spriteSheetRef.current = img;
 
-        const res = await fetch(spriteDataUrl);
+        const res = await fetch(spriteDataURL);
         const json = await res.json();
         spriteDataRef.current = json;
 
@@ -53,7 +62,7 @@ export default function AnimatedBackground({ children }) {
     const frameCount = frameKeys.length;
 
     const width = window.innerWidth;
-    const height = width / 1.33;
+    const height = context.onSplash ? window.innerHeight : width / aspectRatio;
     canvas.width = width;
     canvas.height = height;
 
@@ -63,6 +72,7 @@ export default function AnimatedBackground({ children }) {
       const key = frameKeys[frameRef.current];
       const frame = data.frames[key].frame;
 
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(
         sheet, // Image source
         frame.x, frame.y, // Top left corner to crop from
@@ -88,7 +98,7 @@ export default function AnimatedBackground({ children }) {
           left: 0,
           width: "100vw",
           height: "auto",
-          zIndex: -1,
+          zIndex: zIndex,
         }}
       />
       {children}

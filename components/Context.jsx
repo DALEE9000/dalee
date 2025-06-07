@@ -2,8 +2,28 @@
 
 import { useState, createContext } from "react";
 
+const SplashContext = createContext();
 const StargazerContext = createContext();
 const LibraryContext = createContext();
+
+function SplashProvider(props) {
+    const [onSplash, setOnSplash] = useState(true);
+
+    function offSplash() {
+        setOnSplash(false);
+    }
+
+    const value = {
+        onSplash: onSplash,
+        offSplash: offSplash,
+    }
+
+    return (
+        <SplashContext.Provider value={value}>
+            {props.children}
+        </SplashContext.Provider>
+    )
+}
 
 function StargazerProvider(props) {
     const [stargazer, setStargazer] = useState(false);
@@ -57,4 +77,4 @@ function LibraryProvider(props) {
     );
 }
 
-export { StargazerContext, StargazerProvider, LibraryContext, LibraryProvider };
+export { SplashContext, SplashProvider, StargazerContext, StargazerProvider, LibraryContext, LibraryProvider };

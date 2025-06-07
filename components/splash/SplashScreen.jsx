@@ -1,17 +1,17 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Loader from "@/components/Loader";
-import styles from './Splash.module.css'; 
+import styles from './Splash.module.css';
 
 // Dynamically import all components
 const Parallax = dynamic(() => import("./Parallax"), { ssr: false });
 const TitleAnimation = dynamic(() => import("./TitleAnimation"), { ssr: false });
 const SplashButton = dynamic(() => import("@/components/Buttons"), { ssr: false });
 
-export default function SplashScreen({ setOnSplash }){
+export default function SplashScreen() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [showTransition, setShowTransition] = useState(false);
 
@@ -69,9 +69,7 @@ export default function SplashScreen({ setOnSplash }){
                     className={styles['title-animation-div']}
                 >
                     <TitleAnimation />
-                    <SplashButton 
-                        setOnSplash={setOnSplash} 
-                    />
+                    <SplashButton />
                 </div>
             </motion.div>
         </>

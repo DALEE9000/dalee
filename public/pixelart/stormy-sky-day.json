@@ -1,0 +1,59 @@
+{ "frames": {
+   "stormy-sky-day 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "sourceSize": { "w": 2900, "h": 1600 },
+    "duration": 100
+   },
+   "stormy-sky-day 1.aseprite": {
+    "frame": { "x": 2900, "y": 0, "w": 2900, "h": 1600 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "sourceSize": { "w": 2900, "h": 1600 },
+    "duration": 100
+   },
+   "stormy-sky-day 2.aseprite": {
+    "frame": { "x": 5800, "y": 0, "w": 2900, "h": 1600 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "sourceSize": { "w": 2900, "h": 1600 },
+    "duration": 100
+   },
+   "stormy-sky-day 3.aseprite": {
+    "frame": { "x": 8700, "y": 0, "w": 2900, "h": 1600 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "sourceSize": { "w": 2900, "h": 1600 },
+    "duration": 100
+   },
+   "stormy-sky-day 4.aseprite": {
+    "frame": { "x": 11600, "y": 0, "w": 2900, "h": 1600 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 2900, "h": 1600 },
+    "sourceSize": { "w": 2900, "h": 1600 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.13-x64",
+  "image": "stormy-sky-day.png",
+  "format": "RGBA8888",
+  "size": { "w": 14500, "h": 1600 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Rain 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Rain 2", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
