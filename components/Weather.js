@@ -1,16 +1,15 @@
 export async function getWeather() {
   try {
-    let lat = null;
-    let lon = null;
-
     // STEP 1: Try to get IP-based location
     const geoRes = await fetch('/api/geolocate');
     if (geoRes.ok) {
       const geoData = await geoRes.json();
       lat = geoData.lat;
       lon = geoData.lon;
+      city = geoData.city;
+      country = geoData.country;
 
-      console.log("Vercel Geolocation:", lat, lon);
+      console.log("Vercel Geolocation:", lat, lon, city, country);
     } else {
       console.warn("Vercel Geolocation failed with status:", geoRes.status);
     }
