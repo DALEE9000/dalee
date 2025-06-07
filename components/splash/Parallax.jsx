@@ -39,6 +39,7 @@ export default function Parallax() {
   if (!weather) return null;
 
   var precipitation = weather.current.current.precip_mm;
+  var cloudCover = weather.current.current.cloud;
   // precipitation = 9;
 
   // Add static layers here
@@ -46,10 +47,10 @@ export default function Parallax() {
     "sky1", 
     "sky2", 
     "sky3", 
-    ...(precipitation > 0 ? [] : ["sun1"])
+    ...((precipitation > 0 || cloudCover > 50) ? [] : ["sun1"])
   ];
 
-  console.log(weather.current.location.name, weather.current.location.region, weather.current.current.precip_mm)
+  console.log(weather.current.location.name, weather.current.location.region, weather.current.location.lat, weather.current.location.lon, precipitation, cloudCover)
 
   return (
     <>
@@ -74,8 +75,8 @@ export default function Parallax() {
         zIndex={15}
       />}
 
-      {/* RAINY DAY MASK */}
-      {(precipitation > 0 && precipitation < 8) && <div
+      {/* RAINY / CLOUDY DAY MASK */}
+      {((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80)) && <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day.png)`,
@@ -83,8 +84,8 @@ export default function Parallax() {
         }}
       />}
 
-      {/* STORMY DAY MASK */}
-      {(precipitation >= 8) && <div
+      {/* STORMY / VERY CLOUDY DAY MASK */}
+      {(precipitation >= 8) || (cloudCover >= 80) && <div
         className={styles['static-layer']}
         style={{ 
           backgroundImage: `url(/pixelart/muggymask-day-stormy.png)`,

@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Loader.jsx", "components/library/ThreeDBook.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/Loader.jsx", "components/library/ThreeDBook.jsx", "app/api/weather/route.js"],
   "exclude": ["node_modules"]
 }

@@ -1,42 +1,41 @@
 export async function getWeather() {
-  // Wrap geolocation in a promise
-  const getPosition = () =>
-    new Promise((resolve, reject) => {
-      if (!navigator.geolocation) {
-        reject(new Error("Geolocation not supported"));
-      } else {
-        navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000 });
-      }
-    });
-
   try {
-    let url = '/api/weather';
+    let lat = null;
+    let lon = null;
 
-    try {
-      const position = await getPosition();
-      const { latitude, longitude } = position.coords;
+    // STEP 1: Try to get IP-based location
+    const ipRes = await fetch('/api/ip');
+    if (ipRes.ok) {
+      const ipData = await ipRes.json();
+      lat = ipData.location.latitude;
+      lon = ipData.location.longitude;
 
-      console.log("Location:", latitude, longitude);
-
-      url = `/api/weather?lat=${latitude}&lon=${longitude}`;
-    } catch (geoError) {
-        console.warn("Geolocation failed, using IP fallback:", geoError);
+      console.log("IP-based location:", lat, lon);
+    } else {
+      console.warn("IP API failed with status:", ipRes.status);
     }
 
-    const response = await fetch(url);
-    console.log("API response status:", response.status);
-
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
+    // STEP 2: Construct weather API URL
+    let weatherUrl = `/api/weather`;
+    if (lat && lon) {
+      weatherUrl += `?lat=${lat}&lon=${lon}`;
+    } else {
+      console.warn("Falling back to auto:ip");
+      // Leave URL as default
     }
 
-    const data = await response.json();
+    // STEP 3: Fetch weather
+    const weatherRes = await fetch(weatherUrl);
+    if (!weatherRes.ok) {
+      throw new Error(`Weather API error: ${weatherRes.status}`);
+    }
 
-    console.log("Weather data fetched:", data);
+    const weatherData = await weatherRes.json();
+    console.log("Weather data fetched:", weatherData);
+    return weatherData;
 
-    return data;
   } catch (err) {
-      console.error("Failed to fetch weather:", err);
+    console.error("getWeather failed:", err);
     return null;
   }
 }
