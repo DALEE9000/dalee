@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { getWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
-import { preconnect } from 'react-dom';
 
 // This ensures a seamless horizontal wrap
 const animateparam = [

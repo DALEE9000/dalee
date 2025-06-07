@@ -60,17 +60,14 @@ export default function SplashScreen() {
             </motion.div>
 
             <motion.div
+                className={styles['title-animation-div']}
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1 }}
                 transition={{ duration: 2, ease: "easeInOut" }}
             >
-                <div 
-                    className={styles['title-animation-div']}
-                >
                     <TitleAnimation />
                     <SplashButton />
-                </div>
             </motion.div>
         </>
         )
