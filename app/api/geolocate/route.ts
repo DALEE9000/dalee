@@ -1,6 +1,10 @@
-import { geolocation } from '@vercel/functions';
- 
+import { geolocation } from '@vercel/edge';
+
+export const runtime = 'edge';
+
 export function GET(request: Request) {
-  const details = geolocation(request);
-  return Response.json(details);
+  const geo = geolocation(request);
+  return new Response(JSON.stringify(geo), {
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
