@@ -43,7 +43,7 @@ export default function Parallax() {
     "sky1", 
     "sky2", 
     "sky3", 
-    ...(weather.precip_mm > 0 ? [] : ["sun"])
+    ...(weather.precip_mm > 0 ? [] : ["sun1"])
   ];
 
   // weather.precip_mm = 9// testing parameters
