@@ -1,7 +1,6 @@
 export async function getWeather() {
   try {
-    let geoData = null;
-    let lat, lon, city, country, ip = null;
+    let geoData, lat, lon, city, country, zip, ip = null;
 
     // STEP 1: Try to get IP-based location
     const geoRes = await fetch('/api/geolocate');
