@@ -13,6 +13,7 @@ export default function Socials() {
                 target="_blank"
             >
                 <Image
+                    unoptimized
                     className={styles['sm']}
                     src="/socialmedia/github-mark-white.svg"
                     alt="Github"
@@ -29,6 +30,7 @@ export default function Socials() {
                 target="_blank"
             >
                 <Image
+                    unoptimized
                     className={styles['sm']}
                     src="/socialmedia/InBug-White.png"
                     alt="LinkedIn"
@@ -45,6 +47,7 @@ export default function Socials() {
                 target="_blank"
             >
                 <Image
+                    unoptimized
                     className={styles['sm']}
                     src="/socialmedia/x-logo.svg"
                     alt="X"
@@ -61,6 +64,7 @@ export default function Socials() {
                 target="_blank"
             >
                 <Image
+                    unoptimized
                     className={styles['sm']}
                     src="/socialmedia/bluesky-1.svg"
                     alt="Bluesky"
@@ -77,6 +81,7 @@ export default function Socials() {
                 target="_blank"
             >
                 <Image
+                    unoptimized
                     className={styles['sm']}
                     src="/socialmedia/se-icon.svg"
                     alt="StackExchange"
