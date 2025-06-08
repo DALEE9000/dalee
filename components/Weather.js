@@ -13,6 +13,7 @@ export async function getWeather() {
       country = geoData.country;
       ip = geoData.ip;
 
+      console.log(geoData)
       console.log("Vercel Geolocation:", lat, lon, city, country, ip);
     } else {
       console.warn("Vercel Geolocation failed with status:", geoRes.status);
