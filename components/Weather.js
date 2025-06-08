@@ -23,9 +23,9 @@ export async function getWeather() {
     let weatherUrl = `/api/weather`;
 
     if (country === 'US' || country === 'CA') {
-      if (geoData.postal_code) {
-        weatherUrl += `?zip=${geoData.postal_code}`;
-        console.log("Using ZIP:", geoData.postal_code);
+      if (zip) {
+        weatherUrl += `?zip=${zip}`;
+        console.log("Using ZIP:", zip);
       } else if (lat && lon) {
         // fallback to lat/lon if zip is missing
         weatherUrl += `?lat=${lat}&lon=${lon}`;
