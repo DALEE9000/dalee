@@ -4,16 +4,16 @@ import { SplashContext } from '@/components/Context';
 import styles from './splash/Splash.module.css';
 
 export default function SplashButton() {
-    const [imageSrc, setImageSrc] = useState("/pixelart/button1.png");
+    const [imageSrc, setImageSrc] = useState("/pixelart/enterbutton/button1.png");
 
     const context = useContext(SplashContext);
 
     function handleMouseEnter() {
-        setImageSrc("/pixelart/button2.png");
+        setImageSrc("/pixelart/enterbutton/button2.png");
     }
 
     function handleMouseExit() {
-        setImageSrc("/pixelart/button1.png");
+        setImageSrc("/pixelart/enterbutton/button1.png");
     }
 
     return (

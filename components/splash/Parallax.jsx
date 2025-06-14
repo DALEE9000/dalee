@@ -6,27 +6,27 @@ import AnimatedBackground from '@/components/AnimatedBackground';
 import { getWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
 
-// This ensures a seamless horizontal wrap
-const animateparam = [
-  { initialX: '100%', animateX: '-100%' },
-  { initialX: '0%', animateX: '-200%' },
-  { initialX: '200%', animateX: '0%' },
-];
-
-// Add dynamic layers here
-const elements = [
-  { element: "cloud1", duration: 120 },
-  { element: "cloud2", duration: 90 },
-  { element: "cloud3", duration: 150 },
-  { element: "mountains", duration: 240 }
-];
-
 // Paths
-const rainySkySpriteSheet = '/pixelart/rainy-sky-day.png';
-const rainySkySpriteSheetData = '/pixelart/rainy-sky-day.json';
+const rainySkySpriteSheet = '/pixelart/rain/rainy-sky-day.png';
+const rainySkySpriteSheetData = '/pixelart/rain/rainy-sky-day.json';
 
-const stormySkySpriteSheet = '/pixelart/stormy-sky-day.png';
-const stormySkySpriteSheetData = '/pixelart/stormy-sky-day.json';
+const stormySkySpriteSheet = '/pixelart/storm/stormy-sky-day.png';
+const stormySkySpriteSheetData = '/pixelart/storm/stormy-sky-day.json';
+
+const nightSkySpriteSheet = '/pixelart/night/night-sky.png';
+const nightSkySpriteSheetData = '/pixelart/night/night-sky.json';
+
+// Function for day/night cycle
+function isDaytime(sunriseStr, sunsetStr) {
+  const now = new Date();
+
+  const today = new Date().toLocaleDateString('en-CA');
+
+  const sunrise = new Date(`${today} ${sunriseStr}`);
+  const sunset = new Date(`${today} ${sunsetStr}`);
+
+  return now >= sunrise && now <= sunset;
+}
 
 export default function Parallax() {
 
@@ -38,17 +38,60 @@ export default function Parallax() {
 
   if (!weather) return null;
 
+  // Defining variables from API paths
   var precipitation = weather.current.current.precip_mm;
   var cloudCover = weather.current.current.cloud;
-  // precipitation = 9;
+  var sunrise = weather.astronomy.astronomy.astro.sunrise;
+  var sunset = weather.astronomy.astronomy.astro.sunset;
+  var sunUp = isDaytime(sunrise, sunset);
+  // precipitation = 0;
+  // cloudCover = 0;
+  // sunUp = false;
 
   // Add static layers here
   const staticImages = [
-    "sky1", 
-    "sky2", 
-    "sky3", 
-    ...((precipitation > 0 || cloudCover > 50) ? [] : ["sun1"])
+    ...(sunUp ? ["day/sky1"] : []), 
+    ...(sunUp ? ["day/sky2"] : []), 
+    ...(sunUp ? ["day/sky3"] : []), 
+    ...((((precipitation > 0 || cloudCover > 50) || (!sunUp))) ? [] : ["landscape/sun1"]),
+    ...(!sunUp ? ["night/moon"] : []),
   ];
+
+  // Add dynamic layers here
+  const elements = [
+    ...((sunUp) ? [{ element: "clouds/cloud1", duration: 120 }] : []),
+    ...((sunUp) ? [{ element: "clouds/cloud2", duration: 90 }] : []),
+    ...((sunUp) ? [{ element: "clouds/cloud3", duration: 150 }] : []),
+    ...((!sunUp) ? [{ element: "night/cloud1", duration: 120 }] : []),
+    ...((!sunUp) ? [{ element: "night/cloud2", duration: 90 }] : []),
+    ...((!sunUp) ? [{ element: "night/cloud3", duration: 150 }] : []),
+    ...((sunUp) ? [{ element: "landscape/mountains", duration: 240 }] : [{ element: "night/mountains-night", duration: 240 }]), // MOUNTAINS
+  ];
+
+  // This ensures a seamless horizontal wrap for dynamic layers
+  const animateparam = [
+    { initialX: '100%', animateX: '-100%' },
+    { initialX: '0%', animateX: '-200%' },
+    { initialX: '200%', animateX: '0%' },
+  ];
+
+  // Add masks here
+  const masks = [
+    ...((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80) ? ["landscape/muggymask-day"] : []), // RAINY / CLOUDY DAY
+    ...((precipitation >= 8) || (cloudCover >= 80) ? ["landscape/muggymask-day-stormy"] : []), // STORMY / VERY CLOUDY DAY
+  ]
+
+  // Add precipitation here
+  const precip = [
+    ...((precipitation < 8 && precipitation > 0) ? [{ image: rainySkySpriteSheet, sprite: rainySkySpriteSheetData }] : []), // RAIN
+    ...((precipitation >= 8) ? [{ image: stormySkySpriteSheet, sprite: stormySkySpriteSheetData }] : [])
+  ]
+
+  let image, sprite;
+
+  if (precipitation > 0 && precip.length > 0) {
+    ({ image, sprite } = precip[0]);
+  }
 
   console.log(weather.current.location.name, weather.current.location.region, weather.current.location.lat, weather.current.location.lon, precipitation, cloudCover)
 
@@ -57,44 +100,34 @@ export default function Parallax() {
     <div 
         className={styles['parallax-container']}
     >
-      {/* RAIN ANIMATION */}
-      {(precipitation < 8 && precipitation > 0) &&
+      {/* PRECIPITATION ANIMATION */}
+      {(precipitation > 0) &&
       <AnimatedBackground 
-        spriteSheetURL={rainySkySpriteSheet}
-        spriteDataURL={rainySkySpriteSheetData}
+        spriteSheetURL={image}
+        spriteDataURL={sprite}
         aspectRatio={1.8125}
         zIndex={15}
       />}
 
-      {/* STORMY ANIMATION */}
-      {(precipitation >= 8) &&
+      {/* NIGHT ANIMATION */}
+      {!sunUp &&
       <AnimatedBackground 
-        spriteSheetURL={stormySkySpriteSheet}
-        spriteDataURL={stormySkySpriteSheetData}
+        spriteSheetURL={nightSkySpriteSheet}
+        spriteDataURL={nightSkySpriteSheetData}
         aspectRatio={1.8125}
-        zIndex={15}
+        zIndex={1}
       />}
 
-      {/* RAINY / CLOUDY DAY MASK */}
-      {((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80)) && 
+      {/* MASKS */}
+      {((precipitation > 0) || (cloudCover > 50)) &&
       <div
         className={styles['static-layer']}
         style={{ 
-          backgroundImage: `url(/pixelart/muggymask-day.png)`,
+          backgroundImage: `url(/pixelart/${masks[0]}.png)`,
           zIndex: 13,
         }}
       />}
-
-      {/* STORMY / VERY CLOUDY DAY MASK */}
-      {(precipitation >= 8) || (cloudCover >= 80) && 
-      <div
-        className={styles['static-layer']}
-        style={{ 
-          backgroundImage: `url(/pixelart/muggymask-day-stormy.png)`,
-          zIndex: 13,
-        }}
-      />}
-
+      
       {/* STATIC LAYERS*/}
       {staticImages.map((bg) => (
         <div
@@ -105,7 +138,6 @@ export default function Parallax() {
       ))}
 
       {/*DYNAMIC LAYERS*/}
-
       {elements.map(({ element, duration }) =>
         animateparam.map((layer, index) => (
           <motion.div

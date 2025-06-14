@@ -18,8 +18,8 @@ import { SplashProvider, StargazerProvider, LibraryProvider } from '@/components
 };*/
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const spriteSheetURL = "/pixelart/spacesprites.png";
-  const spriteDataURL = "/pixelart/spacesprites.json";
+  const spriteSheetURL = "/pixelart/space/spacesprites.png";
+  const spriteDataURL = "/pixelart/space/spacesprites.json";
 
   return (
     <html lang="en">

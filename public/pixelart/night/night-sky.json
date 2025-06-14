@@ -1,0 +1,142 @@
+{ "frames": {
+   "night-sky 0.aseprite": {
+    "frame": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 1.aseprite": {
+    "frame": { "x": 580, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 2.aseprite": {
+    "frame": { "x": 1160, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 3.aseprite": {
+    "frame": { "x": 1740, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 4.aseprite": {
+    "frame": { "x": 2320, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 5.aseprite": {
+    "frame": { "x": 2900, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 6.aseprite": {
+    "frame": { "x": 3480, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 7.aseprite": {
+    "frame": { "x": 4060, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 8.aseprite": {
+    "frame": { "x": 4640, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 9.aseprite": {
+    "frame": { "x": 5220, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 10.aseprite": {
+    "frame": { "x": 5800, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 11.aseprite": {
+    "frame": { "x": 6380, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 12.aseprite": {
+    "frame": { "x": 6960, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 13.aseprite": {
+    "frame": { "x": 7540, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   },
+   "night-sky 14.aseprite": {
+    "frame": { "x": 8120, "y": 0, "w": 580, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 580, "h": 320 },
+    "sourceSize": { "w": 580, "h": 320 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.13-x64",
+  "image": "night-sky.png",
+  "format": "RGBA8888",
+  "size": { "w": 8700, "h": 320 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "sky", "opacity": 255, "blendMode": "normal" },
+   { "name": "Animatestar 010", "opacity": 255, "blendMode": "normal" },
+   { "name": "Animatestar 011", "opacity": 255, "blendMode": "normal" },
+   { "name": "Animatestar 030", "opacity": 255, "blendMode": "normal" },
+   { "name": "Animatestar 031", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}
