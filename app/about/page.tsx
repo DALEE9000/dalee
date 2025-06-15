@@ -27,8 +27,7 @@ export default function About() {
     'My work in New York State government and politics has been featured in national and local journalism outlets such as The American Prospect, The Guardian, New York Focus, The Christian Science Monitor, and Singtao Daily.',
     'Additionally, I have presented original legal and science research at venues like Yale Law School, the American Bar Association Section on Labor and Employment Law, and the Microsoft Technology Center in New York City.',
     'My media appearances include the Netflix-acclaimed documentary Knock Down The House (2019) and For Whom the Alarm Sounds (2022).',
-    'I am based in Queens, New York, where I happily enjoy collecting LEGO® minifigures, reading vintage books, and cooking.',
-    <a href="/dal_resume.pdf" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>View my curriculum vitae.</LightUpText></a>
+    'I am based in Queens, New York, where I happily enjoy collecting LEGO® minifigures, reading vintage books, and cooking.'
   ]
 
   return (
@@ -66,6 +65,12 @@ export default function About() {
                   {para}
                 </AboutMeParagraph>
               )}
+
+              <AboutMeParagraph
+                props={styles['about-text']}
+              >
+                <a href="/dal_resume.pdf" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>View my curriculum vitae.</LightUpText></a>
+              </AboutMeParagraph>
             </motion.div>
           )}
         </AnimatePresence>

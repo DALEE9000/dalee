@@ -16,7 +16,6 @@ export default function HireMe() {
   const context = useContext(StargazerContext);
 
   const box1 = clsx(styles['twinkle-box'], styles['about-box1']);
-  const box2 = clsx(styles['twinkle-box'], styles['about-box2']);
 
   return (
     <>
