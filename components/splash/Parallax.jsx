@@ -33,8 +33,6 @@ function to24Hour(timeStr) {
 
 // Function for day/night cycle
 function isDaytime(sunriseStr, sunsetStr) {
-  console.log(sunriseStr, sunsetStr)
-
   const now = new Date();
   const today = new Date().toLocaleDateString('en-CA');
 
@@ -117,7 +115,7 @@ export default function Parallax() {
     ({ image, sprite } = precip[0]);
   }
 
-  console.log(weather.current.location.name, weather.current.location.region, weather.current.location.lat, weather.current.location.lon, precipitation, cloudCover)
+  console.log('location:', weather.current.location.name, 'region:', weather.current.location.region, 'lat:', weather.current.location.lat, 'lon:', weather.current.location.lon, 'precipitation:', precipitation, 'cloud cover:', cloudCover, 'sun up?', sunUp)
 
   return (
     <>
