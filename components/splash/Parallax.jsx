@@ -16,14 +16,38 @@ const stormySkySpriteSheetData = '/pixelart/storm/stormy-sky-day.json';
 const nightSkySpriteSheet = '/pixelart/night/night-sky.png';
 const nightSkySpriteSheetData = '/pixelart/night/night-sky.json';
 
+// Function for converting to 24 hr
+function to24Hour(timeStr) {
+  const [time, modifier] = timeStr.trim().split(" ");
+  let [hours, minutes] = time.split(":").map(Number);
+
+  if (modifier.toLowerCase() === "pm" && hours !== 12) {
+    hours += 12;
+  }
+  if (modifier.toLowerCase() === "am" && hours === 12) {
+    hours = 0;
+  }
+
+  return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00`;
+}
+
 // Function for day/night cycle
 function isDaytime(sunriseStr, sunsetStr) {
-  const now = new Date();
+  console.log(sunriseStr, sunsetStr)
 
+  const now = new Date();
   const today = new Date().toLocaleDateString('en-CA');
 
-  const sunrise = new Date(`${today} ${sunriseStr}`);
-  const sunset = new Date(`${today} ${sunsetStr}`);
+  const sunrise24 = to24Hour(sunriseStr); // Convert to 24-hour format
+  const sunset24 = to24Hour(sunsetStr);
+
+  const sunrise = new Date(`${today}T${sunrise24}`);
+  const sunset = new Date(`${today}T${sunset24}`);
+
+  console.log('is the sun up?', now >= sunrise && now <= sunset)
+  console.log('date:', today)
+  console.log('sunrise:', sunrise)
+  console.log('sunset:', sunset)
 
   return now >= sunrise && now <= sunset;
 }
