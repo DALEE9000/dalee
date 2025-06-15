@@ -60,7 +60,7 @@ export default function About() {
 
               {aboutParagraphs.map((para, index) => 
                 <AboutMeParagraph 
-                  key={index}
+                  key={`para-${index}`}
                   props={styles['about-text']}
                 >
                   {para}
