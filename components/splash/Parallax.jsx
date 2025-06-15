@@ -99,8 +99,8 @@ export default function Parallax() {
 
   // Add masks here
   const masks = [
-    ...((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80) ? ["landscape/muggymask-day"] : []), // RAINY / CLOUDY DAY
-    ...((precipitation >= 8) || (cloudCover >= 80) ? ["landscape/muggymask-day-stormy"] : []), // STORMY / VERY CLOUDY DAY
+    ...(((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80) && sunUp)? ["landscape/muggymask-day"] : []), // RAINY / CLOUDY DAY
+    ...(((precipitation >= 8) || (cloudCover >= 80) && sunUp)? ["landscape/muggymask-day-stormy"] : []), // STORMY / VERY CLOUDY DAY
   ]
 
   // Add precipitation here
