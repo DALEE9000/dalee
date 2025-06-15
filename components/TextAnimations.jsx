@@ -112,6 +112,25 @@ export function LibraryAnimation() {
         />
     );
 }
+
+export function HireMeAnimation() {
+
+    return(
+        <TypeAnimation
+            className={stylesHome['hire-me-animation']}
+            sequence={[
+                'Hire Me',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}
+
 export function StargazerAnimation() {
 
     return(

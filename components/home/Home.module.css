@@ -10,7 +10,8 @@
 .aboutme-animation,
 .writing-animation,
 .research-animation,
-.library-animation {
+.library-animation,
+.hire-me-animation {
   font-size: 5vw;
   font-weight: 700;
 }
@@ -127,7 +128,8 @@
   align-content: flex-start;
 }
 
-#writing {
+#writing,
+#hire-me {
   height: 140vh;
   display: grid;
   gap: 5vw;
@@ -236,7 +238,8 @@
   #about,
   #writing,
   #research,
-  #library {
+  #library,
+  #hire-me {
     grid-template-rows: 25vw repeat(3, auto);
     gap: 15vw;
   }
@@ -244,7 +247,8 @@
   .aboutme-animation,
   .writing-animation, 
   .research-animation,
-  .library-animation {
+  .library-animation,
+  .hire-me-animation {
     font-size: 10vw;
     font-weight: 700;
   }

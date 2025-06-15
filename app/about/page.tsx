@@ -4,21 +4,20 @@ import '../globals.css';
 import { useContext } from 'react';
 import clsx from 'clsx';
 import Image from 'next/image';
-import { raleway } from '@/components/Fonts';
 import { AboutMeAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { StargazerContext } from '@/components/Context';
 import { DivAnimation, AboutMeParagraph } from '@/components/BoxAnimations';
+import { LightUpText } from '@/components/BoxAnimations';
 import Stargazer from '@/components/Stargazer';
 
 export default function About() {
 
   const context = useContext(StargazerContext);
-
+  
   const box1 = clsx(styles['about-box1']);
   const box2 = clsx(styles['twinkle-box'], styles['about-box2']);
-  const box3 = clsx(styles['twinkle-box'], styles['about-box3']);
 
   const aboutParagraphs = [
     'I am an independent researcher, with investigative endeavors ranging between atmospheric and ocean physics, legal institutionalism and political economy, and applied statistics in the physical and social sciences.',
@@ -28,7 +27,8 @@ export default function About() {
     'My work in New York State government and politics has been featured in national and local journalism outlets such as The American Prospect, The Guardian, New York Focus, The Christian Science Monitor, and Singtao Daily.',
     'Additionally, I have presented original legal and science research at venues like Yale Law School, the American Bar Association Section on Labor and Employment Law, and the Microsoft Technology Center in New York City.',
     'My media appearances include the Netflix-acclaimed documentary Knock Down The House (2019) and For Whom the Alarm Sounds (2022).',
-    'I am based in Queens, New York, where I happily enjoy collecting LEGO® minifigures, reading vintage books, and cooking.'
+    'I am based in Queens, New York, where I happily enjoy collecting LEGO® minifigures, reading vintage books, and cooking.',
+    <a href="/dal_resume.pdf" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>View my curriculum vitae.</LightUpText></a>
   ]
 
   return (
@@ -39,6 +39,7 @@ export default function About() {
           {!context.stargazer && (
             <DivAnimation props={box1}>
               <Image
+                unoptimized
                 className={styles['portrait']}
                 src="/images/portrait.jpeg"
                 width={300}
@@ -68,22 +69,6 @@ export default function About() {
             </motion.div>
           )}
         </AnimatePresence>
-
-        <AnimatePresence mode="wait">
-          {!context.stargazer && (
-            <DivAnimation props={box3}>
-              <p
-                className={styles['about-text']}
-                style={{
-                    fontFamily: raleway.style.fontFamily,
-                }}
-              >
-                Curriculum Vitae
-              </p>
-            </DivAnimation>
-          )}
-        </AnimatePresence>
-
       </section>
 
       {context.stargazer && <Stargazer />}
