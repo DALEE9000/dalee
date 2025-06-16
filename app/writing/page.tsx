@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
 import styles from "@/components/home/Home.module.css";
-import { DivAnimation } from '@/components/BoxAnimations';
+import { LightUpText, DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
@@ -69,7 +69,7 @@ export default function Writing() {
                   fontFamily: raleway.style.fontFamily,
                 }}
               >
-                I write a Substack named Alphabet Agency. 
+                I write a Substack named <a href="https://alphabetagency.substack.com/" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Alphabet Agency</LightUpText></a>. 
               </p>
 
               <div 
