@@ -1,5 +1,6 @@
 "use client" /* MUST use 'use client' on pages with framer motion */
 
+import Head from 'next/head';
 import clsx from 'clsx';
 import './globals.css';
 import styles from '@/components/home/Home.module.css';

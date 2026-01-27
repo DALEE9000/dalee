@@ -27,7 +27,9 @@
 }
 
 .link-props {
-    text-decoration: none;
+    text-decoration: underline dashed;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 7px;
     font-weight: 700;
     color: white;
 }

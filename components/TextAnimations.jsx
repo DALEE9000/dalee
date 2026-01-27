@@ -6,7 +6,6 @@ import { raleway } from '@/components/Fonts';
 import stylesHome from './home/Home.module.css';
 
 export function BioAnimation() {
-
     return(
     <>
         <span
@@ -23,7 +22,9 @@ export function BioAnimation() {
             preRenderFirstString={true}
             sequence={[
                 500,
-                'climate researcher',
+                'fiscal policy researcher',
+                500,
+                'ocean physics researcher',
                 1000,
                 'writer',
                 1000,
@@ -42,7 +43,6 @@ export function BioAnimation() {
 }
 
 export function AboutMeAnimation() {
-
     return(
         <TypeAnimation
             className={stylesHome['aboutme-animation']}
@@ -60,7 +60,6 @@ export function AboutMeAnimation() {
 }
 
 export function WritingAnimation() {
-
     return(
         <TypeAnimation
             className={stylesHome['writing-animation']}
@@ -78,7 +77,6 @@ export function WritingAnimation() {
 }
 
 export function ResearchAnimation() {
-
     return(
         <TypeAnimation
             className={stylesHome['research-animation']}
@@ -96,7 +94,6 @@ export function ResearchAnimation() {
 }
 
 export function LibraryAnimation() {
-
     return(
         <TypeAnimation
             className={stylesHome['library-animation']}
@@ -114,7 +111,6 @@ export function LibraryAnimation() {
 }
 
 export function HireMeAnimation() {
-
     return(
         <TypeAnimation
             className={stylesHome['hire-me-animation']}
@@ -132,7 +128,6 @@ export function HireMeAnimation() {
 }
 
 export function StargazerAnimation() {
-
     return(
         <TypeAnimation
             sequence={[
@@ -154,7 +149,6 @@ export function StargazerAnimation() {
 }
 
 export function SWOT() {
-
     return(
         <TypeAnimation
             className={stylesHome['project-animation']}

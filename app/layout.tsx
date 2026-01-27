@@ -1,7 +1,7 @@
 "use client"
 
-import React, { useContext, Suspense } from "react";
-/* import { Metadata } from 'next';*/
+import Head from 'next/head';
+import React, { useEffect, useContext, Suspense } from "react";
 import "./globals.css";
 import SplashScreen from "@/components/splash/SplashScreen";
 import Transition from "@/components/Transition";
@@ -12,22 +12,51 @@ import Footer from '@/components/Footer';
 import { SplashContext } from '@/components/Context';
 import { SplashProvider, StargazerProvider, LibraryProvider } from '@/components/Context';
 
-/*export const metadata: Metadata = {
-  title: "David A. Lee",
-  description: "Personal website of David A. Lee",
-};*/
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    const script1 = document.createElement("script");
+    script1.async = true;
+    script1.src = "https://www.googletagmanager.com/gtag/js?id=G-SY4QB2DS8Q";
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement("script");
+    script2.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SY4QB2DS8Q');
+    `;
+    document.head.appendChild(script2);
+  }, []);
+
   const spriteSheetURL = "/pixelart/space/spacesprites.png";
   const spriteDataURL = "/pixelart/space/spacesprites.json";
 
   return (
     <html lang="en">
-      <head>
+      <Head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>David A. Lee</title>
-      </head>
+        <title>
+          David A. Lee – Independent Researcher
+        </title>
+        <meta
+          name="description"
+          content="Researcher in physical oceanography, political economy, and applied statistics."
+        />
+        <meta 
+          name="keywords" 
+          content="researcher, physics, oceanography, economics, statistics, NYC" 
+        />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
+        <meta property="og:title" content="David Lee – Independent Researcher" />
+        <meta property="og:description" content="Researcher in physical oceanography, political economy, and applied statistics." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://davidalee.dev" />
+        <meta property="og:site_name" content="David Lee – Independent Researcher" />
+        <meta property="og:locale" content="en_US" />
+      </Head>
       <body className="home-page">
         <SplashProvider>
           <StargazerProvider>
