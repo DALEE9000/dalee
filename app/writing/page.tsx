@@ -1,8 +1,9 @@
 "use client"
 
 import '../globals.css';
-import { useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import clsx from 'clsx';
+import SupascribeEmbed from './SupascribeEmbedSubstack';
 import { AnimatePresence } from 'framer-motion';
 import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
@@ -11,48 +12,9 @@ import { LightUpText, DivAnimation } from '@/components/BoxAnimations';
 import { StargazerContext } from '@/components/Context';
 import Stargazer from '@/components/Stargazer';
 
-declare global {
-  interface Window {
-    SubstackFeedWidget?: {
-      substackUrl: string;
-      posts?: number;
-      colors?: {
-        primary?: string;
-        secondary?: string;
-        background?: string;
-      };
-    };
-  }
-}
-
 export default function Writing() {
-
   const context = useContext(StargazerContext);
   const box1 = clsx(styles['twinkle-box'], styles['about-box1']);
-
-  useEffect(() => {
-    // Set up the widget configuration
-    window.SubstackFeedWidget = {
-      substackUrl: "alphabetagency.substack.com",
-      posts: 5,
-      colors: {
-        primary: "#FFFFFF",
-        secondary: "#FFFFFF",
-        background: "#29465B",
-      },
-    };
-
-    // Dynamically load the Substack feed script
-    const script = document.createElement("script");
-    script.src = "https://js.supascribe.com/v1/loader/4vgDz4SW7LUHnSLq4E1Q7oIbRWv1.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up if needed
-      document.body.removeChild(script);
-    };
-  }, [context.stargazer]);
 
   return (
     <>
@@ -71,11 +33,7 @@ export default function Writing() {
               >
                 I write a Substack named <a href="https://alphabetagency.substack.com/" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Alphabet Agency</LightUpText></a>. 
               </p>
-
-              <div 
-                id='substack-feed-embed' 
-                className={styles['substack-post-embed']}
-              />
+              <SupascribeEmbed embedId="4vgDz4SW7LUHnSLq4E1Q7oIbRWv1" />
             </DivAnimation>
           )}
         </AnimatePresence>
