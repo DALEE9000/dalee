@@ -66,28 +66,47 @@ export default function Parallax() {
   var sunrise = weather.astronomy.astronomy.astro.sunrise;
   var sunset = weather.astronomy.astronomy.astro.sunset;
   var sunUp = isDaytime(sunrise, sunset);
+  // Test variables for dev mode
+  // var sunset = false;
   // precipitation = 0;
-  // cloudCover = 0;
+  //cloudCover = 0;
   // sunUp = false;
 
   // Add static layers here
   const staticImages = [
-    ...(sunUp ? ["day/sky1"] : []), 
-    ...(sunUp ? ["day/sky2"] : []), 
-    ...(sunUp ? ["day/sky3"] : []), 
+    ...(sunUp ? ["day/sky1", "day/sky2", "day/sky3"] : []), 
     ...((((precipitation > 0 || cloudCover > 50) || (!sunUp))) ? [] : ["landscape/sun1"]),
     ...(!sunUp ? ["night/moon"] : []),
+    // ...((sunUp && sunset) ? ["sunset/sky1"] : []),
+    // ...((sunUp && sunset) ? ["sunset/sky2"] : []),
+    // ...((sunUp && sunset) ? ["sunset/sky3"] : []),
+    // ...((sunUp && sunset) ? ["sunset/sun1"] : []),
   ];
 
   // Add dynamic layers here
+  // Cloud assets and durations here
+  const clouds = [
+  { name: "cloud1", duration: 120 },
+  { name: "cloud2", duration: 90 },
+  { name: "cloud3", duration: 150 },
+  ];
+
+  const withPrefix = (prefix, items) =>
+    items.map(({ name, duration }) => ({
+      element: `${prefix}/${name}`,
+      duration,
+    }));
+
   const elements = [
-    ...((sunUp) ? [{ element: "clouds/cloud1", duration: 120 }] : []),
-    ...((sunUp) ? [{ element: "clouds/cloud2", duration: 90 }] : []),
-    ...((sunUp) ? [{ element: "clouds/cloud3", duration: 150 }] : []),
-    ...((!sunUp) ? [{ element: "night/cloud1", duration: 120 }] : []),
-    ...((!sunUp) ? [{ element: "night/cloud2", duration: 90 }] : []),
-    ...((!sunUp) ? [{ element: "night/cloud3", duration: 150 }] : []),
-    ...((sunUp) ? [{ element: "landscape/mountains", duration: 240 }] : [{ element: "night/mountains-night", duration: 240 }]), // MOUNTAINS
+    ...(sunUp
+      ? withPrefix("clouds", clouds)
+      : withPrefix("night", clouds)),
+    {
+      element: sunUp
+        ? "landscape/mountains"
+        : "night/mountains-night",
+      duration: 240, // Adjust mountain parallax duration here
+    },
   ];
 
   // This ensures a seamless horizontal wrap for dynamic layers

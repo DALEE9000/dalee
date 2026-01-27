@@ -31,13 +31,16 @@ export async function GET(req) {
                 ) {
                   id
                   last_read_date
+                  edition {
+                    id
+                    image {
+                      url
+                    }
+                  }
                   book {
                     title
                     pages
                     description
-                    image {
-                      url
-                    }
                     release_date
                     rating
                     slug
@@ -55,13 +58,16 @@ export async function GET(req) {
               ) {
                 id
                 last_read_date
+                edition {
+                  id
+                  image {
+                    url
+                  }
+                }
                 book {
                   title
                   pages
                   description
-                  image {
-                    url
-                  }
                   release_date
                   rating
                   slug
@@ -77,7 +83,6 @@ export async function GET(req) {
                 where: { 
                   list_books: { 
                       list_id: { _eq: $listId }
-                      user_books: { status_id: { _eq: 3 } }
                   } 
                 }
                 
@@ -85,6 +90,12 @@ export async function GET(req) {
                 name
   							books_count
                 list_books {
+                  edition {
+                    id
+                    image {
+                      url
+                    }
+                  }
                   book {
                     title
                     pages

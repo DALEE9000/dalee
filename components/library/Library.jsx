@@ -282,7 +282,7 @@ export default function ReadBooks() {
           <AnimatePresence mode="wait">
             {currentBooks.map((item, index) => (
               <BookBounce key={`${item.book.title}-${currentPage}-${index}`} delayIndex={index}>
-                {item?.book?.image?.url ? (
+                {item?.edition?.image?.url ? (
                   <div className={styles['book-image']}>
                     <button
                       className={clsx(styles['category-button'], bookStyles['book-container'])}
@@ -290,13 +290,13 @@ export default function ReadBooks() {
                         context.activateBookProfile();
                         setTitle(item.book.title);
                         setAuthor(concatenateAuthors(item.book.contributions))
-                        setBookCover(item.book.image.url);
+                        setBookCover(item.edition.image.url);
                         setDesc(item.book.description);
                         setPages(item.book.pages);
                         setTimeout(() => scrollToId("scroll"), 100);
                       }}
                     >
-                      <ThreeDBook image={item.book.image.url} alt={item.book.title} />
+                      <ThreeDBook image={item.edition.image.url} alt={item.book.title} />
                     </button>
                   </div>
                 ) : (
