@@ -56,6 +56,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:url" content="https://davidalee.dev" />
         <meta property="og:site_name" content="David Lee – Independent Researcher" />
         <meta property="og:locale" content="en_US" />
+
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SY4QB2DS8Q"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-SY4QB2DS8Q');
+            `,
+          }}
+        />
       </Head>
       <body className="home-page">
         <SplashProvider>
