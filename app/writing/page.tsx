@@ -44,7 +44,7 @@ export default function Writing() {
 
     // Dynamically load the Substack feed script
     const script = document.createElement("script");
-    script.src = "https://substackapi.com/embeds/feed.js";
+    script.src = "https://js.supascribe.com/v1/loader/4vgDz4SW7LUHnSLq4E1Q7oIbRWv1.js";
     script.async = true;
     document.body.appendChild(script);
 
