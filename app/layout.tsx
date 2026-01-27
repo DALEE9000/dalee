@@ -1,7 +1,8 @@
 "use client"
 
 import Head from 'next/head';
-import React, { useEffect, useContext, Suspense } from "react";
+import React, { useContext, Suspense } from "react";
+import { GoogleAnalytics } from '@next/third-parties/google'
 import "./globals.css";
 import SplashScreen from "@/components/splash/SplashScreen";
 import Transition from "@/components/Transition";
@@ -13,22 +14,6 @@ import { SplashContext } from '@/components/Context';
 import { SplashProvider, StargazerProvider, LibraryProvider } from '@/components/Context';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    const script1 = document.createElement("script");
-    script1.async = true;
-    script1.src = "https://www.googletagmanager.com/gtag/js?id=G-SY4QB2DS8Q";
-    document.head.appendChild(script1);
-
-    const script2 = document.createElement("script");
-    script2.innerHTML = `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-SY4QB2DS8Q');
-    `;
-    document.head.appendChild(script2);
-  }, []);
-
   const spriteSheetURL = "/pixelart/space/spacesprites.png";
   const spriteDataURL = "/pixelart/space/spacesprites.json";
 
@@ -56,19 +41,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta property="og:url" content="https://davidalee.dev" />
         <meta property="og:site_name" content="David Lee – Independent Researcher" />
         <meta property="og:locale" content="en_US" />
-
-        {/* Google Analytics */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SY4QB2DS8Q"></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-SY4QB2DS8Q');
-            `,
-          }}
-        />
       </Head>
       <body className="home-page">
         <SplashProvider>
@@ -81,6 +53,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </StargazerProvider>
         </SplashProvider>
       </body>
+      <GoogleAnalytics gaId="G-SY4QB2DS8Q" />
     </html>
   );
 }

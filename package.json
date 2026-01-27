@@ -12,6 +12,7 @@
     "@dalee9000/react19-ts-textfit": "^1.0.2",
     "@lottiefiles/lottie-player": "^2.0.12",
     "@next/font": "^14.2.15",
+    "@next/third-parties": "^16.1.5",
     "@react-spring/three": "^10.0.1",
     "@react-three/drei": "^10.1.2",
     "@react-three/fiber": "^9.1.2",
