@@ -33,7 +33,7 @@ export default function Writing() {
               >
                 I write a Substack named <a href="https://alphabetagency.substack.com/" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Alphabet Agency</LightUpText></a>. 
               </p>
-              <SupascribeEmbed embedId="4vgDz4SW7LUHnSLq4E1Q7oIbRWv1" />
+              <SupascribeEmbed embedId="804504388187" />
             </DivAnimation>
           )}
         </AnimatePresence>
