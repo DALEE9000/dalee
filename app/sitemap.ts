@@ -16,7 +16,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      path: "/publications",
+      path: "/research",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      path: "/library",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -25,6 +30,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.7,
     },
+    {
+      path: "/hireme",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    }
   ];
 
   return staticPages.map((page) => ({
