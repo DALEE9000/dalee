@@ -1,6 +1,22 @@
+const CACHE_KEY = 'weather_cache';
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes
+
 export async function getWeather() {
+  // Return cached data if it's still fresh
   try {
-    let geoData, lat, lon, city, country, zip, ip = null;
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, timestamp } = JSON.parse(cached);
+      if (Date.now() - timestamp < CACHE_TTL) {
+        return data;
+      }
+    }
+  } catch (_) {
+    // sessionStorage unavailable (SSR, private browsing restrictions, etc.)
+  }
+
+  try {
+    let geoData, lat, lon, country, zip = null;
 
     // STEP 1: Try to get IP-based location
     const geoRes = await fetch('/api/geolocate');
@@ -8,14 +24,8 @@ export async function getWeather() {
       geoData = await geoRes.json();
       lat = geoData.geo.latitude;
       lon = geoData.geo.longitude;
-      city = geoData.geo.city;
       country = geoData.geo.country;
-      zip = geoData.geo.postalCode
-      ip = geoData.ip;
-
-      console.log("Vercel Geolocation:", lat, lon, city, country, ip);
-    } else {
-      console.warn("Vercel Geolocation failed with status:", geoRes.status);
+      zip = geoData.geo.postalCode;
     }
 
     // STEP 2: Construct weather API URL
@@ -24,20 +34,11 @@ export async function getWeather() {
     if (country === 'US' || country === 'CA') {
       if (zip) {
         weatherUrl += `?zip=${zip}`;
-        console.log("Using ZIP:", zip);
       } else if (lat && lon) {
-        // fallback to lat/lon if zip is missing
         weatherUrl += `?lat=${lat}&lon=${lon}`;
-        console.warn("ZIP not found, falling back to lat/lon");
-      } else {
-        console.warn("No location data, falling back to auto:ip");
       }
     } else if (lat && lon) {
       weatherUrl += `?lat=${lat}&lon=${lon}`;
-      console.log("Using lat/lon:", lat, lon);
-    } else {
-      console.warn("No location data, falling back to auto:ip");
-      // Leave weatherUrl unchanged for IP fallback
     }
 
     // STEP 3: Fetch weather
@@ -47,7 +48,14 @@ export async function getWeather() {
     }
 
     const weatherData = await weatherRes.json();
-    console.log("Weather data fetched:", weatherData);
+
+    // Cache result for 10 minutes
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data: weatherData, timestamp: Date.now() }));
+    } catch (_) {
+      // sessionStorage full or unavailable
+    }
+
     return weatherData;
 
   } catch (err) {

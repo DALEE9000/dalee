@@ -1,20 +1,19 @@
 "use client"
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { getWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
 
-// Paths
+// Sprite sheet image paths
 const rainySkySpriteSheet = '/pixelart/rain/rainy-sky-day.png';
-const rainySkySpriteSheetData = '/pixelart/rain/rainy-sky-day.json';
-
 const stormySkySpriteSheet = '/pixelart/storm/stormy-sky-day.png';
-const stormySkySpriteSheetData = '/pixelart/storm/stormy-sky-day.json';
-
 const nightSkySpriteSheet = '/pixelart/night/night-sky.png';
-const nightSkySpriteSheetData = '/pixelart/night/night-sky.json';
+
+// Sprite data imported directly (eliminates runtime fetch)
+import rainySkySpriteData from '@/public/pixelart/rain/rainy-sky-day.json';
+import stormySkySpriteData from '@/public/pixelart/storm/stormy-sky-day.json';
+import nightSkySpriteData from '@/public/pixelart/night/night-sky.json';
 
 // Function for converting to 24 hr
 function to24Hour(timeStr) {
@@ -42,10 +41,6 @@ function isDaytime(sunriseStr, sunsetStr) {
   const sunrise = new Date(`${today}T${sunrise24}`);
   const sunset = new Date(`${today}T${sunset24}`);
 
-  console.log('is the sun up?', now >= sunrise && now <= sunset)
-  console.log('date:', today)
-  console.log('sunrise:', sunrise)
-  console.log('sunset:', sunset)
 
   return now >= sunrise && now <= sunset;
 }
@@ -58,7 +53,20 @@ export default function Parallax() {
     getWeather().then(setWeather);
   }, []);
 
-  if (!weather) return null;
+  // Optimistic render: show daytime sky while weather data loads
+  if (!weather) {
+    return (
+      <div className={styles['parallax-container']}>
+        {["day/sky1", "day/sky2", "day/sky3"].map((bg) => (
+          <div
+            key={bg}
+            className={styles['static-layer']}
+            style={{ backgroundImage: `url(/pixelart/${bg}.png)` }}
+          />
+        ))}
+      </div>
+    );
+  }
 
   // Defining variables from API paths
   var precipitation = weather.current.current.precip_mm;
@@ -109,12 +117,8 @@ export default function Parallax() {
     },
   ];
 
-  // This ensures a seamless horizontal wrap for dynamic layers
-  const animateparam = [
-    { initialX: '100%', animateX: '-100%' },
-    { initialX: '0%', animateX: '-200%' },
-    { initialX: '200%', animateX: '0%' },
-  ];
+  // CSS animation class per copy (a/b/c correspond to the three phase-offset keyframes)
+  const layerClasses = ['parallax-layer-a', 'parallax-layer-b', 'parallax-layer-c'];
 
   // Add masks here
   const masks = [
@@ -124,37 +128,36 @@ export default function Parallax() {
 
   // Add precipitation here
   const precip = [
-    ...((precipitation < 8 && precipitation > 0) ? [{ image: rainySkySpriteSheet, sprite: rainySkySpriteSheetData }] : []), // RAIN
-    ...((precipitation >= 8) ? [{ image: stormySkySpriteSheet, sprite: stormySkySpriteSheetData }] : [])
+    ...((precipitation < 8 && precipitation > 0) ? [{ image: rainySkySpriteSheet, spriteData: rainySkySpriteData }] : []), // RAIN
+    ...((precipitation >= 8) ? [{ image: stormySkySpriteSheet, spriteData: stormySkySpriteData }] : [])
   ]
 
-  let image, sprite;
+  let image, spriteData;
 
   if (precipitation > 0 && precip.length > 0) {
-    ({ image, sprite } = precip[0]);
+    ({ image, spriteData } = precip[0]);
   }
 
-  console.log('location:', weather.current.location.name, 'region:', weather.current.location.region, 'lat:', weather.current.location.lat, 'lon:', weather.current.location.lon, 'precipitation:', precipitation, 'cloud cover:', cloudCover, 'sun up?', sunUp)
 
   return (
     <>
-    <div 
+    <div
         className={styles['parallax-container']}
     >
       {/* PRECIPITATION ANIMATION */}
       {(precipitation > 0) &&
-      <AnimatedBackground 
+      <AnimatedBackground
         spriteSheetURL={image}
-        spriteDataURL={sprite}
+        spriteData={spriteData}
         aspectRatio={1.8125}
         zIndex={15}
       />}
 
       {/* NIGHT ANIMATION */}
       {!sunUp &&
-      <AnimatedBackground 
+      <AnimatedBackground
         spriteSheetURL={nightSkySpriteSheet}
-        spriteDataURL={nightSkySpriteSheetData}
+        spriteData={nightSkySpriteData}
         aspectRatio={1.8125}
         zIndex={1}
       />}
@@ -180,22 +183,15 @@ export default function Parallax() {
 
       {/*DYNAMIC LAYERS*/}
       {elements.map(({ element, duration }) =>
-        animateparam.map((layer, index) => (
-          <motion.div
+        layerClasses.map((cls, index) => (
+          <div
             key={`${element}-${index}`}
-            className={styles["parallax-layer"]}
-            style={{ 
+            className={`${styles["parallax-layer"]} ${styles[cls]}`}
+            style={{
               backgroundImage: `url(/pixelart/${element}.png)`,
+              '--scroll-duration': `${duration}s`,
             }}
-            initial={{ x: layer.initialX }}
-            animate={{ x: layer.animateX }}
-            transition={{
-              repeat: Infinity,
-              duration,
-              ease: "linear",
-            }}
-          >
-          </motion.div>
+          />
         ))
       )}
     </div>

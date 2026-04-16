@@ -10,21 +10,21 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { SplashContext } from '@/components/Context';
 import { SplashProvider, StargazerProvider, LibraryProvider } from '@/components/Context';
+import spaceSpriteData from '@/public/pixelart/space/spacesprites.json';
 
-export default function LayoutClient({ 
-    children, 
-    spriteSheetURL, 
-    spriteDataURL 
-}: { children: React.ReactNode, 
-     spriteSheetURL: string, 
-     spriteDataURL: string }
+export default function LayoutClient({
+    children,
+    spriteSheetURL,
+}: { children: React.ReactNode,
+     spriteSheetURL: string,
+    }
     ) {
     return (
         <>
             <SplashProvider>
             <StargazerProvider>
                 <LibraryProvider>
-                <RootLayoutContent spriteSheetURL={spriteSheetURL} spriteDataURL={spriteDataURL}>
+                <RootLayoutContent spriteSheetURL={spriteSheetURL}>
                     {children}
                 </RootLayoutContent>
                 </LibraryProvider>
@@ -37,11 +37,9 @@ export default function LayoutClient({
 function RootLayoutContent({
   children,
   spriteSheetURL,
-  spriteDataURL
 }: {
   children: React.ReactNode;
   spriteSheetURL: string;
-  spriteDataURL: string;
 }) {
   const context = useContext(SplashContext);
 
@@ -53,7 +51,7 @@ function RootLayoutContent({
         </Suspense>
       ) : (
         <Transition>
-          <AnimatedBackground spriteSheetURL={spriteSheetURL} spriteDataURL={spriteDataURL} aspectRatio={1.33} zIndex={-1}>
+          <AnimatedBackground spriteSheetURL={spriteSheetURL} spriteData={spaceSpriteData} aspectRatio={1.33} zIndex={-1}>
             <Navbar />
             {children}
             <Footer />

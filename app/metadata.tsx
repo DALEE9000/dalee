@@ -14,7 +14,7 @@ export const seoMetadata: Metadata = {
     locale: 'en_US',
   },
   twitter: {
-    /* card: 'summary_large_image', */
+    card: 'summary_large_image',
     title: 'David A. Lee | Climate Researcher and Economist',
     description: 'Researcher in physical oceanography, political economy, and applied statistics.',
   },

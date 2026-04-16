@@ -1,14 +1,9 @@
 import { GoogleAnalytics } from '@next/third-parties/google'
-import Head from "next/head";
 import "./globals.css";
 import { seoMetadata } from './metadata';
 import LayoutClient from './layoutClient';
 
 export const metadata = seoMetadata;
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const spriteSheetURL = "/pixelart/space/spacesprites.png";
-  const spriteDataURL = "/pixelart/space/spacesprites.json";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -37,16 +32,20 @@ const jsonLd = {
   ]
 };
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const spriteSheetURL = "/pixelart/space/spacesprites.png";
+
   return (
     <html lang="en">
-      <Head>
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} 
-        />
-      </Head>
+      <head>
+        <link rel="preload" href="/pixelart/space/spacesprites.png" as="image" type="image/png" />
+      </head>
       <body className="home-page">
-        <LayoutClient children={children} spriteSheetURL={spriteSheetURL} spriteDataURL={spriteDataURL} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <LayoutClient children={children} spriteSheetURL={spriteSheetURL} />
       </body>
       <GoogleAnalytics gaId="G-SY4QB2DS8Q" />
     </html>

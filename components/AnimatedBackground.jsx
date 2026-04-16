@@ -6,16 +6,16 @@ import { SplashContext } from '@/components/Context';
 // Starry night: aspect ratio is 1.33, zIndex is -1
 // Splash page: aspect ratio is 1.8125, zIndex is 15
 
-export default function AnimatedBackground({ 
+export default function AnimatedBackground({
   children,
   spriteSheetURL,
-  spriteDataURL,
+  spriteData,
   aspectRatio,
   zIndex
  }) {
   const canvasRef = useRef(null);
   const spriteSheetRef = useRef(null);
-  const spriteDataRef = useRef(null);
+  const spriteDataRef = useRef(spriteData);
   const frameRef = useRef(0);
   const animationRef = useRef(null);
 
@@ -34,10 +34,6 @@ export default function AnimatedBackground({
           img.onerror = rej;
         });
         spriteSheetRef.current = img;
-
-        const res = await fetch(spriteDataURL);
-        const json = await res.json();
-        spriteDataRef.current = json;
 
         setIsReady(true);
       } catch (e) {

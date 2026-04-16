@@ -9,6 +9,22 @@
   z-index: 0;
 }
 
+/* Parallax scroll keyframes — three variants match the three phase-offset copies */
+@keyframes parallax-a {
+  from { transform: translateX(100%); }
+  to   { transform: translateX(-100%); }
+}
+
+@keyframes parallax-b {
+  from { transform: translateX(0%); }
+  to   { transform: translateX(-200%); }
+}
+
+@keyframes parallax-c {
+  from { transform: translateX(200%); }
+  to   { transform: translateX(0%); }
+}
+
 /* Parallax Layer */
 .parallax-layer {
   position: absolute;
@@ -20,11 +36,23 @@
   bottom: 0;
   object-fit: cover;
   background-size: 100% 100%;
-  background-position: center center; /* Keep the image centered */
-  background-repeat: "repeat-x";
+  background-position: center center;
+  background-repeat: repeat-x;
   min-width: 1920px;
   max-height: 100vh;
-  z-index: 1; /* Ensure layers stack correctly */
+  z-index: 1;
+}
+
+.parallax-layer-a {
+  animation: parallax-a var(--scroll-duration) linear infinite;
+}
+
+.parallax-layer-b {
+  animation: parallax-b var(--scroll-duration) linear infinite;
+}
+
+.parallax-layer-c {
+  animation: parallax-c var(--scroll-duration) linear infinite;
 }
 
 /* Static Layer */

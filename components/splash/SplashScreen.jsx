@@ -15,27 +15,19 @@ export default function SplashScreen() {
     const [isLoaded, setIsLoaded] = useState(false);
     const [showTransition, setShowTransition] = useState(false);
 
-    // Simulate preloading all components
     useEffect(() => {
         const preloadComponents = async () => {
-        try {
-            // Preload Parallax
-            await import("./Parallax");
-            
-            // Preload TitleAnimation
-            await import("./TitleAnimation");
-            
-            // Preload SplashButton
-            await import("@/components/Buttons");
-
-            // Simulate a small delay to ensure visual stability
-            setTimeout(() => {
+            try {
+                await Promise.all([
+                    import("./Parallax"),
+                    import("./TitleAnimation"),
+                    import("@/components/Buttons"),
+                ]);
                 setIsLoaded(true);
-                setShowTransition(true); // Trigger the transition effect
-            }, 250);
-        } catch (error) {
-            console.error("Error preloading components:", error);
-        }
+                setShowTransition(true);
+            } catch (error) {
+                console.error("Error preloading components:", error);
+            }
         };
 
         preloadComponents();
