@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(xargs grep *)",
-      "Bash(xargs ls *)"
+      "Bash(xargs ls *)",
+      "Bash(powershell -Command \"\\(Get-Content 'c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\components\\\\splash\\\\Parallax.jsx' -Raw\\) -replace \\\\\"import \\\\{ getWeather \\\\} from '@/components/Weather';\\\\\", \\\\\"import \\\\{ getWeather, getCachedWeather \\\\} from '@/components/Weather';\\\\\" | Set-Content 'c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\components\\\\splash\\\\Parallax.jsx' -NoNewline\")",
+      "Bash(node -e ' *)"
     ]
   }
 }

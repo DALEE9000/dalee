@@ -19,7 +19,7 @@ export default function SplashButton() {
     return (
         <>
             <button 
-                onClick={() => context.offSplash()}
+                onClick={() => context.exitSplash()}
                 className={styles['splash-button']}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseExit}

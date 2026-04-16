@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
-import { getWeather } from '@/components/Weather';
+import { getWeather, getCachedWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
 
 // Sprite sheet image paths
@@ -35,38 +35,26 @@ function isDaytime(sunriseStr, sunsetStr) {
   const now = new Date();
   const today = new Date().toLocaleDateString('en-CA');
 
-  const sunrise24 = to24Hour(sunriseStr); // Convert to 24-hour format
+  const sunrise24 = to24Hour(sunriseStr);
   const sunset24 = to24Hour(sunsetStr);
 
   const sunrise = new Date(`${today}T${sunrise24}`);
   const sunset = new Date(`${today}T${sunset24}`);
-
 
   return now >= sunrise && now <= sunset;
 }
 
 export default function Parallax() {
 
-  const [weather, setWeather] = useState(null);
+  // Initialize synchronously from sessionStorage — no flash on cached visits
+  const [weather, setWeather] = useState(() => getCachedWeather());
 
   useEffect(() => {
+    if (weather) return; // cache hit, skip the API calls
     getWeather().then(setWeather);
   }, []);
 
-  // Optimistic render: show daytime sky while weather data loads
-  if (!weather) {
-    return (
-      <div className={styles['parallax-container']}>
-        {["day/sky1", "day/sky2", "day/sky3"].map((bg) => (
-          <div
-            key={bg}
-            className={styles['static-layer']}
-            style={{ backgroundImage: `url(/pixelart/${bg}.png)` }}
-          />
-        ))}
-      </div>
-    );
-  }
+  if (!weather) return null;
 
   // Defining variables from API paths
   var precipitation = weather.current.current.precip_mm;
@@ -82,7 +70,7 @@ export default function Parallax() {
 
   // Add static layers here
   const staticImages = [
-    ...(sunUp ? ["day/sky1", "day/sky2", "day/sky3"] : []), 
+    ...(sunUp ? ["day/sky1", "day/sky2", "day/sky3"] : []),
     ...((((precipitation > 0 || cloudCover > 50) || (!sunUp))) ? [] : ["landscape/sun1"]),
     ...(!sunUp ? ["night/moon"] : []),
     // ...((sunUp && sunset) ? ["sunset/sky1"] : []),
@@ -166,12 +154,12 @@ export default function Parallax() {
       {((precipitation > 0) || (cloudCover > 50)) &&
       <div
         className={styles['static-layer']}
-        style={{ 
+        style={{
           backgroundImage: `url(/pixelart/${masks[0]}.png)`,
           zIndex: 13,
         }}
       />}
-      
+
       {/* STATIC LAYERS*/}
       {staticImages.map((bg) => (
         <div

@@ -36,8 +36,14 @@ a:active {
   text-align: center;
 }
 
-.home-page > * {
+.home-page > *,
+.splash-exit-wrapper > * {
   grid-area: 1 / 1;
+}
+
+.splash-exit-wrapper {
+  display: grid;
+  width: 100%;
 }
 
 .home-page-scroll {

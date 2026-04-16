@@ -11,6 +11,7 @@ import Footer from '@/components/Footer';
 import { SplashContext } from '@/components/Context';
 import { SplashProvider, StargazerProvider, LibraryProvider } from '@/components/Context';
 import spaceSpriteData from '@/public/pixelart/space/spacesprites.json';
+import { motion } from 'framer-motion';
 
 export default function LayoutClient({
     children,
@@ -46,9 +47,15 @@ function RootLayoutContent({
   return (
     <div className={`home-page ${context.onSplash ? 'home-page-scroll' : ''}`}>
       {context.onSplash ? (
-        <Suspense fallback={<Loader />}>
-          <SplashScreen />
-        </Suspense>
+        <motion.div
+          className="splash-exit-wrapper"
+          animate={{ opacity: context.isExiting ? 0 : 1 }}
+          transition={{ duration: 0.8, ease: "easeInOut" }}
+        >
+          <Suspense fallback={<Loader />}>
+            <SplashScreen />
+          </Suspense>
+        </motion.div>
       ) : (
         <Transition>
           <AnimatedBackground spriteSheetURL={spriteSheetURL} spriteData={spaceSpriteData} aspectRatio={1.33} zIndex={-1}>

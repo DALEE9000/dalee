@@ -8,14 +8,25 @@ const LibraryContext = createContext();
 
 function SplashProvider(props) {
     const [onSplash, setOnSplash] = useState(true);
+    const [isExiting, setIsExiting] = useState(false);
+
+    function exitSplash() {
+        setIsExiting(true);
+        setTimeout(() => {
+            setOnSplash(false);
+            setIsExiting(false);
+        }, 800);
+    }
 
     function offSplash() {
         setOnSplash(false);
     }
 
     const value = {
-        onSplash: onSplash,
-        offSplash: offSplash,
+        onSplash,
+        offSplash,
+        exitSplash,
+        isExiting,
     }
 
     return (
