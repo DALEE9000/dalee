@@ -130,3 +130,76 @@
     height: 50px;
   }
 }
+
+/* PIXEL LOADER OVERLAY */
+/* Found in PixelLoader.jsx */
+
+.pixel-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.6s steps(6, end);
+}
+
+.pixel-loader-fading {
+  opacity: 0;
+}
+
+.pixel-loader-text {
+  font-size: clamp(1.2rem, 3vw, 2.2rem);
+  color: #fff;
+  letter-spacing: 0.35em;
+  margin: 0 0 1.5rem 0;
+}
+
+.pixel-loader-bar-outer {
+  width: min(55vw, 420px);
+  border: 4px solid #fff;
+  padding: 4px;
+  background: #000;
+  image-rendering: pixelated;
+}
+
+.pixel-loader-bar-fill {
+  height: 22px;
+  /* Repeating teal squares with black gaps — each square is 22×22px */
+  background: repeating-linear-gradient(
+    to right,
+    #00e5ff 0px,
+    #00e5ff 22px,
+    #000 22px,
+    #000 26px
+  );
+  box-shadow: 0 0 10px #00e5ff88;
+  width: 0%;
+  transition: width 0.45s steps(8, end);
+  image-rendering: pixelated;
+}
+
+/* Faster fill when snapping to 100% on completion */
+.pixel-loader-bar-complete {
+  transition: width 0.2s steps(4, end);
+}
+
+.pixel-loader-percent {
+  font-size: clamp(0.85rem, 2vw, 1.1rem);
+  color: #666;
+  margin: 0.75rem 0 0 0;
+  letter-spacing: 0.2em;
+}
+
+.pixel-loader-subtext {
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+  color: #00e5ff99;
+  margin: 0.5rem 0 0 0;
+  letter-spacing: 0.15em;
+}

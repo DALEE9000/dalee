@@ -44,14 +44,20 @@ function isDaytime(sunriseStr, sunsetStr) {
   return now >= sunrise && now <= sunset;
 }
 
-export default function Parallax() {
+export default function Parallax({ onReady }) {
 
   // Initialize synchronously from sessionStorage — no flash on cached visits
   const [weather, setWeather] = useState(() => getCachedWeather());
 
   useEffect(() => {
-    if (weather) return; // cache hit, skip the API calls
-    getWeather().then(setWeather);
+    if (weather) {
+      onReady?.(); // cache hit — signal immediately
+      return;
+    }
+    getWeather().then(data => {
+      setWeather(data);
+      if (data) onReady?.();
+    });
   }, []);
 
   if (!weather) return null;
