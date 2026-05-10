@@ -93,6 +93,23 @@ export function ResearchAnimation() {
     );
 }
 
+export function MathematicsAnimation() {
+    return(
+        <TypeAnimation
+            className={stylesHome['mathematics-animation']}
+            sequence={[
+                'Mathematics',
+            ]}
+            speed={40}
+            style={{
+                fontFamily: jersey.style.fontFamily,
+            }}
+            wrapper="span"
+            repeat={0}
+        />
+    );
+}
+
 export function LibraryAnimation() {
     return(
         <TypeAnimation

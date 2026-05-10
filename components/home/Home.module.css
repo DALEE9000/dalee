@@ -10,6 +10,7 @@
 .aboutme-animation,
 .writing-animation,
 .research-animation,
+.mathematics-animation,
 .library-animation,
 .hire-me-animation {
   font-size: 5vw;
@@ -112,7 +113,8 @@
 }
 
 #about,
-#research {
+#research,
+#mathematics {
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
@@ -240,6 +242,7 @@
   #about,
   #writing,
   #research,
+  #mathematics,
   #library,
   #hire-me {
     grid-template-rows: 25vw repeat(3, auto);
@@ -247,8 +250,9 @@
   }
 
   .aboutme-animation,
-  .writing-animation, 
+  .writing-animation,
   .research-animation,
+  .mathematics-animation,
   .library-animation,
   .hire-me-animation {
     font-size: 10vw;

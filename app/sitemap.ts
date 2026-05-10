@@ -21,6 +21,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      path: "/mathematics",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      path: "/mathematics/strang-differential-equations-linear-algebra",
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       path: "/library",
       changeFrequency: "monthly",
       priority: 0.8,

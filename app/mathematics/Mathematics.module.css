@@ -1,0 +1,165 @@
+/* BACK BUTTON — slug pages */
+
+.back-link {
+  display: inline-block;
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+/* INDEX PAGE — textbook card link */
+
+.textbook-card {
+  display: block;
+  padding: 1.5rem 2rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 1rem;
+  margin-top: 1.5rem;
+  color: white;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.textbook-card:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 1rem #a683ff55;
+}
+
+.textbook-card-title {
+  font-size: clamp(1.2rem, 2.5vw, 2rem);
+}
+
+.textbook-card-author {
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.3rem;
+}
+
+
+/* TEXTBOOK PAGE — chapter dropdowns */
+
+.chapters-header {
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.chapter-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.chapter-section:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.chapter-toggle {
+  all: unset;
+  box-sizing: border-box;
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  padding: 1rem 0;
+  transition: color 0.2s ease;
+}
+
+.chapter-toggle:hover {
+  color: #cbcb85;
+}
+
+.chapter-toggle-arrow {
+  font-size: 0.8em;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.chapter-content {
+  overflow: hidden;
+  padding-bottom: 1.25rem;
+}
+
+/* Nested section dropdowns inside a chapter */
+.section-dropdown {
+  margin-left: 0.5rem;
+  padding-left: 1rem;
+}
+
+.section-animation {
+  margin-bottom: 1rem;
+}
+
+.chapter-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 1rem 0 0.4rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.chapter-pdf {
+  width: 100%;
+  height: 75vh;
+  border: none;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.chapter-video {
+  width: 100%;
+  border-radius: 0.5rem;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* FULL SOLUTIONS PDF */
+
+.full-pdf-header {
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+}
+
+.full-pdf-frame {
+  width: 100%;
+  height: 80vh;
+  border: none;
+  border-radius: 0.5rem;
+  display: block;
+}
+
+.pdf-open-link {
+  display: inline-block;
+  margin-top: 0.6rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: underline dashed;
+  text-underline-offset: 4px;
+  transition: color 0.2s ease;
+}
+
+.pdf-open-link:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* BOOK HEADER */
+
+.book-title {
+  font-size: clamp(1.6rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+  line-height: 1.15;
+}
+
+.book-author {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 1.5rem;
+}
+
+@media (max-width: 800px) {
+  .textbook-card {
+    padding: 1rem 1.2rem;
+  }
+}

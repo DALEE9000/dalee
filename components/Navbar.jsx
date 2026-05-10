@@ -22,6 +22,7 @@ export default function Navbar() {
         { href: "/", route: "Home" },
         { href: "/about", route: "About" },
         { href: "/research", route: "Research" },
+        { href: "/mathematics", route: "Mathematics" },
         { href: "/library", route: "Library" },
         { href: "/writing", route: "Writing" },
         { href: "/hireme", route: "Hire Me!" }

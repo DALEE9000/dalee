@@ -4,7 +4,10 @@
       "Bash(xargs grep *)",
       "Bash(xargs ls *)",
       "Bash(powershell -Command \"\\(Get-Content 'c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\components\\\\splash\\\\Parallax.jsx' -Raw\\) -replace \\\\\"import \\\\{ getWeather \\\\} from '@/components/Weather';\\\\\", \\\\\"import \\\\{ getWeather, getCachedWeather \\\\} from '@/components/Weather';\\\\\" | Set-Content 'c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\components\\\\splash\\\\Parallax.jsx' -NoNewline\")",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\app\" -Recurse -Directory | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\"\\), \"\" })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\app\" -Recurse -File | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\"\\), \"\" })",
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\\\\components\" -Recurse -File | ForEach-Object { $_.FullName -replace [regex]::Escape\\(\"c:\\\\Users\\\\david\\\\Documents\\\\Websites\\\\dalee\"\\), \"\" })"
     ]
   }
 }
