@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { SplashContext } from '@/components/Context';
+import styles from './AnimatedBackground.module.css';
 
 // Starry night: aspect ratio is 1.33, zIndex is -1
 // Splash page: aspect ratio is 1.8125, zIndex is 15
@@ -48,6 +49,9 @@ export default function AnimatedBackground({
   aspectRatio,
   zIndex,
   onReady = undefined,
+  // CSS-only twinkling stars shown until the sprite sheet is decoded
+  // (used by the starfield background, which has no loader in front of it)
+  showPlaceholder = false,
  }) {
   const canvasRef = useRef(null);
   const framesRef = useRef(null);
@@ -55,8 +59,16 @@ export default function AnimatedBackground({
   onReadyRef.current = onReady;
 
   const [isReady, setIsReady] = useState(false);
+  const [placeholderGone, setPlaceholderGone] = useState(false);
 
   const context = useContext(SplashContext);
+
+  // Unmount the placeholder once its fade-out finishes
+  useEffect(() => {
+    if (!isReady || !showPlaceholder) return;
+    const t = setTimeout(() => setPlaceholderGone(true), 1400);
+    return () => clearTimeout(t);
+  }, [isReady, showPlaceholder]);
 
   useEffect(() => {
     let cancelled = false;
@@ -165,6 +177,13 @@ export default function AnimatedBackground({
 
   return (
     <div style={{ position: "relative", width: "100vw", height: "0px" }}>
+      {showPlaceholder && !placeholderGone && (
+        <div
+          className={`${styles['star-placeholder']} ${isReady ? styles['star-placeholder-hidden'] : ''}`}
+          style={{ zIndex: zIndex }}
+          aria-hidden="true"
+        />
+      )}
       <canvas
         ref={canvasRef}
         style={{
@@ -174,6 +193,9 @@ export default function AnimatedBackground({
           width: "100vw",
           height: "auto",
           zIndex: zIndex,
+          // Cross-fade in over the placeholder stars
+          opacity: showPlaceholder && !isReady ? 0 : 1,
+          transition: showPlaceholder ? "opacity 1.2s ease" : undefined,
         }}
       />
       {children}

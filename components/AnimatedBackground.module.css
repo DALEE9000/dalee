@@ -1,0 +1,45 @@
+/* CSS-only twinkling starfield shown while the sprite sheet downloads and
+   decodes. Pure gradients — zero network cost, paints on first frame.
+   Three tile sizes so the repetition isn't obvious. */
+
+.star-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* Same box the canvas will occupy (width / 1.33) */
+  aspect-ratio: 1.33;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1px 1px at 25px 35px, #fff, transparent),
+    radial-gradient(1px 1px at 160px 90px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(2px 2px at 85px 170px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(1px 1px at 210px 230px, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 320px 60px, #fff, transparent),
+    radial-gradient(1px 1px at 60px 300px, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(2px 2px at 380px 190px, rgba(255, 255, 255, 0.85), transparent),
+    radial-gradient(1px 1px at 270px 340px, #fff, transparent);
+  background-size:
+    290px 290px,
+    290px 290px,
+    430px 430px,
+    430px 430px,
+    610px 610px,
+    610px 610px,
+    530px 530px,
+    530px 530px;
+  background-repeat: repeat;
+  /* Gentle twinkle — animates opacity only, so it stays on the compositor */
+  animation: star-twinkle 2.6s ease-in-out infinite alternate;
+  transition: opacity 1.2s ease;
+}
+
+.star-placeholder-hidden {
+  opacity: 0;
+  animation: none;
+}
+
+@keyframes star-twinkle {
+  from { opacity: 0.55; }
+  to   { opacity: 1; }
+}
