@@ -21,7 +21,7 @@ export default function AboutClient() {
 
   const currentWork = [
     <> Fiscal Policy Analyst for the <a href="https://www.centernyc.org/" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Center for New York City Affairs</LightUpText></a> </>,
-    <> Research Staffer in the <a href="https://ocean-transport.github.io/intro.html" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Ocean Transport Group</LightUpText></a> at Columbia University's Lamont Doherty Earth Observatory </>,
+    <> Oceanography Researcher in the <a href="https://ocean-transport.github.io/intro.html" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Ocean Transport Group</LightUpText></a> at Columbia University's Lamont Doherty Earth Observatory </>,
   ]
 
   const aboutParagraphs = [
