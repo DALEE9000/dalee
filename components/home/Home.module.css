@@ -38,48 +38,61 @@
 .twinkle-box {
   text-align: left;
   padding: 50px 50px;
-  background-color: rgba(0, 0, 0, 0.6);  /* Translucent black background */
+  /* Slightly more opaque than the old 0.6 to keep the frosted legibility —
+     backdrop-filter: blur re-filtered the animating starfield behind every
+     box on every canvas frame, which was a constant GPU cost */
+  background-color: rgba(0, 0, 0, 0.75);  /* Translucent black background */
   border-radius: 50px;
-  backdrop-filter: blur(2px);
   position: relative;
   z-index: 1;
   box-shadow: 0 0 2rem 0.3rem #a683ff; /* */
 }
 
-.twinkle-box::before,
-.twinkle-box::after {
-  content: "";
-  border-radius: inherit;
+/* Spinning gradient border (rendered by the <span> DivAnimation adds).
+   The old version animated --gradient-angle, which re-rasterized the whole
+   gradient 60x/second per box. Here the gradient is painted ONCE onto an
+   oversized square (::before) and spun with a transform, so the animation
+   runs entirely on the compositor. */
+.twinkle-ring {
+  /* Only meaningful inside a .twinkle-box (which provides position:relative).
+     DivAnimation renders the ring unconditionally, so hide it everywhere else
+     — e.g. the About portrait wrapper, where it would anchor to the page. */
+  display: none;
   position: absolute;
   inset: -0.1rem;
+  border-radius: inherit;
+  padding: 0.5rem;
   z-index: -1;
-  background: linear-gradient(
-    var(--gradient-angle),
-    white,
-    #0a001d,
-    #1c1639
-  );
-  animation: rotation 20s linear infinite;
-  mask: 
+  overflow: clip;
+  pointer-events: none;
+  container-type: size; /* lets ::before size itself with cqw/cqh below */
+  mask:
     linear-gradient(#fff 0 0) content-box, /* content-box here covers the stuff in the box EXCEPT the padding */
     linear-gradient(#fff 0 0);
   mask-composite: exclude; /* excludes the overlapping parts of the masks */
-  padding: 0.5rem;
 }
 
-.card::after {
-  filter: blur(3.5rem);
+.twinkle-box > .twinkle-ring {
+  display: block;
 }
 
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+.twinkle-ring::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* A square with side = width + height always covers the box's diagonal,
+     so no corner ever shows a gap mid-rotation, whatever the box shape */
+  width: calc(100cqw + 100cqh);
+  height: calc(100cqw + 100cqh);
+  background: linear-gradient(0deg, white 30%, #0a001d 50%, #1c1639 70%);
+  animation: twinkle-spin 20s linear infinite;
+  will-change: transform;
 }
 
-@keyframes rotation {
-  0%   { --gradient-angle: 0deg; }
-  100% { --gradient-angle: 360deg; }
+@keyframes twinkle-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 .box-1 {
@@ -113,8 +126,7 @@
 }
 
 #about,
-#research,
-#mathematics {
+#research {
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;
@@ -123,6 +135,8 @@
   align-content: flex-start;
 }
 
+/* Single content row — trailing empty rows would add ~10vw of dead space
+   between the content and the footer */
 #library {
   display: grid;
   gap: 5vw;
@@ -132,7 +146,8 @@
   align-content: flex-start;
 }
 
-#writing,
+/* #mathematics matches #hire-me exactly so the footer lands the same way */
+#mathematics,
 #hire-me {
   height: 140vh;
   display: grid;
@@ -143,8 +158,31 @@
   align-content: flex-start;
 }
 
+/* min- rather than fixed height: the paginated feed can grow past 140vh
+   without spilling over the footer */
+#writing {
+  min-height: 140vh;
+  display: grid;
+  gap: 5vw;
+  grid-template-columns: 1fr 70vw 1fr;
+  grid-template-rows: 5vw repeat(3, auto);
+  justify-items: center;
+  align-content: flex-start;
+}
+
 .about-text {
   font-size: 2rem;
+}
+
+/* Bullet list variant of .about-text (see AboutMeList) */
+.about-list {
+  font-size: 2rem;
+  margin: 1em 0;
+  padding-left: 1.2em;
+}
+
+.about-list li {
+  margin: 0.4em 0;
 }
 
 .portrait {
@@ -243,9 +281,13 @@
   #writing,
   #research,
   #mathematics,
-  #library,
   #hire-me {
     grid-template-rows: 25vw repeat(3, auto);
+    gap: 15vw;
+  }
+
+  #library {
+    grid-template-rows: 25vw repeat(1, auto);
     gap: 15vw;
   }
 
@@ -265,6 +307,10 @@
   }
 
   .about-text {
+    font-size: 5vw;
+  }
+
+  .about-list {
     font-size: 5vw;
   }
 

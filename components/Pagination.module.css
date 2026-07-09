@@ -1,0 +1,35 @@
+/* SHARED PREV/NEXT PAGER — see Pagination.jsx */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.page-button {
+  all: unset;
+  cursor: pointer;
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  letter-spacing: 0.1em;
+  padding: 0.35rem 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  color: white;
+  transition: border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.page-button:hover:not(:disabled) {
+  border-color: #a683ff;
+  box-shadow: 0 0 0.75rem #a683ff55;
+}
+
+.page-button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.page-label {
+  font-size: clamp(1rem, 1.6vw, 1.3rem);
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 0.1em;
+}

@@ -1,9 +1,10 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { raleway } from "./Fonts";
+import homeStyles from "./home/Home.module.css";
 
-const boxVariants = {
+const boxVariants: Variants = {
 hidden: { opacity: 0, scale: 0.8 },
 visible: { opacity: 1, scale: 1, transition: { duration: 1, type: "spring", bounce: 0.5 } },
 };
@@ -46,6 +47,8 @@ export function DivAnimation({
         variants={boxVariants}
         exit={{ opacity: 0, y: -20 }}
     >
+      {/* Compositor-friendly spinning gradient border (see .twinkle-ring) */}
+      <span className={homeStyles['twinkle-ring']} aria-hidden="true" />
       {children}
     </motion.div>
   );
@@ -71,6 +74,29 @@ export function AboutMeParagraph({
         >
             {children}
         </motion.p>
+    )
+}
+
+export function AboutMeList({
+    children, props
+}: {
+    children: React.ReactNode;
+    props: string;
+}) {
+
+    return (
+        <motion.ul
+          className={props}
+          style={{
+              fontFamily: raleway.style.fontFamily,
+          }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={boxVariants}
+        >
+            {children}
+        </motion.ul>
     )
 }
 

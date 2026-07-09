@@ -38,7 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/pixelart/space/spacesprites.png" as="image" type="image/png" />
+        {/* Warmed for after the splash — low priority so it doesn't compete
+            with the splash's own weather fetch and pixel-art layers */}
+        <link rel="preload" href="/pixelart/space/spacesprites.png" as="image" type="image/png" fetchPriority="low" />
       </head>
       <body className="home-page">
         <script

@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Image from 'next/image';
 import { SplashContext } from '@/components/Context';
 import styles from './splash/Splash.module.css';
@@ -7,6 +7,12 @@ export default function SplashButton() {
     const [imageSrc, setImageSrc] = useState("/pixelart/enterbutton/button1.png");
 
     const context = useContext(SplashContext);
+
+    // Warm the hover frame so the first mouseover doesn't flash while it loads
+    useEffect(() => {
+        const img = new window.Image();
+        img.src = "/pixelart/enterbutton/button2.png";
+    }, []);
 
     function handleMouseEnter() {
         setImageSrc("/pixelart/enterbutton/button2.png");

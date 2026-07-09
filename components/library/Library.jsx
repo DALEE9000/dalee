@@ -2,8 +2,9 @@
 import { useEffect, useState, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import clsx from "clsx";
-import { jersey, raleway } from '@/components/Fonts';
-import { AboutMeParagraph, BookBounce, LightUpText } from '@/components/BoxAnimations';
+import { raleway } from '@/components/Fonts';
+import { AboutMeParagraph, BookBounce } from '@/components/BoxAnimations';
+import Pagination from '@/components/Pagination';
 import { LibraryContext } from '@/components/Context';
 import BookCard from '@/components/library/BookCard';
 import BookSummary from '@/components/library/BookSummary';
@@ -29,8 +30,9 @@ export default function ReadBooks() {
   // Establishing current page on library grid
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Total number of books per page
-  const booksPerPage = 30;
+  // Total number of books per page — 5 columns × 3 rows on desktop
+  // (fewer columns at narrower widths, so more rows there)
+  const booksPerPage = 15;
 
   // Establishing book data to load book profile
   const [title, setTitle] = useState('');
@@ -311,37 +313,21 @@ export default function ReadBooks() {
           </AnimatePresence>
         </div>
 
-        <div className={clsx(
-          styles['pagination'],
-          !context.displayLibrary && styles['dismount'])}
-        >
-          <button
-            className={styles['category-button']}
-            onClick={() => {
+        {context.displayLibrary && (
+          <Pagination
+            page={currentPage}
+            pageCount={totalPages}
+            onPrev={() => {
               setCurrentPage(prev => Math.max(prev - 1, 1));
               scrollToId("scroll");
             }}
-            disabled={currentPage === 1}
-          >
-            {(currentPage === 1) ? 
-              <span className={clsx(styles['page-button'], styles['disabled'])} style={{ fontFamily: jersey.style.fontFamily }}>Prev</span> 
-              : <LightUpText props={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}>Prev</LightUpText>}
-          </button>
-              <span className={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}> {currentPage} / {totalPages} </span>
-          <button
-            className={styles['category-button']}
-            onClick={() => {
+            onNext={() => {
               setCurrentPage(prev => Math.min(prev + 1, totalPages));
               scrollToId("scroll");
-            }} 
-            disabled={currentPage === totalPages}
-          >
-            {(currentPage === totalPages) ?
-              <span className={clsx(styles['page-button'], styles['disabled'])} style={{ fontFamily: jersey.style.fontFamily }}>Next</span>
-              : <LightUpText props={styles['page-button']} style={{ fontFamily: jersey.style.fontFamily }}>Next</LightUpText>}
-            {/* make sure text DOESN'T light up at end of pagination */}
-          </button>
-        </div>
+            }}
+            className={styles['pagination']}
+          />
+        )}
 
         {!context.displayLibrary && <BookSummary title={title} author={author} bookCover={bookCover} desc={desc} pages={pages} />}
 

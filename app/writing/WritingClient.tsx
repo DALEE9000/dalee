@@ -3,7 +3,7 @@
 import '../globals.css';
 import { useContext } from 'react';
 import clsx from 'clsx';
-import SupascribeEmbed from './SupascribeEmbedSubstack';
+import SubstackFeed from './SubstackFeed';
 import { AnimatePresence } from 'framer-motion';
 import { raleway } from '@/components/Fonts';
 import { WritingAnimation } from '@/components/TextAnimations';
@@ -33,7 +33,7 @@ export default function WritingClient() {
               >
                 I write a Substack named <a href="https://alphabetagency.substack.com/" target="_blank" rel="noopener noreferrer"><LightUpText props={styles['link-props']}>Alphabet Agency</LightUpText></a>.
               </p>
-              <SupascribeEmbed embedId="804504388187" />
+              <SubstackFeed />
             </DivAnimation>
           )}
         </AnimatePresence>

@@ -59,9 +59,13 @@ function RootLayoutContent({
       ) : (
         <Transition>
           <AnimatedBackground spriteSheetURL={spriteSheetURL} spriteData={spaceSpriteData} aspectRatio={1.33} zIndex={-1}>
-            <Navbar />
-            {children}
-            <Footer />
+            {/* Flex shell keeps the footer at the viewport bottom on pages
+                with short content (e.g. /mathematics) */}
+            <div className="page-shell">
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+            </div>
           </AnimatedBackground>
         </Transition>
       )}

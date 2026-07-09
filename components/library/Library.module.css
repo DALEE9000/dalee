@@ -119,19 +119,9 @@
     text-shadow: 0 0 8px #cbcb85, 0 0 16px #cbcb85;
 }
 
+/* Spacing only — the pager itself is the shared components/Pagination */
 .pagination {
     margin: 2vw;
-}
-
-.page-button,
-.disabled {
-    font-size: 1.5vw;
-    margin: 0 1vw;
-}
-
-.disabled {
-    color: grey;
-    cursor: default;
 }
 
 .dismount {
@@ -167,12 +157,6 @@
 
     .category-text {
         font-size: 2.5vw;
-    }
-
-    .page-button,
-    .disabled {
-        font-size: 3vw;
-        margin: 0 1vw;
     }
 
     .profile-container {

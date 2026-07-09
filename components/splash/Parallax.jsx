@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import AnimatedBackground from '@/components/AnimatedBackground';
 import { getWeather, getCachedWeather } from '@/components/Weather';
 import styles from "./Splash.module.css";
@@ -44,130 +44,172 @@ function isDaytime(sunriseStr, sunsetStr) {
   return now >= sunrise && now <= sunset;
 }
 
+// Used when the weather fetch fails, so the splash still renders (clear day)
+const FALLBACK_WEATHER = {
+  current: { current: { precip_mm: 0, cloud: 0 } },
+  astronomy: { astronomy: { astro: { sunrise: '6:00 AM', sunset: '8:00 PM' } } },
+};
+
+// Cloud assets and durations here
+const clouds = [
+  { name: "cloud1", duration: 120 },
+  { name: "cloud2", duration: 90 },
+  { name: "cloud3", duration: 150 },
+];
+
+const withPrefix = (prefix, items) =>
+  items.map(({ name, duration }) => ({
+    element: `${prefix}/${name}`,
+    duration,
+  }));
+
+// CSS animation class per copy (a/b/c correspond to the three phase-offset keyframes)
+const layerClasses = ['parallax-layer-a', 'parallax-layer-b', 'parallax-layer-c'];
+
+// Fetch AND decode an image so the reveal doesn't pop layers in one by one.
+// Never rejects — a single missing asset shouldn't hold the page hostage.
+const preloadImage = (src) =>
+  new Promise((resolve) => {
+    const img = new Image();
+    img.src = src;
+    img.decode().then(resolve, resolve);
+  });
+
 export default function Parallax({ onReady }) {
 
   // Initialize synchronously from sessionStorage — no flash on cached visits
   const [weather, setWeather] = useState(() => getCachedWeather());
+  const [layersReady, setLayersReady] = useState(false);
+  const [spritesReady, setSpritesReady] = useState(0);
+
+  const onReadyRef = useRef(onReady);
+  onReadyRef.current = onReady;
 
   useEffect(() => {
-    if (weather) {
-      onReady?.(); // cache hit — signal immediately
-      return;
-    }
+    if (weather) return;
+    let cancelled = false;
     getWeather().then(data => {
-      setWeather(data);
-      if (data) onReady?.();
+      if (!cancelled) setWeather(data || FALLBACK_WEATHER);
     });
+    return () => { cancelled = true; };
   }, []);
 
-  if (!weather) return null;
+  // Build the scene (which layers, masks, and sprite animations to show)
+  const scene = useMemo(() => {
+    if (!weather) return null;
 
-  // Defining variables from API paths
-  var precipitation = weather.current.current.precip_mm;
-  var cloudCover = weather.current.current.cloud;
-  var sunrise = weather.astronomy.astronomy.astro.sunrise;
-  var sunset = weather.astronomy.astronomy.astro.sunset;
-  var sunUp = isDaytime(sunrise, sunset);
-  // Test variables for dev mode
-  // var sunset = false;
-  // precipitation = 0;
-  //cloudCover = 0;
-  // sunUp = false;
+    const precipitation = weather.current.current.precip_mm;
+    const cloudCover = weather.current.current.cloud;
+    const sunrise = weather.astronomy.astronomy.astro.sunrise;
+    const sunset = weather.astronomy.astronomy.astro.sunset;
+    const sunUp = isDaytime(sunrise, sunset);
 
-  // Add static layers here
-  const staticImages = [
-    ...(sunUp ? ["day/sky1", "day/sky2", "day/sky3"] : []),
-    ...((((precipitation > 0 || cloudCover > 50) || (!sunUp))) ? [] : ["landscape/sun1"]),
-    ...(!sunUp ? ["night/moon"] : []),
-    // ...((sunUp && sunset) ? ["sunset/sky1"] : []),
-    // ...((sunUp && sunset) ? ["sunset/sky2"] : []),
-    // ...((sunUp && sunset) ? ["sunset/sky3"] : []),
-    // ...((sunUp && sunset) ? ["sunset/sun1"] : []),
-  ];
+    // Add static layers here
+    const staticImages = [
+      ...(sunUp ? ["day/sky1", "day/sky2", "day/sky3"] : []),
+      ...((((precipitation > 0 || cloudCover > 50) || (!sunUp))) ? [] : ["landscape/sun1"]),
+      ...(!sunUp ? ["night/moon"] : []),
+    ];
 
-  // Add dynamic layers here
-  // Cloud assets and durations here
-  const clouds = [
-  { name: "cloud1", duration: 120 },
-  { name: "cloud2", duration: 90 },
-  { name: "cloud3", duration: 150 },
-  ];
+    // Add dynamic layers here
+    const elements = [
+      ...(sunUp
+        ? withPrefix("clouds", clouds)
+        : withPrefix("night", clouds)),
+      {
+        element: sunUp
+          ? "landscape/mountains"
+          : "night/mountains-night",
+        duration: 240, // Adjust mountain parallax duration here
+      },
+    ];
 
-  const withPrefix = (prefix, items) =>
-    items.map(({ name, duration }) => ({
-      element: `${prefix}/${name}`,
-      duration,
-    }));
+    // Add masks here
+    const mask =
+      ((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80 && sunUp))
+        ? "landscape/muggymask-day" // RAINY / CLOUDY DAY
+        : ((precipitation >= 8) || (cloudCover >= 80 && sunUp))
+          ? "landscape/muggymask-day-stormy" // STORMY / VERY CLOUDY DAY
+          : null;
 
-  const elements = [
-    ...(sunUp
-      ? withPrefix("clouds", clouds)
-      : withPrefix("night", clouds)),
-    {
-      element: sunUp
-        ? "landscape/mountains"
-        : "night/mountains-night",
-      duration: 240, // Adjust mountain parallax duration here
-    },
-  ];
+    // Add precipitation here
+    const precipSprite =
+      precipitation >= 8
+        ? { image: stormySkySpriteSheet, spriteData: stormySkySpriteData }
+        : precipitation > 0
+          ? { image: rainySkySpriteSheet, spriteData: rainySkySpriteData }
+          : null;
 
-  // CSS animation class per copy (a/b/c correspond to the three phase-offset keyframes)
-  const layerClasses = ['parallax-layer-a', 'parallax-layer-b', 'parallax-layer-c'];
+    return { sunUp, staticImages, elements, mask, precipSprite };
+  }, [weather]);
 
-  // Add masks here
-  const masks = [
-    ...(((precipitation > 0 && precipitation < 8) || (cloudCover > 50 && cloudCover < 80) && sunUp)? ["landscape/muggymask-day"] : []), // RAINY / CLOUDY DAY
-    ...(((precipitation >= 8) || (cloudCover >= 80) && sunUp)? ["landscape/muggymask-day-stormy"] : []), // STORMY / VERY CLOUDY DAY
-  ]
+  // Preload + decode every CSS background layer before revealing the scene
+  useEffect(() => {
+    if (!scene) return;
+    let cancelled = false;
 
-  // Add precipitation here
-  const precip = [
-    ...((precipitation < 8 && precipitation > 0) ? [{ image: rainySkySpriteSheet, spriteData: rainySkySpriteData }] : []), // RAIN
-    ...((precipitation >= 8) ? [{ image: stormySkySpriteSheet, spriteData: stormySkySpriteData }] : [])
-  ]
+    const urls = [
+      ...scene.staticImages,
+      ...scene.elements.map(({ element }) => element),
+      ...(scene.mask ? [scene.mask] : []),
+    ].map((name) => `/pixelart/${name}.png`);
 
-  let image, spriteData;
+    Promise.all(urls.map(preloadImage)).then(() => {
+      if (!cancelled) setLayersReady(true);
+    });
 
-  if (precipitation > 0 && precip.length > 0) {
-    ({ image, spriteData } = precip[0]);
-  }
+    return () => { cancelled = true; };
+  }, [scene]);
 
+  // Signal ready once the CSS layers are decoded and every sprite animation
+  // (rain/storm and/or night sky) has produced its first frame
+  const spritesNeeded = scene
+    ? (scene.precipSprite ? 1 : 0) + (!scene.sunUp ? 1 : 0)
+    : 0;
+  const ready = !!scene && layersReady && spritesReady >= spritesNeeded;
+
+  useEffect(() => {
+    if (ready) onReadyRef.current?.();
+  }, [ready]);
+
+  if (!scene) return null;
+
+  const handleSpriteReady = () => setSpritesReady((n) => n + 1);
 
   return (
-    <>
-    <div
-        className={styles['parallax-container']}
-    >
+    <div className={styles['parallax-container']}>
       {/* PRECIPITATION ANIMATION */}
-      {(precipitation > 0) &&
+      {scene.precipSprite &&
       <AnimatedBackground
-        spriteSheetURL={image}
-        spriteData={spriteData}
+        spriteSheetURL={scene.precipSprite.image}
+        spriteData={scene.precipSprite.spriteData}
         aspectRatio={1.8125}
         zIndex={15}
+        onReady={handleSpriteReady}
       />}
 
       {/* NIGHT ANIMATION */}
-      {!sunUp &&
+      {!scene.sunUp &&
       <AnimatedBackground
         spriteSheetURL={nightSkySpriteSheet}
         spriteData={nightSkySpriteData}
         aspectRatio={1.8125}
         zIndex={1}
+        onReady={handleSpriteReady}
       />}
 
       {/* MASKS */}
-      {((precipitation > 0) || (cloudCover > 50)) &&
+      {scene.mask &&
       <div
         className={styles['static-layer']}
         style={{
-          backgroundImage: `url(/pixelart/${masks[0]}.png)`,
+          backgroundImage: `url(/pixelart/${scene.mask}.png)`,
           zIndex: 13,
         }}
       />}
 
       {/* STATIC LAYERS*/}
-      {staticImages.map((bg) => (
+      {scene.staticImages.map((bg) => (
         <div
           key={bg}
           className={styles['static-layer']}
@@ -176,7 +218,7 @@ export default function Parallax({ onReady }) {
       ))}
 
       {/*DYNAMIC LAYERS*/}
-      {elements.map(({ element, duration }) =>
+      {scene.elements.map(({ element, duration }) =>
         layerClasses.map((cls, index) => (
           <div
             key={`${element}-${index}`}
@@ -189,6 +231,5 @@ export default function Parallax({ onReady }) {
         ))
       )}
     </div>
-    </>
   );
 };

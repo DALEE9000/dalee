@@ -7,6 +7,10 @@
   width: 100%;
   height: 100vh;
   z-index: 0;
+  /* Layers slide across ±200% — clip + containment lets the browser skip
+     rasterizing everything outside the viewport */
+  overflow: clip;
+  contain: layout paint style;
 }
 
 /* Parallax scroll keyframes — three variants match the three phase-offset copies */
@@ -41,6 +45,10 @@
   min-width: 1920px;
   max-height: 100vh;
   z-index: 1;
+  /* These animate transform for their whole lifetime — keep them on the
+     compositor so they never get re-rasterized mid-scroll */
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
 .parallax-layer-a {

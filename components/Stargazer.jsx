@@ -3,9 +3,6 @@ import clsx from "clsx";
 import { StargazerAnimation } from "@/components/TextAnimations";
 import styles from "@/components/home/Home.module.css";
 
-const requestAnimationFrame = window.requestAnimationFrame;
-const cancelAnimationFrame = window.cancelAnimationFrame;
-
 const Stargazer = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [musicOn, setMusicOn] = useState(false);
@@ -79,6 +76,10 @@ const Stargazer = () => {
     };
 
     useEffect(() => {
+        // Only listen while actually dragging — no document-wide mousemove
+        // work the rest of the time
+        if (!isDragging) return;
+
         document.addEventListener('mousemove', handleMove);
         document.addEventListener('mouseup', handleMouseUp);
 
