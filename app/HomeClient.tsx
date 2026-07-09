@@ -66,7 +66,7 @@ export default function HomeClient() {
                   fontStyle: 'italic',
                   marginTop: '2vw',
                   textAlign: 'center',
-                  height: '8vw'
+                  minHeight: '8vw' // fixed height clipped long hobby lines when they wrap on mobile
                 }}
               >
                 <HobbyCycle />

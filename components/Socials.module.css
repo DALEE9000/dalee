@@ -7,7 +7,8 @@
 }
 
 .sm {
-    width: 1.5vw;
+    /* Floor keeps the icons tappable on mid-size windows */
+    width: clamp(18px, 1.5vw, 32px);
     height: auto;
 }
 

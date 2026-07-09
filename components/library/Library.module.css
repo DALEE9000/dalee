@@ -6,6 +6,13 @@
     align-items: start;
 }
 
+/* Without this, the nowrap category chip row sets the grid column's
+   min-content width and blows the whole page out horizontally — grid items
+   default to min-width:auto, so the scrollable row can't actually shrink */
+.library-page > * {
+    min-width: 0;
+}
+
 .library-grid {
     width: 100%;
     display: grid;
@@ -63,7 +70,7 @@
 
 .profile-author,
 .profile-pages {
-    font-size: 1vw;
+    font-size: clamp(0.8rem, 1vw, 1.25rem);
     font-weight: bold;
     margin: 0.5vw 0;
 }
@@ -79,17 +86,23 @@
 }
 
 .profile-desc {
-    font-size: 1vw;
+    font-size: clamp(0.8rem, 1vw, 1.25rem);
+}
+
+/* Each sentence of a book description on its own line */
+.desc-sentence {
+    display: block;
+    margin-bottom: 0.5em;
 }
 
 .book-title {
-    font-size: 1vw;
+    font-size: clamp(0.8rem, 1vw, 1.25rem);
     font-weight: bold;
     margin: 0 2vw;
 }
 
 .category {
-    font-size: 1.5vw;
+    font-size: clamp(1rem, 1.5vw, 1.6rem);
     margin-top: 0;
 }
 
@@ -100,7 +113,7 @@
 }
 
 .category-text {
-    font-size: 1vw;
+    font-size: clamp(0.8rem, 1vw, 1.25rem);
     transition: font-size 0.3s ease, font-weight 0.3s ease, text-shadow 0.3s ease;
 }
 
@@ -114,7 +127,7 @@
 }
 
 .category-selected {
-    font-size: 1.5vw;
+    font-size: clamp(1rem, 1.5vw, 1.6rem);
     font-weight: 700;
     text-shadow: 0 0 8px #cbcb85, 0 0 16px #cbcb85;
 }
@@ -122,6 +135,11 @@
 /* Spacing only — the pager itself is the shared components/Pagination */
 .pagination {
     margin: 2vw;
+}
+
+/* Back button under the book profile */
+.back-button {
+    font-size: clamp(1rem, 1.5vw, 1.4rem);
 }
 
 .dismount {
@@ -136,27 +154,67 @@
 }
 
 @media (max-width: 900px) {
+    /* Stack: category chip bar on top, full-width book grid below
+       (side-by-side columns were unusably cramped on phones) */
     .library-page {
-        grid-template-columns: 1fr 1.5fr;
-        gap: 5vw;
+        grid-template-columns: 1fr;
+        gap: 4vw;
     }
-    
+
     .library-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 2vw;
+    }
+
+    /* Categories become one horizontally scrollable row of pixel-style chips */
+    .category-list {
+        display: flex;
+        align-items: center;
+        gap: 2.5vw;
+        overflow-x: auto;
+        padding: 1vw 2px 3vw;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+    }
+
+    /* Collapse the li/ul wrappers so top-level chips and expanded
+       subcategory chips all flow in the same scrollable row */
+    .category-list > li,
+    .subcategory-list {
+        display: contents;
+    }
+
+    .category-list .category-button,
+    .subcategory-list li {
+        flex: 0 0 auto;
+    }
+
+    .category-list .category-button {
+        display: block;
+        border: 2px solid rgba(255, 255, 255, 0.45);
+        padding: 1.5vw 3vw;
+        white-space: nowrap;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .category-list .category-button:has(.category-selected) {
+        border-color: #cbcb85;
+        box-shadow: 0 0 0.6rem #cbcb8555;
     }
 
     .book-card,
     .book-image {
-        aspect-ratio: 1 / 2.5;
+        /* Sized for 3-up cells around the 80x160 mobile books — 1/2.5 was
+           tuned for the old 2-column layout and left big vertical gaps */
+        aspect-ratio: 1 / 1.8;
     }
 
     .category {
-        font-size: 3vw;
+        font-size: clamp(0.9rem, 3vw, 1.4rem);
     }
 
     .category-text {
-        font-size: 2.5vw;
+        font-size: clamp(0.8rem, 2.5vw, 1.2rem);
     }
 
     .profile-container {
@@ -172,7 +230,7 @@
 
     .profile-author,
     .profile-pages {
-        font-size: 3vw;
+        font-size: clamp(0.8rem, 3vw, 1.2rem);
         font-weight: bold;
         margin: 2vw 0;
     }
@@ -193,6 +251,6 @@
     }
 
     .profile-desc {
-        font-size: 2vw;
+        font-size: clamp(0.85rem, 2vw, 1.1rem);
     }
 }

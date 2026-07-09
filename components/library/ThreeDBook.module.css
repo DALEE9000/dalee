@@ -14,9 +14,16 @@
   }
 }
 
+/* All dimensions derive from these three variables; the media queries at the
+   bottom only resize the book, so every breakpoint stays geometrically
+   consistent (cover, spine, and depth always match) */
 .book {
-  width: 125px;
-  height: 250px;
+  --book-w: 125px;
+  --book-h: 250px;
+  --book-d: 25px;
+  --book-shadow: 5px 5px 10px #666;
+  width: var(--book-w);
+  height: var(--book-h);
   position: relative;
   transform-style: preserve-3d;
   transform: rotateY(-30deg);
@@ -24,34 +31,34 @@
   animation: 1s ease 0s 1 initAnimation;
 }
 
-.book-container:hover .book, 
+.book-container:hover .book,
 .book-container:focus .book {
   transform: rotateY(-60deg);
 }
 
+/* Front cover (the img) */
 .book > :first-child {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: red;
-  width: 125px;
-  height: 250px;
-  transform: translateZ(12.5px);
+  width: var(--book-w);
+  height: var(--book-h);
+  transform: translateZ(calc(var(--book-d) / 2));
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
-  box-shadow: 5px 5px 10px #666;
+  box-shadow: var(--book-shadow);
 }
 
+/* Page block (the striped spine edge) */
 .book::before {
   position: absolute;
   content: ' ';
-  background-color: blue;
   left: 0;
   top: 1px;
-  width: 23px;
-  height: 248px;
-  transform: translateX(111.5px) rotateY(90deg);
-  background: linear-gradient(90deg, 
+  width: calc(var(--book-d) - 2px);
+  height: calc(var(--book-h) - 2px);
+  transform: translateX(calc(var(--book-w) - var(--book-d) / 2 - 1px)) rotateY(90deg);
+  background: linear-gradient(90deg,
     #fff 0%,
     #f9f9f9 5%,
     #fff 10%,
@@ -76,198 +83,43 @@
     );
 }
 
+/* Back cover */
 .book::after {
   position: absolute;
   top: 0;
   left: 0;
   content: ' ';
-  width: 125px;
-  height: 250px;
-  transform: translateZ(-12.5px);
+  width: var(--book-w);
+  height: var(--book-h);
+  transform: translateZ(calc(var(--book-d) / -2));
   background-color: #01060f;
   border-radius: 0 2px 2px 0;
 }
 
 @media (min-width: 1200px) and (max-width: 1600px) {
-  .book-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 600px;
-  }
-
-  @keyframes initAnimation {
-    0% {
-      transform: rotateY(-60deg);
-    }
-    100% {
-      transform: rotateY(-30deg);
-    }
-  }
-
   .book {
-    width: 100px;
-    height: 200px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateY(-30deg);
-    transition: 1s ease;
-    animation: 1s ease 0s 1 initAnimation;
+    --book-w: 100px;
+    --book-h: 200px;
+    --book-d: 20px;
+    --book-shadow: 3px 3px 3px #666;
   }
+}
 
-  .book-container:hover .book, 
-  .book-container:focus .book {
-    transform: rotateY(-60deg);
-  }
-
-  .book > :first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: red;
-    width: 100px;
-    height: 200px;
-    transform: translateZ(10px);
-    background-color: #01060f;
-    border-radius: 0 2px 2px 0;
-    box-shadow: 3px 3px 3px #666;
-  }
-
-  .book::before {
-    position: absolute;
-    content: ' ';
-    background-color: blue;
-    left: 0;
-    top: 1px;
-    width: 18px;
-    height: 198px;
-    transform: translateX(89px) rotateY(90deg);
-    background: linear-gradient(90deg, 
-      #fff 0%,
-      #f9f9f9 5%,
-      #fff 10%,
-      #f9f9f9 15%,
-      #fff 20%,
-      #f9f9f9 25%,
-      #fff 30%,
-      #f9f9f9 35%,
-      #fff 40%,
-      #f9f9f9 45%,
-      #fff 50%,
-      #f9f9f9 55%,
-      #fff 60%,
-      #f9f9f9 65%,
-      #fff 70%,
-      #f9f9f9 75%,
-      #fff 80%,
-      #f9f9f9 85%,
-      #fff 90%,
-      #f9f9f9 95%,
-      #fff 100%
-      );
-  }
-
-  .book::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: ' ';
-    width: 100px;
-    height: 200px;
-    transform: translateZ(-10px);
-    background-color: #01060f;
-    border-radius: 0 2px 2px 0;
+/* 3- and 2-column grids — full-size books overflowed their cells here */
+@media (min-width: 600px) and (max-width: 1200px) {
+  .book {
+    --book-w: 90px;
+    --book-h: 180px;
+    --book-d: 18px;
+    --book-shadow: 3px 3px 3px #666;
   }
 }
 
 @media (max-width: 600px) {
-  .book-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 600px;
-  }
-
-  @keyframes initAnimation {
-    0% {
-      transform: rotateY(-60deg);
-    }
-    100% {
-      transform: rotateY(-30deg);
-    }
-  }
-
   .book {
-    width: 80px;
-    height: 160px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateY(-30deg);
-    transition: 1s ease;
-    animation: 1s ease 0s 1 initAnimation;
-  }
-
-  .book-container:hover .book, 
-  .book-container:focus .book {
-    transform: rotateY(-60deg);
-  }
-
-  .book > :first-child {
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: red;
-    width: 80px;
-    height: 160px;
-    transform: translateZ(7.5px);
-    background-color: #01060f;
-    border-radius: 0 2px 2px 0;
-    box-shadow: 2px 2px 2px #666;
-  }
-
-  .book::before {
-    position: absolute;
-    content: ' ';
-    background-color: blue;
-    left: 0;
-    top: 1px;
-    width: 13px;
-    height: 158px;
-    transform: translateX(71.5px) rotateY(90deg);
-    background: linear-gradient(90deg, 
-      #fff 0%,
-      #f9f9f9 5%,
-      #fff 10%,
-      #f9f9f9 15%,
-      #fff 20%,
-      #f9f9f9 25%,
-      #fff 30%,
-      #f9f9f9 35%,
-      #fff 40%,
-      #f9f9f9 45%,
-      #fff 50%,
-      #f9f9f9 55%,
-      #fff 60%,
-      #f9f9f9 65%,
-      #fff 70%,
-      #f9f9f9 75%,
-      #fff 80%,
-      #f9f9f9 85%,
-      #fff 90%,
-      #f9f9f9 95%,
-      #fff 100%
-      );
-  }
-
-  .book::after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    content: ' ';
-    width: 80px;
-    height: 160px;
-    transform: translateZ(-7.5px);
-    background-color: #01060f;
-    border-radius: 0 2px 2px 0;
+    --book-w: 80px;
+    --book-h: 160px;
+    --book-d: 15px;
+    --book-shadow: 2px 2px 2px #666;
   }
 }

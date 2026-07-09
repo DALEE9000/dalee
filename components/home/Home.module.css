@@ -190,6 +190,9 @@
   border: 5px solid white;
   grid-column: 2 / 3;
   grid-row: 2 / 3;
+  /* The Image renders at 300px — don't let it overflow narrow phone columns */
+  max-width: 100%;
+  height: auto;
 }
 
 .about-box1 {
@@ -287,8 +290,18 @@
   }
 
   #library {
+    /* Wider than the usual 70vw column — the stacked chip bar and 3-column
+       book grid need the room. Column widths + gaps must total 100vw:
+       84 + 2x8 leaves a real 8vw margin either side of the box */
+    grid-template-columns: 1fr 84vw 1fr;
     grid-template-rows: 25vw repeat(1, auto);
-    gap: 15vw;
+    gap: 15vw 8vw;
+  }
+
+  /* The box is width:100% + 25px side padding; without border-box it
+     renders 50px wider than its grid column and eats the side margins */
+  #library .twinkle-box {
+    box-sizing: border-box;
   }
 
   .aboutme-animation,

@@ -21,6 +21,8 @@ const Stargazer = () => {
     const dragX = useRef(0);
     const dragY = useRef(0);
 
+    const hasDragged = useRef(false);
+
     useEffect(() => {
         const centerBlock = () => {
             if (!block.current) return;
@@ -43,6 +45,14 @@ const Stargazer = () => {
         };
 
         centerBlock();
+
+        // Re-center on resize (unless the user has dragged it somewhere) so
+        // the box can't end up stranded outside the viewport
+        const onResize = () => {
+            if (!hasDragged.current) centerBlock();
+        };
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
     }, []);
 
 
@@ -68,6 +78,7 @@ const Stargazer = () => {
     const handleMouseDown = (e) => {
         lastX.current = e.pageX;
         lastY.current = e.pageY;
+        hasDragged.current = true;
         setDragging(true);
     };
 
