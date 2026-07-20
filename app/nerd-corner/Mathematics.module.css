@@ -7,6 +7,16 @@
   margin-bottom: 1.5rem;
 }
 
+/* INDEX PAGE — category headers */
+
+.category-header {
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin: 2.5rem 0 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
 /* INDEX PAGE — textbook card link */
 
 .textbook-card {

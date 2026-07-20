@@ -15,6 +15,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: path.join(__dirname),
   },
+  async redirects() {
+    return [
+      {
+        source: "/mathematics",
+        destination: "/nerd-corner",
+        permanent: true,
+      },
+      {
+        source: "/mathematics/:slug",
+        destination: "/nerd-corner/:slug",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -10,7 +10,7 @@ import Stargazer from '@/components/Stargazer';
 import { jersey } from '@/components/Fonts';
 import { raleway } from '@/components/Fonts';
 import homeStyles from '@/components/home/Home.module.css';
-import mathStyles from '@/app/mathematics/Mathematics.module.css';
+import mathStyles from '@/app/nerd-corner/Mathematics.module.css';
 import type { Textbook, Chapter } from '@/components/mathematics/books';
 
 function toEmbeddablePdfUrl(url: string): string {
@@ -120,9 +120,9 @@ export default function TextbookClient({ book }: { book: Textbook }) {
         <AnimatePresence mode="wait">
           {!context.stargazer && (
             <DivAnimation props={box1}>
-              <Link href="/mathematics" className={mathStyles['back-link']}>
+              <Link href="/nerd-corner" className={mathStyles['back-link']}>
                 <LightUpText style={{ fontFamily: jersey.style.fontFamily }}>
-                  ← Mathematics
+                  ← Nerd Corner
                 </LightUpText>
               </Link>
 

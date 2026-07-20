@@ -14,13 +14,13 @@ export async function generateMetadata(
   const book = getTextbook(slug);
   if (!book) return {};
   return {
-    title: `${book.title} | Mathematics | David A. Lee`,
+    title: `${book.title} | Nerd Corner | David A. Lee`,
     description: book.coverDescription,
-    alternates: { canonical: `https://www.davidalee.dev/mathematics/${slug}` },
+    alternates: { canonical: `https://www.davidalee.dev/nerd-corner/${slug}` },
     openGraph: {
-      title: `${book.title} | Mathematics | David A. Lee`,
+      title: `${book.title} | Nerd Corner | David A. Lee`,
       description: book.coverDescription,
-      url: `https://www.davidalee.dev/mathematics/${slug}`,
+      url: `https://www.davidalee.dev/nerd-corner/${slug}`,
     },
   };
 }

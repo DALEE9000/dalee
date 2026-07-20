@@ -98,7 +98,7 @@ export function MathematicsAnimation() {
         <TypeAnimation
             className={stylesHome['mathematics-animation']}
             sequence={[
-                'Mathematics',
+                'Nerd Corner',
             ]}
             speed={40}
             style={{

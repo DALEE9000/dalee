@@ -146,10 +146,12 @@
   align-content: flex-start;
 }
 
-/* #mathematics matches #hire-me exactly so the footer lands the same way */
+/* #mathematics matches #hire-me exactly so the footer lands the same way.
+   min-height (not height) so a long textbook list pushes the footer down
+   instead of overflowing behind it */
 #mathematics,
 #hire-me {
-  height: 140vh;
+  min-height: 140vh;
   display: grid;
   gap: 5vw;
   grid-template-columns: 1fr 70vw 1fr;

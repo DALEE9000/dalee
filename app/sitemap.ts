@@ -1,5 +1,6 @@
 // app/sitemap.ts
 import { MetadataRoute } from "next";
+import { textbooks } from "@/components/mathematics/books";
 
 const baseUrl = "https://www.davidalee.dev";
 
@@ -21,15 +22,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      path: "/mathematics",
+      path: "/nerd-corner",
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      path: "/mathematics/strang-differential-equations-linear-algebra",
+    ...textbooks.map((book) => ({
+      path: `/nerd-corner/${book.slug}`,
       changeFrequency: "monthly",
       priority: 0.7,
-    },
+    })),
     {
       path: "/library",
       changeFrequency: "monthly",
