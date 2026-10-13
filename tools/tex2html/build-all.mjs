@@ -70,6 +70,8 @@ for (const m of manuals) {
     built++;
   } catch (e) {
     console.error(`${m.slug}: FAILED: ${e.message.split('\n')[0]}`);
+    const stderr = e.stderr?.toString().trim();
+    if (stderr) console.error('  ' + stderr.split('\n').slice(-5).join('\n  '));
     failed++;
   }
   saveManifest();

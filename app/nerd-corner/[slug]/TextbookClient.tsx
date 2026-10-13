@@ -26,7 +26,7 @@ function PdfLink({ href, label }: { href: string; label: string }) {
     >
       <span>{label}</span>
       <span className={mathStyles['pdf-link-tag']} style={{ fontFamily: raleway.style.fontFamily }}>
-        PDF ↗
+        PDF
       </span>
     </a>
   );

@@ -43,9 +43,14 @@ jobs:
           cache: npm
 
       - name: Install pandoc, poppler, epstopdf
+        # pandoc from its release, not apt: Ubuntu's build is older than the
+        # one the pipeline was developed against (3.12)
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q pandoc poppler-utils ghostscript texlive-font-utils
+          sudo apt-get install -y -q poppler-utils ghostscript texlive-font-utils
+          curl -fsSL -o /tmp/pandoc.deb https://github.com/jgm/pandoc/releases/download/3.12.1/pandoc-3.12.1-1-amd64.deb
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version | head -1
 
       - run: npm ci --no-audit --no-fund
 
