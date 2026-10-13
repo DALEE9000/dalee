@@ -12,31 +12,68 @@ import { raleway } from '@/components/Fonts';
 import homeStyles from '@/components/home/Home.module.css';
 import mathStyles from '@/app/nerd-corner/Mathematics.module.css';
 import type { Textbook, Chapter } from '@/components/mathematics/books';
+import type { ProblemIndex } from '@/components/mathematics/solutionsHtml';
 
-function toEmbeddablePdfUrl(url: string): string {
-  return `/api/pdf?url=${encodeURIComponent(url)}`;
+// PDFs are linked, not embedded: an iframe pulled the whole file on open.
+function PdfLink({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={mathStyles['pdf-link']}
+      style={{ fontFamily: jersey.style.fontFamily }}
+    >
+      <span>{label}</span>
+      <span className={mathStyles['pdf-link-tag']} style={{ fontFamily: raleway.style.fontFamily }}>
+        PDF ↗
+      </span>
+    </a>
+  );
 }
 
-function PdfEmbed({ src, title, className }: { src: string; title: string; className: string }) {
-  const embedUrl = toEmbeddablePdfUrl(src);
+// Problems rendered from the TeX source, one page each, grouped by chapter
+// and section. Only shown when the book has a build.
+function ProblemIndexList({ bookSlug, index }: { bookSlug: string; index: ProblemIndex }) {
   return (
     <>
-      <iframe src={embedUrl} className={className} title={title} />
-      <a
-        href={src}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={mathStyles['pdf-open-link']}
-        style={{ fontFamily: raleway.style.fontFamily }}
-      >
-        ↗ open in new tab
-      </a>
+      <p className={mathStyles['chapter-label']} style={{ fontFamily: raleway.style.fontFamily }}>
+        Problems
+      </p>
+      {index.chapters.map((chapter, ci) => (
+        <Dropdown key={ci} label={chapter.title} defaultOpen={ci === 0}>
+          {chapter.sections.map((section, si) => (
+            <div key={si} className={mathStyles['problem-group']}>
+              {section.title && (
+                <p className={mathStyles['problem-group-title']} style={{ fontFamily: raleway.style.fontFamily }}>
+                  {section.title}
+                </p>
+              )}
+              <div className={mathStyles['problem-chips']}>
+                {section.problems.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/nerd-corner/${bookSlug}/${p.slug}`}
+                    className={mathStyles['problem-chip']}
+                    style={{ fontFamily: jersey.style.fontFamily }}
+                  >
+                    {p.number}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </Dropdown>
+      ))}
     </>
   );
 }
 
-function Dropdown({ label, children }: { label: string; children: React.ReactNode }) {
-  const [open, setOpen] = useState(false);
+function Dropdown(
+  { label, defaultOpen = false, children }:
+  { label: string; defaultOpen?: boolean; children: React.ReactNode }
+) {
+  const [open, setOpen] = useState(defaultOpen);
 
   return (
     <div className={mathStyles['chapter-section']}>
@@ -72,21 +109,14 @@ function Dropdown({ label, children }: { label: string; children: React.ReactNod
   );
 }
 
+// Chapters with animations keep a dropdown; the rest are a bare link.
 function ChapterDropdown({ chapter }: { chapter: Chapter }) {
+  if (!chapter.sections?.length) {
+    return <PdfLink href={chapter.pdfUrl} label={chapter.title} />;
+  }
   return (
     <Dropdown label={chapter.title}>
-      {chapter.pdfUrl && (
-        <>
-          <p className={mathStyles['chapter-label']} style={{ fontFamily: raleway.style.fontFamily }}>
-            Solutions PDF
-          </p>
-          <PdfEmbed
-            src={chapter.pdfUrl}
-            title={`${chapter.title} solutions`}
-            className={mathStyles['chapter-pdf']}
-          />
-        </>
-      )}
+      {chapter.pdfUrl && <PdfLink href={chapter.pdfUrl} label="Solutions" />}
 
       {chapter.sections?.map((section, si) => (
         <div key={si} className={mathStyles['section-dropdown']}>
@@ -110,7 +140,9 @@ function ChapterDropdown({ chapter }: { chapter: Chapter }) {
   );
 }
 
-export default function TextbookClient({ book }: { book: Textbook }) {
+export default function TextbookClient(
+  { book, index }: { book: Textbook; index: ProblemIndex | null }
+) {
   const context = useContext(StargazerContext);
   const box1 = clsx(homeStyles['twinkle-box'], homeStyles['about-box1']);
 
@@ -139,19 +171,22 @@ export default function TextbookClient({ book }: { book: Textbook }) {
                 </AboutMeParagraph>
               )}
 
-              {book.fullSolutionsPdfUrl && (
-                <Dropdown label="Full Solutions">
-                  <PdfEmbed
-                    src={book.fullSolutionsPdfUrl}
-                    title={`${book.title} — full solutions`}
-                    className={mathStyles['full-pdf-frame']}
-                  />
-                </Dropdown>
+              {index && <ProblemIndexList bookSlug={book.slug} index={index} />}
+
+              {index && (
+                <p className={mathStyles['chapter-label']} style={{ fontFamily: raleway.style.fontFamily }}>
+                  PDFs
+                </p>
               )}
 
-              {book.chapters.map((chapter, i) => (
-                <ChapterDropdown key={i} chapter={chapter} />
-              ))}
+              <div className={mathStyles['pdf-links']}>
+                {book.fullSolutionsPdfUrl && (
+                  <PdfLink href={book.fullSolutionsPdfUrl} label="Full Solutions" />
+                )}
+                {book.chapters.map((chapter, i) => (
+                  <ChapterDropdown key={i} chapter={chapter} />
+                ))}
+              </div>
             </DivAnimation>
           )}
         </AnimatePresence>

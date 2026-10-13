@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { textbooks, getTextbook } from '@/components/mathematics/books';
+import { getProblemIndex } from '@/components/mathematics/solutionsHtml';
 import TextbookClient from './TextbookClient';
 
 export function generateStaticParams() {
@@ -31,5 +32,6 @@ export default async function TextbookPage(
   const { slug } = await params;
   const book = getTextbook(slug);
   if (!book) notFound();
-  return <TextbookClient book={book} />;
+  const index = await getProblemIndex(slug);
+  return <TextbookClient book={book} index={index} />;
 }

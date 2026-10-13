@@ -173,3 +173,95 @@
     padding: 1rem 1.2rem;
   }
 }
+
+/* TEXTBOOK PAGE — per-problem index (rendered TeX) */
+
+.problem-group {
+  margin: 0.4rem 0 1rem;
+}
+
+.problem-group-title {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0.6rem 0 0.4rem;
+}
+
+.problem-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.problem-chip {
+  display: inline-block;
+  min-width: 3.2rem;
+  padding: 0.35rem 0.8rem;
+  text-align: center;
+  font-size: clamp(1rem, 1.6vw, 1.25rem);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.problem-chip:hover {
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 0.6rem #a683ff55;
+}
+
+/* PROBLEM PAGE — prev / index / next */
+
+.problem-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 2.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+}
+
+.problem-nav a {
+  color: white;
+  transition: color 0.2s ease;
+}
+
+.problem-nav a:hover {
+  color: #cbcb85;
+}
+
+/* PROBLEM PAGE — denser card so dense math reads over the starfield */
+.problem-box {
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+/* TEXTBOOK PAGE — PDF link rows (replaced the inline PDF embeds) */
+
+.pdf-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.8rem 0 1.5rem;
+}
+
+.pdf-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: fit-content;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: white;
+  transition: color 0.2s ease;
+}
+
+.pdf-link:hover {
+  color: #cbcb85;
+}
+
+.pdf-link-tag {
+  font-size: 0.7em;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.6);
+}

@@ -43,3 +43,5 @@ next-env.d.ts
 
 # Claude
 .claude/
+# tex2html: shallow clones of the solutions repos (public/solutions is committed)
+.tex2html-work/

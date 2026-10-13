@@ -1,0 +1,31 @@
+<div class="problem">
+<p>Consider the data in Example 8.6. Find the plug-in estimate of the correlation coefficient. Estimate the standard error using the bootstrap. Find a 95 percent confidence interval using the Normal, pivotal, and percentile methods.</p>
+</div>
+<p>We plot the LSAT and GPA data as follows:</p>
+<div class="center">
+<p><figure class="fig" style="max-width:100.0%"><img src="/solutions/wasserman-all-of-statistics/figs/chap8ex1i.svg" alt="" loading="lazy" style="aspect-ratio:376.4 / 276.55"></figure></p>
+</div>
+<p>And calculate the plug-in estimate of the correlation as <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.7764</mn></mrow><annotation encoding="application/x-tex">0.7764</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.7764</span></span></span></span>. For <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>B</mi><mo>=</mo><mn>1000</mn></mrow><annotation encoding="application/x-tex">B = 1000</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.0502em;">B</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1000</span></span></span></span> number of samples, we bootstrap the correlation, which has standard error <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0.1263</mn></mrow><annotation encoding="application/x-tex">0.1263</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">0.1263</span></span></span></span>. This gives us for the confidence intervals</p>
+<div class="center">
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Normal</th>
+<th style="text-align: center;"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mn>0.5287</mn><mo separator="true">,</mo><mn>1.0240</mn><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left( 0.5287, 1.0240 \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0.5287</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1.0240</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Pivotal</td>
+<td style="text-align: center;"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mn>0.5902</mn><mo separator="true">,</mo><mn>1.0879</mn><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left( 0.5902, 1.0879 \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0.5902</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1.0879</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></td>
+</tr>
+<tr>
+<td style="text-align: center;">Percentile</td>
+<td style="text-align: center;"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo fence="true">(</mo><mn>0.4649</mn><mo separator="true">,</mo><mn>0.9625</mn><mo fence="true">)</mo></mrow><annotation encoding="application/x-tex">\left( 0.4649, 0.9625 \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;">(</span><span class="mord">0.4649</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">0.9625</span><span class="mclose delimcenter" style="top:0em;">)</span></span></span></span></span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="center">
+<p><figure class="fig" style="max-width:100.0%"><img src="/solutions/wasserman-all-of-statistics/figs/chap8ex1ii.svg" alt="" loading="lazy" style="aspect-ratio:355.46 / 277.44"></figure></p>
+</div>

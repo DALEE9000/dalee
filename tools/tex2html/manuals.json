@@ -1,0 +1,43 @@
+[
+  {
+    "slug": "strang-differential-equations-linear-algebra",
+    "repo": "DALEE9000/Solutions-to-Differential-Equations-and-Linear-Algebra-by-Gilbert-Strang",
+    "doc": "deqla/deqla.tex"
+  },
+  {
+    "slug": "strang-linear-algebra-and-learning-from-data",
+    "repo": "DALEE9000/Solutions-to-Linear-Algebra-and-Learning-from-Data-by-Gilbert-Strang",
+    "doc": "ladata/ladata.tex"
+  },
+  {
+    "slug": "haberman-applied-partial-differential-equations",
+    "repo": "DALEE9000/Solutions-to-Applied-Partial-Differential-Equations-by-Richard-Haberman",
+    "doc": "apde/apde.tex"
+  },
+  {
+    "slug": "wasserman-all-of-statistics",
+    "repo": "DALEE9000/Solutions-to-All-of-Statistics-by-Larry-Wasserman",
+    "doc": "allofstats/allofstats.tex"
+  },
+  {
+    "slug": "meyer-introductory-probability-and-statistical-applications",
+    "repo": "DALEE9000/Solutions-to-Introductory-Probability-and-Statistical-Applications-2nd-ed.-Paul-L.-Meyer",
+    "doc": "master.tex",
+    "preset": "meyer"
+  },
+  {
+    "slug": "griffiths-introduction-to-electrodynamics",
+    "repo": "DALEE9000/Solutions-to-Introduction-to-Electrodynamics-by-David-Griffiths",
+    "doc": "introelectrodynamics/introelectrodynamics.tex"
+  },
+  {
+    "slug": "griffiths-introduction-to-quantum-mechanics",
+    "repo": "DALEE9000/Solutions-to-Introduction-to-Quantum-Mechanics-by-David-Griffiths",
+    "doc": "introquantummechanics/introquantummechanics.tex"
+  },
+  {
+    "slug": "kundu-cohen-dowling-fluid-mechanics",
+    "repo": "DALEE9000/Solutions-to-Fluid-Mechanics-6th-ed.-Kundu-Cohen-Dowling",
+    "doc": "fluidmechanics/fluidmechanics.tex"
+  }
+]

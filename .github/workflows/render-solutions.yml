@@ -1,0 +1,65 @@
+# Re-render the Nerd Corner solutions manuals from their TeX repos.
+#
+# Runs when a solutions repo pushes (its notify-site workflow sends a
+# repository_dispatch here), every 15 minutes as a fallback, and on demand.
+# build-all.mjs clones each repo listed in tools/tex2html/manuals.json,
+# rebuilds the ones whose HEAD changed since the sha in
+# public/solutions/manifest.json, and this job commits the result to main.
+# Vercel then deploys. GITHUB_TOKEN is enough to push here; the only secret in
+# the system is the dispatch token in the solutions repos.
+
+name: Render solutions manuals
+
+on:
+  repository_dispatch:
+    types: [solutions-updated]
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Rebuild every manual even if unchanged'
+        type: boolean
+        default: false
+
+concurrency:
+  group: render-solutions
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install pandoc, poppler, epstopdf
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q pandoc poppler-utils ghostscript texlive-font-utils
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Build changed manuals
+        run: node tools/tex2html/build-all.mjs ${{ inputs.force && '--force' || '' }}
+
+      - name: Commit and push
+        run: |
+          git add public/solutions
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "solutions: re-render changed manuals"
+          git push

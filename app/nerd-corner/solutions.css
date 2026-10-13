@@ -1,0 +1,127 @@
+/* Rendered TeX solutions (output of tools/tex2html), dark theme. Global
+   because the markup comes from pandoc, not from components. */
+
+/* Computer Modern for prose too, from the fonts KaTeX already loads:
+   KaTeX_Main is the roman, KaTeX_SansSerif matches \textsf headings. */
+.solutions {
+  font-family: 'KaTeX_Main', 'Latin Modern Roman', 'Computer Modern', 'Times New Roman', serif;
+  font-weight: 400;
+  font-size: 1.15rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.92);
+  overflow-wrap: anywhere;
+}
+
+.solutions h1,
+.solutions h2,
+.solutions h3,
+.solutions strong {
+  font-family: 'KaTeX_SansSerif', 'Latin Modern Sans', sans-serif;
+}
+
+.solutions h1,
+.solutions h2,
+.solutions h3 {
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 2.2rem 0 0.8rem;
+}
+
+.solutions h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); }
+.solutions h2 {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+.solutions h3 { font-size: 1.15rem; }
+
+.solutions p { margin: 0.7rem 0; }
+
+.solutions ol,
+.solutions ul {
+  padding-left: 1.6rem;
+  margin: 0.6rem 0;
+}
+.solutions li > p:first-child { margin-top: 0; }
+
+.solutions a { color: #a683ff; }
+
+/* \qs problem box: mirrors the tcolorbox "question" colour in the PDF */
+.solutions .problem {
+  margin: 2rem 0 1rem;
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid #3fb69e;
+  border-radius: 0 0.5rem 0.5rem 0;
+  background: rgba(63, 182, 158, 0.08);
+}
+.solutions .problem > p:first-child { margin-top: 0; }
+.solutions .problem > :last-child { margin-bottom: 0; }
+
+.solutions .theorem {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.2rem;
+  border-left: 3px solid #8c8cff;
+  background: rgba(140, 140, 255, 0.08);
+}
+
+.solutions .center { text-align: center; }
+
+/* math: display equations scroll sideways on narrow screens instead of
+   overflowing the card */
+.solutions .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.3rem 0;
+  margin: 0.8rem 0;
+}
+.solutions .katex { font-size: 1.08em; }
+
+/* figures: build.mjs recolours them dark with neon accents; the SVG carries
+   its own near-black paper, the border just lifts it off the card */
+.solutions .fig {
+  margin: 1rem auto;
+  width: 100%;
+}
+.solutions .fig img {
+  display: block;
+  width: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.5rem;
+}
+
+.solutions .footnotes {
+  margin-top: 2.5rem;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+.solutions .footnotes hr { border: 0; border-top: 1px solid rgba(255, 255, 255, 0.18); }
+
+.solutions pre {
+  overflow-x: auto;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* math KaTeX could not parse: shown raw so it gets fixed at the source */
+.solutions .tex-error {
+  display: inline-block;
+  white-space: pre-wrap;
+  padding: 0.1rem 0.4rem;
+  background: rgba(255, 0, 0, 0.18);
+  color: #ffb3b3;
+  border-radius: 0.3rem;
+}
+
+.solutions table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  overflow-x: auto;
+  display: block;
+}
+.solutions th,
+.solutions td {
+  padding: 0.3rem 0.8rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
