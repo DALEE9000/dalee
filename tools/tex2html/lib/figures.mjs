@@ -23,17 +23,30 @@ const hslToRgb = (h, s, l) => {
 
 // white paper -> near-black card, black ink -> off-white, greys inverted,
 // anything saturated pushed to a bright neon of the same hue.
+// cairo writes rgb(100%,100%,100%) on Windows and rgb(100%, 100%, 100%) on
+// Linux; hex and 0-255 forms are accepted too in case a source SVG uses them.
+const COLOUR = /rgb\(\s*([\d.]+)(%?)\s*,\s*([\d.]+)%?\s*,\s*([\d.]+)%?\s*\)|#([0-9a-fA-F]{6})\b/g;
+
+function remap(r, g, b) {
+  let [h, s, l] = rgbToHsl(r, g, b);
+  if (s < 0.15) {
+    l = l > 0.9 ? 0.06 : l < 0.12 ? 0.93 : Math.min(0.9, Math.max(0.35, 1 - l));
+    if (l < 0.1) { h = 0.68; s = 0.3; } else s = 0;
+  } else {
+    s = Math.max(s, 0.85);
+    l = Math.min(0.72, Math.max(0.6, l));
+  }
+  return `rgb(${hslToRgb(h, s, l).join(',')})`;
+}
+
 export const darkTheme = (svg) =>
-  svg.replace(/rgb\(([\d.]+)%,([\d.]+)%,([\d.]+)%\)/g, (_, r, g, b) => {
-    let [h, s, l] = rgbToHsl(r / 100, g / 100, b / 100);
-    if (s < 0.15) {
-      l = l > 0.9 ? 0.06 : l < 0.12 ? 0.93 : Math.min(0.9, Math.max(0.35, 1 - l));
-      if (l < 0.1) { h = 0.68; s = 0.3; } else s = 0;
-    } else {
-      s = Math.max(s, 0.85);
-      l = Math.min(0.72, Math.max(0.6, l));
+  svg.replace(COLOUR, (_, r, pct, g, b, hex) => {
+    if (hex) {
+      const n = parseInt(hex, 16);
+      return remap((n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255);
     }
-    return `rgb(${hslToRgb(h, s, l).join(',')})`;
+    const scale = pct ? 100 : 255;
+    return remap(r / scale, g / scale, b / scale);
   });
 
 // pandoc writes <embed> for PDF and <img> for everything else; graphicx also
@@ -149,8 +162,10 @@ export async function processFigures(html, { docDir, repoRoot, figDir, figBase, 
     // length survive as a style; anything else (\unitlength, no width) falls
     // back to the figure's own size so a small diagram stays small
     const width = /width:([^;"]+)/.exec(attrs)?.[1] ?? natural ?? '100%';
-    // the stylesheet caps figures at min(--fig-w, a fraction of the column)
-    parts.push(`<figure class="fig" style="--fig-w:${width}">` +
+    // the stylesheet caps figures at min(--fig-w, a fraction of the column);
+    // raster sources cannot be recoloured, the stylesheet inverts those
+    const cls = name.endsWith('.svg') || name.endsWith('.webp') ? 'fig' : 'fig raster';
+    parts.push(`<figure class="${cls}" style="--fig-w:${width}">` +
       `<img src="${figBase}/${name}" alt="" loading="lazy" style="aspect-ratio:${ratio}"></figure>`);
   }
   parts.push(html.slice(last));

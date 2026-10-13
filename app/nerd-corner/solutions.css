@@ -97,6 +97,11 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 0.5rem;
 }
+/* PNG/JPG sources: pixels cannot be remapped, so invert them for the dark
+   card (hue-rotate keeps the colours roughly where they were) */
+.solutions .fig.raster img {
+  filter: invert(1) hue-rotate(180deg);
+}
 
 /* animations attached to a problem, streamed through /api/video */
 .solutions .video {
