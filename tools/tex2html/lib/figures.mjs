@@ -149,7 +149,8 @@ export async function processFigures(html, { docDir, repoRoot, figDir, figBase, 
     // length survive as a style; anything else (\unitlength, no width) falls
     // back to the figure's own size so a small diagram stays small
     const width = /width:([^;"]+)/.exec(attrs)?.[1] ?? natural ?? '100%';
-    parts.push(`<figure class="fig" style="max-width:${width}">` +
+    // the stylesheet caps figures at min(--fig-w, a fraction of the column)
+    parts.push(`<figure class="fig" style="--fig-w:${width}">` +
       `<img src="${figBase}/${name}" alt="" loading="lazy" style="aspect-ratio:${ratio}"></figure>`);
   }
   parts.push(html.slice(last));

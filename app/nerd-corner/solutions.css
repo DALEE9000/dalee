@@ -81,6 +81,15 @@
 .solutions .fig {
   margin: 1rem auto;
   width: 100%;
+  /* --fig-w is the figure's own cap from \includegraphics (or its natural
+     size); on top of that, never wider than 70% of the column */
+  max-width: min(var(--fig-w, 100%), 70%);
+}
+
+@media (max-width: 600px) {
+  .solutions .fig {
+    max-width: var(--fig-w, 100%);
+  }
 }
 .solutions .fig img {
   display: block;
