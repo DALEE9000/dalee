@@ -109,35 +109,10 @@ function Dropdown(
   );
 }
 
-// Chapters with animations keep a dropdown; the rest are a bare link.
+// Each chapter is a PDF link. Animations are no longer listed here: the build
+// attaches them to their problem's page (tools/tex2html/lib/videos.mjs).
 function ChapterDropdown({ chapter }: { chapter: Chapter }) {
-  if (!chapter.sections?.length) {
-    return <PdfLink href={chapter.pdfUrl} label={chapter.title} />;
-  }
-  return (
-    <Dropdown label={chapter.title}>
-      {chapter.pdfUrl && <PdfLink href={chapter.pdfUrl} label="Solutions" />}
-
-      {chapter.sections?.map((section, si) => (
-        <div key={si} className={mathStyles['section-dropdown']}>
-          <Dropdown label={section.title}>
-            {section.animations.map((anim, ai) => (
-              <div key={ai} className={mathStyles['section-animation']}>
-                <p className={mathStyles['chapter-label']} style={{ fontFamily: raleway.style.fontFamily }}>
-                  {anim.title}
-                </p>
-                {anim.url && (
-                  <video controls loop className={mathStyles['chapter-video']}>
-                    <source src={`/api/video?url=${encodeURIComponent(anim.url)}`} type="video/mp4" />
-                  </video>
-                )}
-              </div>
-            ))}
-          </Dropdown>
-        </div>
-      ))}
-    </Dropdown>
-  );
+  return <PdfLink href={chapter.pdfUrl} label={chapter.title} />;
 }
 
 export default function TextbookClient(

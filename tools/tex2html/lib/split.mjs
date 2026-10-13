@@ -18,7 +18,8 @@ function divEnd(html, start) {
   throw new Error('unbalanced <div> in pandoc output');
 }
 
-export function splitProblems(html) {
+// videos: Map of problem number -> html to append after that solution
+export function splitProblems(html, { videos = new Map() } = {}) {
   const footnotes = new Map();
   html = html.replace(/<section id="[^"]*footnotes"[\s\S]*?<\/section>/, (sec) => {
     for (const m of sec.matchAll(/<li id="([^"]+)">([\s\S]*?)<\/li>/g)) footnotes.set(m[1], m[2]);
@@ -71,6 +72,7 @@ export function splitProblems(html) {
     section.problems.push({ slug, number });
 
     let body = statement + '\n' + solution;
+    if (videos.has(number)) { body += '\n' + videos.get(number); videos.delete(number); }
     const refs = [...body.matchAll(/href="#([^"]+-fn\d+)"/g)].map((m) => m[1]);
     if (refs.length) {
       body += '\n<section class="footnotes"><hr><ol>' +

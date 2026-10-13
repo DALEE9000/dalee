@@ -15,8 +15,9 @@ import { preprocess, graphicsPaths } from './lib/preprocess.mjs';
 import { renderMath } from './lib/math.mjs';
 import { processFigures } from './lib/figures.mjs';
 import { splitProblems } from './lib/split.mjs';
+import { findVideos, videoHtml } from './lib/videos.mjs';
 
-export async function buildManual({ repoRoot, doc, outDir, figBase, preset = 'qs', log = console.error }) {
+export async function buildManual({ repoRoot, doc, outDir, figBase, repo, preset = 'qs', log = console.error }) {
   const texPath = path.resolve(repoRoot, doc);
   const docDir = path.dirname(texPath);
   const docName = path.basename(texPath, '.tex');
@@ -41,7 +42,14 @@ export async function buildManual({ repoRoot, doc, outDir, figBase, preset = 'qs
     .replace(/\bid="([^"]+)"/g, `id="${docName}-$1"`)
     .replace(/\bhref="#([^"]+)"/g, `href="#${docName}-$1"`);
 
-  const split = splitProblems(html);
+  // animations next to the TeX attach to the problem their filename names
+  const vids = repo ? findVideos(repoRoot, repo) : { byProblem: new Map(), unmatched: [] };
+  const videos = new Map([...vids.byProblem].map(([n, list]) => [n, videoHtml(list)]));
+  const videoCount = vids.byProblem.size;
+
+  const split = splitProblems(html, { videos });
+  for (const rel of vids.unmatched) split.errors.push(`video ${rel}: filename names no problem`);
+  for (const n of videos.keys()) split.errors.push(`video for problem ${n}: no such problem`);
 
   const probDir = path.join(outDir, 'problems');
   fs.rmSync(probDir, { recursive: true, force: true });
@@ -51,6 +59,7 @@ export async function buildManual({ repoRoot, doc, outDir, figBase, preset = 'qs
 
   const errors = [...math.errors, ...figs.errors, ...split.errors];
   log(`${docName}: ${split.problems.length} problems, ${figs.count} figures` +
+      (videoCount ? `, ${videoCount} videos` : '') +
       (errors.length ? `, ${errors.length} issue(s)` : ''));
   for (const e of errors) log('  - ' + e);
   return { problems: split.problems.length, figures: figs.count, errors };

@@ -9,6 +9,7 @@
 // manual are reported but do not fail the run.
 
 import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +30,15 @@ const manuals = JSON.parse(fs.readFileSync(path.join(here, 'manuals.json'), 'utf
 if (!manuals.length) { console.error('no manuals matched'); process.exit(2); }
 
 const manifest = fs.existsSync(manifestPath) ? JSON.parse(fs.readFileSync(manifestPath, 'utf8')) : {};
+
+// A change to the pipeline itself must rebuild every manual, not just a
+// change in a repo: hash the tool sources and store it alongside the sha.
+const toolHash = (() => {
+  const h = createHash('sha256');
+  const files = ['build.mjs', 'build-all.mjs', ...fs.readdirSync(path.join(here, 'lib')).map((f) => `lib/${f}`)];
+  for (const f of files.sort()) h.update(fs.readFileSync(path.join(here, f)));
+  return h.digest('hex').slice(0, 12);
+})();
 // core.longpaths: Meyer's "Chapter N - Title/Chapter N - Title.tex" paths
 // exceed the Windows default limit
 const git = (cwd, ...a) =>
@@ -52,21 +62,23 @@ for (const m of manuals) {
     }
     const sha = git(repoDir, 'rev-parse', 'HEAD');
 
-    if (!force && manifest[m.slug]?.sha === sha && fs.existsSync(path.join(outRoot, m.slug, 'index.json'))) {
+    const prev = manifest[m.slug];
+    if (!force && prev?.sha === sha && prev?.tool === toolHash && fs.existsSync(path.join(outRoot, m.slug, 'index.json'))) {
       console.error(`${m.slug}: unchanged (${sha.slice(0, 7)})`);
       unchanged++;
       continue;
     }
 
-    console.error(`${m.slug}: building ${sha.slice(0, 7)}`);
+    console.error(`${m.slug}: building ${sha.slice(0, 7)}${prev && prev.sha === sha ? ' (pipeline changed)' : ''}`);
     const r = await buildManual({
       repoRoot: repoDir,
       doc: m.doc,
       outDir: path.join(outRoot, m.slug),
       figBase: `/solutions/${m.slug}/figs`,
+      repo: m.repo,
       preset: m.preset,
     });
-    manifest[m.slug] = { sha, builtAt: new Date().toISOString(), problems: r.problems, issues: r.errors.length };
+    manifest[m.slug] = { sha, tool: toolHash, builtAt: new Date().toISOString(), problems: r.problems, issues: r.errors.length };
     built++;
   } catch (e) {
     console.error(`${m.slug}: FAILED: ${e.message.split('\n')[0]}`);

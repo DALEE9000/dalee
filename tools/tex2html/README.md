@@ -46,9 +46,17 @@ manual whose markup differs from the `\qs` template (currently Meyer).
    there is nothing to change in the notebooks. An SVG over 400 KB (scatter
    plots with tens of thousands of markers reach 20 MB) is rasterised to a
    1800 px lossless WebP with `sharp` and the SVG dropped.
-5. Split on `<h1>` (chapter), `<h2>` (section), `<div class="problem">`. The
-   slug is the `\qs` number with anything but word characters and dots
+5. Split on `<h1>` (chapter), `<h2>` and deeper (section), `<div class="problem">`.
+   The slug is the `\qs` number with anything but word characters and dots
    replaced by `-`.
+6. Animations: any `.mp4` or `.webm` in the repo is attached to the problem
+   its filename names and streamed through the site's `/api/video` proxy
+   (nothing is copied). Two filename conventions are recognised:
+   `chap8sec8.3ex2.mp4` is problem 8.3.2, `chap3ex3.10.mp4` is problem 3.10.
+   Anything else is reported in the build log and skipped.
+
+The manifest also records a hash of the pipeline sources, so editing
+anything under `tools/tex2html` rebuilds every manual on the next run.
 
 ## Rebuild locally
 
