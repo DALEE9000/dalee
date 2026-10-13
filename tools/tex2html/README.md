@@ -101,11 +101,39 @@ applies. A new manual needs the workflow file copied in and the secret set.
 
 ## Adding a manual
 
-1. Add the book to `components/mathematics/books.ts` as before.
-2. Add `{ slug, repo, doc }` to `manuals.json`. If the manual does not use
-   `\qs`, add a preset in `lib/preprocess.mjs` and name it in the entry.
-3. `node tools/tex2html/build-all.mjs <slug>`, read the log, fix what it
-   flags, commit `public/solutions/<slug>`.
+The new repo should follow the template the others use: a `header*.tex` at
+the root that defines `\qs`, one full-manual document (`<doc>/<doc>.tex`),
+figures referenced from `\includegraphics` as PDF, EPS or PNG.
+
+In dalee:
+
+1. Add the book to `components/mathematics/books.ts` as before (title,
+   author, PDF links). Its `slug` is the key everything else hangs on.
+2. Add `{ "slug", "repo", "doc" }` to `manuals.json`: the same slug, the
+   GitHub `owner/name`, and the full manual's `.tex` path relative to the repo
+   root. If the manual does not use `\qs`, add a preset in
+   `lib/preprocess.mjs` and name it in the entry.
+3. Dry run locally to catch problems before CI sees them:
+   `node tools/tex2html/build-all.mjs <slug>`. Read the log: it lists every
+   math span KaTeX rejected, missing figures, and `\qs` boxes without a
+   number. Fix those in the TeX (or extend the macro table in `lib/math.mjs`
+   if KaTeX lacks a command). Do not commit the local `public/solutions/<slug>`
+   output: CI renders with its own toolchain and the bytes differ, so a local
+   commit just churns. `git checkout -- public/solutions` to discard it.
+4. Commit `books.ts` and `manuals.json`, push. Within 15 minutes the cron
+   render builds the new manual and commits it; or run the workflow by hand
+   from the Actions tab for sooner.
+
+In the new solutions repo, for push-to-live:
+
+5. Copy `tools/tex2html/notify-site.yml` to
+   `.github/workflows/notify-site.yml` and push it.
+6. Store the dispatch token there:
+   `gh secret set DALEE_DISPATCH_TOKEN -R DALEE9000/<repo> -b <token>`
+   (same token the other repos use; if it is lost, generate a new one with
+   the link above and set it on every repo).
+
+Without steps 5 and 6 the manual still renders, just on the 15-minute cron.
 
 ## Known gaps
 
