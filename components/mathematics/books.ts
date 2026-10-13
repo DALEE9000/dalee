@@ -232,6 +232,21 @@ export const textbooks: Textbook[] = [
     ],
   },
   {
+    slug: 'griffiths-introduction-to-quantum-mechanics',
+    title: 'Introduction to Quantum Mechanics',
+    author: 'David J. Griffiths',
+    category: 'Physics',
+    coverDescription: 'Solutions for David J. Griffiths\' Introduction to Quantum Mechanics, 2nd edition.',
+    description: 'Solutions for David J. Griffiths\' Introduction to Quantum Mechanics, 2nd edition.',
+    fullSolutionsPdfUrl: 'https://github.com/DALEE9000/Solutions-to-Introduction-to-Quantum-Mechanics-by-David-Griffiths/blob/main/introquantummechanics/introquantummechanics.pdf',
+    chapters: [
+      {
+        title: 'Chapter 1: The Wave Function',
+        pdfUrl: 'https://github.com/DALEE9000/Solutions-to-Introduction-to-Quantum-Mechanics-by-David-Griffiths/blob/main/introquantummechanicschap1/introquantummechanicschap1.pdf',
+      },
+    ],
+  },
+  {
     slug: 'kundu-cohen-dowling-fluid-mechanics',
     title: 'Fluid Mechanics',
     author: 'Pijush K. Kundu, Ira M. Cohen, and David R. Dowling',
