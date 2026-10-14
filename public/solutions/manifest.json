@@ -1,57 +1,57 @@
 {
   "strang-differential-equations-linear-algebra": {
     "sha": "095d0563e6e9ef82ca1b9ba4c969c02db324a2dd",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:53:54.103Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:09:57.696Z",
     "problems": 460,
     "issues": 0
   },
   "strang-linear-algebra-and-learning-from-data": {
     "sha": "d4b73d22f98d153767b54bbc4d5ec14334fff035",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:53:56.512Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:09:59.944Z",
     "problems": 145,
     "issues": 1
   },
   "haberman-applied-partial-differential-equations": {
     "sha": "873a48e3d1409235c0e19bcf1d291f292a42919c",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:53:59.489Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:10:02.966Z",
     "problems": 122,
     "issues": 0
   },
   "wasserman-all-of-statistics": {
     "sha": "5540fcc89c4072c8cad734d36411b20ac49d3ba0",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:55:14.638Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:10:57.803Z",
     "problems": 108,
     "issues": 1
   },
   "griffiths-introduction-to-electrodynamics": {
     "sha": "629516bd524d843f4348f26af929a5d784de115d",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:55:22.141Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:11:05.145Z",
     "problems": 64,
     "issues": 0
   },
   "griffiths-introduction-to-quantum-mechanics": {
     "sha": "632f12c38804cc5cf1de6ffb6e36eb4b144b2fc5",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:55:23.196Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:11:06.744Z",
     "problems": 18,
     "issues": 0
   },
   "kundu-cohen-dowling-fluid-mechanics": {
     "sha": "bc936e2956af0d519c42cc903baa2bae75a0b53f",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:55:24.537Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:11:08.736Z",
     "problems": 26,
     "issues": 0
   },
   "meyer-introductory-probability-and-statistical-applications": {
     "sha": "6de3e7cf8d9eee841bd89bd37761ad58020aedd4",
-    "tool": "56d8bbce7cb1",
-    "builtAt": "2026-10-13T23:55:21.011Z",
+    "tool": "3d672ddfc2f6",
+    "builtAt": "2026-10-14T00:11:03.549Z",
     "problems": 266,
     "issues": 0
   }
