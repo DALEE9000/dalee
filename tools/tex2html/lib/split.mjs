@@ -7,6 +7,31 @@
 
 const stripTags = (s) => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 
+// Heading text with each rendered KaTeX span replaced by its source TeX
+// (KaTeX's markup carries the text twice, once for screen readers), for
+// page titles and metadata. The HTML form is kept separately for display.
+function plainText(inner) {
+  let out = '', i = 0;
+  const open = /<span class="katex">/g;
+  let m;
+  while ((m = open.exec(inner))) {
+    out += inner.slice(i, m.index);
+    const re = /<span\b|<\/span>/g;
+    re.lastIndex = m.index;
+    let depth = 0, t;
+    while ((t = re.exec(inner))) {
+      depth += t[0] === '</span>' ? -1 : 1;
+      if (depth === 0) break;
+    }
+    const end = t ? t.index + t[0].length : inner.length;
+    const tex = /<annotation encoding="application\/x-tex">([\s\S]*?)<\/annotation>/.exec(inner.slice(m.index, end));
+    out += tex ? tex[1] : '';
+    i = end;
+    open.lastIndex = end;
+  }
+  return stripTags(out + inner.slice(i));
+}
+
 function divEnd(html, start) {
   const re = /<div\b|<\/div>/g;
   re.lastIndex = start;
@@ -46,9 +71,11 @@ export function splitProblems(html, { videos = new Map() } = {}) {
     const tag = markers[i][0].slice(1, 3);
 
     if (/^h[1-6]$/.test(tag)) {
-      const title = stripTags(/<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/.exec(html.slice(start, end))[1]);
-      if (tag === 'h1') { chapter = { title, sections: [] }; chapters.push(chapter); section = null; }
-      else { if (!chapter) ensureSection(); section = { title, problems: [] }; chapter.sections.push(section); }
+      const inner = /<h[1-6][^>]*>([\s\S]*?)<\/h[1-6]>/.exec(html.slice(start, end))[1];
+      const title = plainText(inner);
+      const titleHtml = inner.replace(/\s+/g, ' ').trim();
+      if (tag === 'h1') { chapter = { title, titleHtml, sections: [] }; chapters.push(chapter); section = null; }
+      else { if (!chapter) ensureSection(); section = { title, titleHtml, problems: [] }; chapter.sections.push(section); }
       continue;
     }
 

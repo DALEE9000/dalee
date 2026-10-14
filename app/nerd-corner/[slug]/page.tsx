@@ -3,6 +3,8 @@ import { notFound } from 'next/navigation';
 import { textbooks, getTextbook } from '@/components/mathematics/books';
 import { getProblemIndex } from '@/components/mathematics/solutionsHtml';
 import TextbookClient from './TextbookClient';
+// chapter and section titles can contain rendered math
+import 'katex/dist/katex.min.css';
 
 export function generateStaticParams() {
   return textbooks.map((book) => ({ slug: book.slug }));

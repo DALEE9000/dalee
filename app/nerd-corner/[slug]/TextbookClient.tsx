@@ -41,13 +41,19 @@ function ProblemIndexList({ bookSlug, index }: { bookSlug: string; index: Proble
         Problems
       </p>
       {index.chapters.map((chapter, ci) => (
-        <Dropdown key={ci} label={chapter.title} defaultOpen={ci === 0}>
+        <Dropdown
+          key={ci}
+          label={<span dangerouslySetInnerHTML={{ __html: chapter.titleHtml ?? chapter.title }} />}
+          defaultOpen={ci === 0}
+        >
           {chapter.sections.map((section, si) => (
             <div key={si} className={mathStyles['problem-group']}>
               {section.title && (
-                <p className={mathStyles['problem-group-title']} style={{ fontFamily: raleway.style.fontFamily }}>
-                  {section.title}
-                </p>
+                <p
+                  className={mathStyles['problem-group-title']}
+                  style={{ fontFamily: raleway.style.fontFamily }}
+                  dangerouslySetInnerHTML={{ __html: section.titleHtml ?? section.title }}
+                />
               )}
               <div className={mathStyles['problem-chips']}>
                 {section.problems.map((p) => (
@@ -71,7 +77,7 @@ function ProblemIndexList({ bookSlug, index }: { bookSlug: string; index: Proble
 
 function Dropdown(
   { label, defaultOpen = false, children }:
-  { label: string; defaultOpen?: boolean; children: React.ReactNode }
+  { label: React.ReactNode; defaultOpen?: boolean; children: React.ReactNode }
 ) {
   const [open, setOpen] = useState(defaultOpen);
 

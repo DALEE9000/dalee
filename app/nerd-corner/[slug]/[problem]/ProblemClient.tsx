@@ -13,7 +13,9 @@ import mathStyles from '@/app/nerd-corner/Mathematics.module.css';
 import type { Textbook } from '@/components/mathematics/books';
 import type { ProblemRef } from '@/components/mathematics/solutionsHtml';
 
-type Located = ProblemRef & { chapter: string; section: string };
+type Located = ProblemRef & {
+  chapter: string; section: string; chapterHtml: string; sectionHtml: string;
+};
 
 export default function ProblemClient(
   { book, problem, html, prev, next }:
@@ -46,9 +48,13 @@ export default function ProblemClient(
               <h1 className={mathStyles['book-title']} style={{ fontFamily: jersey.style.fontFamily }}>
                 Problem {problem.number}
               </h1>
-              <p className={mathStyles['book-author']} style={{ fontFamily: raleway.style.fontFamily }}>
-                {[problem.chapter, problem.section].filter(Boolean).join(' · ')}
-              </p>
+              <p
+                className={mathStyles['book-author']}
+                style={{ fontFamily: raleway.style.fontFamily }}
+                dangerouslySetInnerHTML={{
+                  __html: [problem.chapterHtml, problem.sectionHtml].filter(Boolean).join(' · '),
+                }}
+              />
 
               <article className="solutions" dangerouslySetInnerHTML={{ __html: html }} />
 

@@ -7,8 +7,10 @@ import path from 'node:path';
 // exists.
 
 export type ProblemRef = { slug: string; number: string };
-export type ProblemSection = { title: string; problems: ProblemRef[] };
-export type ProblemChapter = { title: string; sections: ProblemSection[] };
+// title is plain text (math as its source TeX) for metadata; titleHtml is the
+// pandoc/KaTeX rendering for display
+export type ProblemSection = { title: string; titleHtml?: string; problems: ProblemRef[] };
+export type ProblemChapter = { title: string; titleHtml?: string; sections: ProblemSection[] };
 export type ProblemIndex = { doc: string; chapters: ProblemChapter[] };
 
 const root = path.join(process.cwd(), 'public', 'solutions');
@@ -41,7 +43,13 @@ export async function getProblemHtml(bookSlug: string, problem: string): Promise
 export function flattenProblems(index: ProblemIndex) {
   return index.chapters.flatMap((chapter) =>
     chapter.sections.flatMap((section) =>
-      section.problems.map((p) => ({ ...p, chapter: chapter.title, section: section.title })),
+      section.problems.map((p) => ({
+        ...p,
+        chapter: chapter.title,
+        section: section.title,
+        chapterHtml: chapter.titleHtml ?? chapter.title,
+        sectionHtml: section.titleHtml ?? section.title,
+      })),
     ),
   );
 }
