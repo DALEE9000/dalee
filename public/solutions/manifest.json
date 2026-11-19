@@ -1,36 +1,36 @@
 {
   "strang-differential-equations-linear-algebra": {
-    "sha": "095d0563e6e9ef82ca1b9ba4c969c02db324a2dd",
+    "sha": "062f58a5446e5b361c90b61d3588a3f8cbc6082c",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:09:57.696Z",
+    "builtAt": "2026-11-19T16:25:54.201Z",
     "problems": 460,
     "issues": 0
   },
   "strang-linear-algebra-and-learning-from-data": {
-    "sha": "d4b73d22f98d153767b54bbc4d5ec14334fff035",
+    "sha": "e9daf54f2001c945458b375ca0e3e930fe54549b",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:09:59.944Z",
+    "builtAt": "2026-11-19T16:25:56.032Z",
     "problems": 145,
     "issues": 1
   },
   "haberman-applied-partial-differential-equations": {
-    "sha": "873a48e3d1409235c0e19bcf1d291f292a42919c",
+    "sha": "2ccbaeb10d91680fea7d8184c7f0e31bbd668c71",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:10:02.966Z",
+    "builtAt": "2026-11-19T16:25:58.493Z",
     "problems": 122,
     "issues": 0
   },
   "wasserman-all-of-statistics": {
-    "sha": "5540fcc89c4072c8cad734d36411b20ac49d3ba0",
+    "sha": "9b4d88392014291325396e246e26f0b89a80b219",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:10:57.803Z",
+    "builtAt": "2026-11-19T16:26:39.871Z",
     "problems": 108,
     "issues": 1
   },
   "griffiths-introduction-to-electrodynamics": {
-    "sha": "629516bd524d843f4348f26af929a5d784de115d",
+    "sha": "5ffc5618d55fb1ceb3bcbfe7e6e0ca414a05183f",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:11:05.145Z",
+    "builtAt": "2026-11-19T16:26:42.156Z",
     "problems": 64,
     "issues": 0
   },
@@ -42,10 +42,10 @@
     "issues": 0
   },
   "kundu-cohen-dowling-fluid-mechanics": {
-    "sha": "bc936e2956af0d519c42cc903baa2bae75a0b53f",
+    "sha": "7d36b13cac9ff01b055aa1cbf4a582428eb019ac",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-10-14T00:11:08.736Z",
-    "problems": 26,
+    "builtAt": "2026-11-19T16:26:44.101Z",
+    "problems": 27,
     "issues": 0
   },
   "meyer-introductory-probability-and-statistical-applications": {
