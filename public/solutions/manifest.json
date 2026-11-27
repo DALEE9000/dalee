@@ -1,50 +1,50 @@
 {
   "strang-differential-equations-linear-algebra": {
-    "sha": "062f58a5446e5b361c90b61d3588a3f8cbc6082c",
+    "sha": "ecbb1b67282415ba4a0b2c828b15d65fc96fb60a",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:25:54.201Z",
+    "builtAt": "2026-11-27T15:52:47.327Z",
     "problems": 460,
     "issues": 0
   },
   "strang-linear-algebra-and-learning-from-data": {
-    "sha": "e9daf54f2001c945458b375ca0e3e930fe54549b",
+    "sha": "672a2955a9a0e02f5c4e8a58b1edf9196bc3e26d",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:25:56.032Z",
+    "builtAt": "2026-11-27T15:52:49.739Z",
     "problems": 145,
     "issues": 1
   },
   "haberman-applied-partial-differential-equations": {
-    "sha": "2ccbaeb10d91680fea7d8184c7f0e31bbd668c71",
+    "sha": "3827709b8beff6844b8a0b321bb4b64e8033e538",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:25:58.493Z",
+    "builtAt": "2026-11-27T15:52:54.171Z",
     "problems": 122,
     "issues": 0
   },
   "wasserman-all-of-statistics": {
-    "sha": "9b4d88392014291325396e246e26f0b89a80b219",
+    "sha": "bc1de43fcdad4235f0924e7371f980b068c513ab",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:26:39.871Z",
+    "builtAt": "2026-11-27T15:54:08.917Z",
     "problems": 108,
     "issues": 1
   },
   "griffiths-introduction-to-electrodynamics": {
-    "sha": "5ffc5618d55fb1ceb3bcbfe7e6e0ca414a05183f",
+    "sha": "7b9b2b9cafb7cd89859ed62d6d7fcd1098963445",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:26:42.156Z",
+    "builtAt": "2026-11-27T15:54:11.350Z",
     "problems": 64,
     "issues": 0
   },
   "griffiths-introduction-to-quantum-mechanics": {
-    "sha": "b7e67360e0d853a77fff3bacc5f951a932b294ef",
+    "sha": "54dcfbae0b053ebc23eb1c99cb6fe2a971bc0c6c",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-25T04:28:45.031Z",
+    "builtAt": "2026-11-27T15:54:13.166Z",
     "problems": 24,
     "issues": 0
   },
   "kundu-cohen-dowling-fluid-mechanics": {
-    "sha": "7d36b13cac9ff01b055aa1cbf4a582428eb019ac",
+    "sha": "f9b5ea4071752d02c94e7f3231280b938e61afef",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-19T16:26:44.101Z",
+    "builtAt": "2026-11-27T15:54:14.692Z",
     "problems": 27,
     "issues": 0
   },
