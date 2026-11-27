@@ -1,15 +1,15 @@
 {
   "strang-differential-equations-linear-algebra": {
-    "sha": "ecbb1b67282415ba4a0b2c828b15d65fc96fb60a",
+    "sha": "03fc869afd5a8d4ddf3e400045a6228bf0be4cd2",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-27T15:52:47.327Z",
+    "builtAt": "2026-11-27T16:02:32.415Z",
     "problems": 460,
     "issues": 0
   },
   "strang-linear-algebra-and-learning-from-data": {
-    "sha": "672a2955a9a0e02f5c4e8a58b1edf9196bc3e26d",
+    "sha": "efa1158cf18480178836c8391d11b99073870c22",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-27T15:52:49.739Z",
+    "builtAt": "2026-11-27T16:02:34.310Z",
     "problems": 145,
     "issues": 1
   },
@@ -28,9 +28,9 @@
     "issues": 1
   },
   "griffiths-introduction-to-electrodynamics": {
-    "sha": "7b9b2b9cafb7cd89859ed62d6d7fcd1098963445",
+    "sha": "aeae6b19e613db90e25c2006fe0f3404fc704b23",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-27T15:54:11.350Z",
+    "builtAt": "2026-11-27T16:02:41.236Z",
     "problems": 64,
     "issues": 0
   },
@@ -42,9 +42,9 @@
     "issues": 0
   },
   "kundu-cohen-dowling-fluid-mechanics": {
-    "sha": "f9b5ea4071752d02c94e7f3231280b938e61afef",
+    "sha": "73fbf1b4b652ecaf49067983f8f9d25f317f23e4",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-27T15:54:14.692Z",
+    "builtAt": "2026-11-27T16:02:42.851Z",
     "problems": 27,
     "issues": 0
   },
