@@ -35,10 +35,10 @@
     "issues": 0
   },
   "griffiths-introduction-to-quantum-mechanics": {
-    "sha": "a6fc3e9d73d0c377320d00d021dbf6b0d6ee5f4f",
+    "sha": "da2df9f772eb0967f76476ad5baf1aa85993f039",
     "tool": "3d672ddfc2f6",
-    "builtAt": "2026-11-28T00:01:12.410Z",
-    "problems": 27,
+    "builtAt": "2026-11-28T03:07:16.059Z",
+    "problems": 28,
     "issues": 0
   },
   "kundu-cohen-dowling-fluid-mechanics": {
